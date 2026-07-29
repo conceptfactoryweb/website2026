@@ -1,0 +1,149 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Contact — Start a project" subtitle="Project enquiry form + details" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept Factory — Start a project</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="site.js" defer></script>
+<style>
+  .contact-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: start; }
+  .field { margin-bottom: 22px; }
+  .field label { display: block; font-family: var(--font-display); text-transform: uppercase; font-size: 12px; letter-spacing: 0.12em; color: var(--ink-2); margin-bottom: 9px; }
+  .field input, .field textarea, .field select { width: 100%; background: var(--site-panel); border: 1px solid var(--hair); border-radius: 4px; padding: 14px 16px; color: #fff; font-family: var(--font-body); font-size: 15px; transition: border-color .2s; }
+  .field textarea { resize: vertical; min-height: 130px; }
+  .field input:focus, .field textarea:focus, .field select:focus { outline: none; border-color: var(--cf-magenta); }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .chips { display: flex; gap: 10px; flex-wrap: wrap; }
+  .chips label { display: inline-flex; cursor: pointer; }
+  .chips input { position: absolute; opacity: 0; pointer-events: none; }
+  .chips span { font-family: var(--font-display); text-transform: uppercase; font-size: 12px; letter-spacing: 0.08em; color: var(--ink-2); border: 1.5px solid var(--hair); border-radius: 999px; padding: 9px 16px; transition: .2s; }
+  .chips input:checked + span { background: var(--cf-magenta); border-color: var(--cf-magenta); color: #fff; }
+  .cdetail { display: flex; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--hair); }
+  .cdetail:first-of-type { border-top: 1px solid var(--hair); }
+  .cdetail .ico { color: var(--cf-magenta); flex: 0 0 auto; margin-top: 2px; }
+  .cdetail h4 { font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.1em; margin: 0 0 5px; }
+  .cdetail p, .cdetail a { margin: 0; color: var(--ink-2); font-size: 15px; line-height: 1.5; }
+  .cdetail a:hover { color: #fff; }
+  .next { display: flex; flex-direction: column; gap: 16px; margin-top: 30px; }
+  .next .row { display: flex; gap: 14px; align-items: flex-start; }
+  .next .num { font-family: var(--font-display); font-weight: 700; color: var(--cf-magenta); font-size: 15px; flex: 0 0 auto; width: 26px; }
+  .next .row p { margin: 0; color: var(--ink-2); font-size: 14px; line-height: 1.5; }
+  .next .row b { color: #fff; font-weight: 600; }
+  @media (max-width: 900px) { .contact-grid { grid-template-columns: 1fr; gap: 44px; } }
+  @media (max-width: 560px) { .field-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__logo" href="index.html"><img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" /></a>
+  <div class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="industries.html">Industries</a>
+    <a href="about.html">About</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html" class="active">Contact</a>
+  </div>
+  <div class="nav__right">
+    <div class="unitsw">
+      <button class="unitsw__btn" aria-label="Switch unit"><span class="dot"></span><span class="cur">Concept Factory</span><svg class="icon chev"><use href="#i-chevron-down"/></svg></button>
+      <div class="unitsw__menu">
+        <div class="lbl">Concept Factory — units</div>
+        <a href="index.html" class="uitem active"><b>Concept Factory</b><span>Design &amp; build studio</span></a>
+        <a href="prop-factory.html" class="uitem"><b>Prop Factory</b><span>In-house prop unit</span></a>
+        <a href="shop.html" class="uitem"><b>The Production Line</b><span>Prop webshop</span></a>
+      </div>
+    </div>
+    <div class="lang"><span class="lang-en"><b>EN</b></span><span style="color:rgba(255,255,255,0.25)">/</span><span class="lang-nl">NL</span></div>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a project</a>
+    <button class="nav__burger" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  <span class="mm-units">Units</span><a href="prop-factory.html">Prop Factory</a><a href="shop.html">The Production Line</a>
+</div>
+
+<!-- PAGE HERO -->
+<header class="phero">
+  <div class="wrap phero__in">
+    <span class="eyebrow">Contact — Let's create</span>
+    <h1><span class="script">Start</span><span class="l2">a project</span></h1>
+    <p class="lead">Tell Concept Factory what you want people to feel. Share the brief, the dream or the rough idea — it gets designed, built and installed, in-house.</p>
+  </div>
+</header>
+
+<!-- CONTACT -->
+<section class="sec-pad-sm" style="padding-top:0;">
+  <div class="wrap">
+    <div class="contact-grid">
+      <!-- FORM -->
+      <form class="reveal-up" onsubmit="return false;">
+        <div class="field">
+          <label>What can we build for you?</label>
+          <div class="chips">
+            <label><input type="radio" name="type" checked /><span>Theming</span></label>
+            <label><input type="radio" name="type" /><span>Theatre / stage</span></label>
+            <label><input type="radio" name="type" /><span>TV / film</span></label>
+            <label><input type="radio" name="type" /><span>Event</span></label>
+            <label><input type="radio" name="type" /><span>Attraction</span></label>
+            <label><input type="radio" name="type" /><span>Other</span></label>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Name</label><input type="text" placeholder="Your name" /></div>
+          <div class="field"><label>Company</label><input type="text" placeholder="Company / organisation" /></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Email</label><input type="email" placeholder="you@company.com" /></div>
+          <div class="field"><label>Phone</label><input type="tel" placeholder="+32 ..." /></div>
+        </div>
+        <div class="field"><label>Tell us about the project</label><textarea placeholder="The idea, the scale, the deadline — as much or as little as you have."></textarea></div>
+        <button type="submit" class="btn btn-primary">Send enquiry <svg class="icon"><use href="#i-send"/></svg></button>
+      </form>
+
+      <!-- DETAILS -->
+      <aside class="reveal-up">
+        <div class="cdetail"><div class="ico"><svg class="icon"><use href="#i-map-pin"/></svg></div><div><h4>Atelier</h4><p>Grensstraat 3<br>2200 Herentals, Belgium</p></div></div>
+        <div class="cdetail"><div class="ico"><svg class="icon"><use href="#i-mail"/></svg></div><div><h4>Email</h4><a href="mailto:bjorn@conceptfactory.be">bjorn@conceptfactory.be</a></div></div>
+        <div class="cdetail"><div class="ico"><svg class="icon"><use href="#i-phone"/></svg></div><div><h4>Phone</h4><a href="tel:+32456716480">+32 456 71 64 80</a></div></div>
+        <div class="cdetail"><div class="ico"><svg class="icon"><use href="#i-clock"/></svg></div><div><h4>Studio hours</h4><p>Mon–Fri · 08:00–17:00</p></div></div>
+
+        <h4 style="font-family:var(--font-display);text-transform:uppercase;font-size:13px;letter-spacing:0.12em;margin:34px 0 0;">What happens next</h4>
+        <div class="next">
+          <div class="row"><span class="num">01</span><p><b>We listen.</b> A call to understand the ambition, scale and timing.</p></div>
+          <div class="row"><span class="num">02</span><p><b>We sketch.</b> A first concept and a realistic plan to build it.</p></div>
+          <div class="row"><span class="num">03</span><p><b>We build.</b> Design, fabrication and install — all in-house.</p></div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" />
+        <p>Creating winning concepts. Themed environments and decor, designed and built in-house in Herentals, Belgium.</p>
+        <div class="foot-soc"><a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a><a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a><a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="work.html">Work</a><a href="prop-factory.html">Prop Factory</a><a href="shop.html">Shop</a><a href="industries.html">Industries</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="#">Press</a></div>
+      <div class="foot-news"><h4 style="font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.16em;color:var(--ink-3);margin:0 0 16px;">Newsletter</h4><p>Behind-the-scenes from the atelier, a few times a year.</p><form onsubmit="return false;"><input type="email" placeholder="Your email" aria-label="Your email" /><button type="submit" aria-label="Subscribe"><svg class="icon"><use href="#i-send"/></svg></button></form></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Concept Factory BV — Grensstraat 3, 2200 Herentals, BE</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a> · <a href="legal.html#conditions">Voorwaarden</a> · NL / EN</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

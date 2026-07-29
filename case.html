@@ -1,0 +1,232 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Case study (data-driven)" subtitle="Multiple projects via ?p=slug" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept Factory — Case study</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="site.js" defer></script>
+<style>
+  .case-step { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 56px; align-items: center; padding: clamp(54px,7vw,90px) 0; border-top: 1px solid var(--hair); }
+  .case-step.flip .case-step__media { order: -1; }
+  .case-step__n { font-family: var(--font-mono); font-size: 13px; color: var(--cf-magenta); letter-spacing: 0.1em; }
+  .case-step h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 700; font-size: clamp(28px,3.4vw,48px); margin: 12px 0 0; letter-spacing: -0.01em; }
+  .case-step p { color: var(--ink-2); font-size: 16px; line-height: 1.7; margin: 18px 0 0; max-width: 48ch; }
+  .case-step__media { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 5px; }
+  .case-step__media img { width: 100%; height: 100%; object-fit: cover; }
+  .gal { display: grid; grid-template-columns: repeat(12,1fr); gap: 16px; }
+  .gal a { position: relative; overflow: hidden; border-radius: 5px; display:block; }
+  .gal img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
+  .gal a:hover img { transform: scale(1.06); }
+  .g6 { grid-column: span 6; aspect-ratio: 16/10; } .g4 { grid-column: span 4; aspect-ratio: 3/3.4; } .g8 { grid-column: span 8; aspect-ratio: 16/9; }
+  .next-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+  @media (max-width: 920px){ .case-step{ grid-template-columns:1fr; gap:30px;} .case-step.flip .case-step__media{order:0;} .g6,.g4,.g8{ grid-column: span 12; aspect-ratio:16/10;} .next-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__logo" href="index.html"><img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" /></a>
+  <div class="nav__links">
+    <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="nav__right">
+    <div class="unitsw">
+      <button class="unitsw__btn" aria-label="Switch unit"><span class="dot"></span><span class="cur">Concept Factory</span><svg class="icon chev"><use href="#i-chevron-down"/></svg></button>
+      <div class="unitsw__menu">
+        <div class="lbl">Concept Factory — units</div>
+        <a href="index.html" class="uitem active"><b>Concept Factory</b><span>Design &amp; build studio</span></a>
+        <a href="prop-factory.html" class="uitem"><b>Prop Factory</b><span>In-house prop unit</span></a>
+        <a href="shop.html" class="uitem"><b>The Production Line</b><span>3D model webshop</span></a>
+      </div>
+    </div>
+    <div class="lang"><span class="lang-en"><b>EN</b></span><span style="color:rgba(255,255,255,0.25)">/</span><span class="lang-nl">NL</span></div>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a project</a>
+    <button class="nav__burger" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  <span class="mm-units">Units</span><a href="prop-factory.html">Prop Factory</a><a href="shop.html">The Production Line</a>
+</div>
+
+<!-- HERO -->
+<header class="phero phero--img" style="min-height:78vh;">
+  <div class="phero__bg"><img id="cHero" src="assets/photos/muizenval-room.jpg" alt="" /></div>
+  <div class="wrap phero__in">
+    <a href="work.html" style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.12em;color:var(--ink-2);margin-bottom:18px;"><svg class="icon" style="width:15px;height:15px;transform:rotate(180deg);"><use href="#i-arrow-right"/></svg> All work</a>
+    <span class="eyebrow" id="cEyebrow">Case study</span>
+    <h1><span class="script" id="cScript">Project</span><span class="l2" id="cL2"></span></h1>
+    <p class="lead" id="cIntro"></p>
+  </div>
+</header>
+
+<!-- META -->
+<section class="sec-pad-sm" style="padding-bottom:0;">
+  <div class="wrap"><div class="statbar reveal-up" id="cMeta"></div></div>
+</section>
+
+<!-- STEPS -->
+<section class="sec-pad-sm"><div class="wrap" id="cSteps"></div></section>
+
+<!-- REVEAL -->
+<section class="sec-pad-sm" style="padding-top:0;"><div class="wrap">
+  <div class="reveal reveal-up">
+    <img class="reveal__fin" id="cRevealFin" src="" alt="Finished" />
+    <span class="reveal__fl">The result</span>
+    <div class="reveal__blue"><img id="cRevealBlue" src="" alt="Blueprint" /><div class="reveal__grid"></div><span class="reveal__bp">CF—BLUEPRINT / 1:20</span></div>
+    <div class="reveal__handle"><div class="reveal__knob"></div></div>
+  </div>
+</div></section>
+
+<!-- STATS -->
+<section class="panel sec-pad-sm"><div class="wrap"><div class="statbar reveal-up" id="cStats"></div></div></section>
+
+<!-- GALLERY -->
+<section class="sec-pad"><div class="wrap-wide">
+  <div class="sec-head reveal-up"><div><span class="sec-num">(05)</span><h2 class="dsp">Gallery</h2></div></div>
+  <div class="gal reveal-up" id="cGallery"></div>
+</div></section>
+
+<!-- NEXT -->
+<section class="panel sec-pad"><div class="wrap">
+  <div class="sec-head reveal-up"><div><span class="sec-num">(06)</span><h2 class="dsp">More work</h2></div><a href="work.html" class="btn btn-ghost btn-sm">All projects <svg class="icon"><use href="#i-arrow-right"/></svg></a></div>
+  <div class="next-grid reveal-up" id="cNext"></div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta"><div class="cta__in"><div class="wrap">
+  <span class="script">Your project</span>
+  <h2 class="dsp">is next</h2>
+  <p>From a single set piece to a full touring world — Concept Factory builds it, in-house.</p>
+  <a href="contact.html" class="btn btn-dark">Start a project <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+</div></div></section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" />
+        <p>Creating winning concepts. Themed environments and decor, designed and built in-house in Herentals, Belgium.</p>
+        <div class="foot-soc"><a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a><a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a><a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="work.html">Work</a><a href="prop-factory.html">Prop Factory</a><a href="shop.html">Shop</a><a href="industries.html">Industries</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="#">Press</a></div>
+      <div class="foot-news"><h4 style="font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.16em;color:var(--ink-3);margin:0 0 16px;">Newsletter</h4><p>Behind-the-scenes from the atelier, a few times a year.</p><form onsubmit="return false;"><input type="email" placeholder="Your email" aria-label="Your email" /><button type="submit" aria-label="Subscribe"><svg class="icon"><use href="#i-send"/></svg></button></form></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Concept Factory BV — Grensstraat 3, 2200 Herentals, BE</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a> · <a href="legal.html#conditions">Voorwaarden</a> · NL / EN</span></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var P = 'assets/photos/';
+  var PROJECTS = {
+    muizenval: { title:'De Muizenval', script:'De Muizenval', l2:'A full stage world', disc:'Theatre decor', client:'Deep Bridge', year:'2025', loc:'Antwerp',
+      hero:'muizenval-room.jpg', intro:'A complete Gothic stage environment for Deep Bridge — designed, engineered and built in-house, from the first blueprint to the final reveal under the lights.',
+      steps:[['Challenge','A whole world, on a deadline','A believable Gothic interior, rich enough for the back row, light enough to move, ready for a hard opening night.','muizenval-blue.jpg'],['Concept','From mood to blueprint','The director\u2019s mood translated into a spatial concept, then into technical drawings the workshop could build to the millimetre.','muizenval-alcove.jpg'],['Production','Built in the atelier','Every panel, moulding and piece of furniture machined, sculpted and scenic-painted by hand.','atelier-build.jpg'],['Result','Curtain up','Installed on site for opening night \u2014 a single, coherent world the cast could live in.','muizenval-room.jpg']],
+      reveal:'muizenval-alcove.jpg', gallery:['muizenval-room.jpg','muizenval-alcove.jpg','muizenval-blue.jpg','escape-study.jpg','atelier-build.jpg'],
+      stats:[['7 wks','Concept to install'],['40+','Built elements'],['100%','Made in-house'],['1','Standing ovation']] },
+
+    aspe: { title:'Aspe \u2014 Club Paparazzi', script:'Aspe', l2:'Club Paparazzi', disc:'Immersive TV set', client:'Studio 100', year:'2025', loc:'Belgium',
+      hero:'aspe_sfeer.jpg', intro:'A full immersive nightclub set for the Aspe murder-mystery production \u2014 lighting, decor and atmosphere built and dressed for camera and a live audience.',
+      steps:[['Challenge','A nightclub, for camera','A believable club that reads on screen and surrounds a live studio audience \u2014 built fast for a tight broadcast schedule.','aspe_club.jpg'],['Concept','Light as material','Concept Factory designed the space around its lighting \u2014 lasers, practicals and LED woven into the build.','aspe-stage.jpg'],['Production','Built &amp; dressed','Stage, bar and seating fabricated in-house, then dressed and lit on location.','atelier-cnc.jpg'],['Result','Action','A complete club world, delivered on schedule and ready to shoot.','aspe_sfeer.jpg']],
+      reveal:'aspe_sfeer.jpg', gallery:['aspe_sfeer.jpg','aspe_club.jpg','aspe-stage.jpg','atelier-cnc.jpg'],
+      stats:[['TV','Broadcast set'],['1','Live audience'],['100%','In-house'],['2025','Aired']] },
+
+    madrat: { title:'Plopsa \u2014 Mad Rat', script:'Mad Rat', l2:'Halloween at Plopsa', disc:'Theme park theming', client:'Plopsa', year:'2024', loc:'Plopsaland',
+      hero:'madrat-2.jpg', intro:'A high-impact Halloween walkthrough for Plopsa \u2014 scenic build, character spaces and atmospheric theming engineered to thrill thousands of guests a night.',
+      steps:[['Challenge','Scare, safely, at scale','An immersive, durable horror environment that handles huge throughput and a hard seasonal deadline.','madrat-1.jpg'],['Concept','A world with a story','Concept Factory built distinct themed spaces \u2014 each a set for the live characters that haunt them.','madrat-3.jpg'],['Production','Weatherproof &amp; tough','Scenic build engineered for crowds and the elements, finished to read in low light.','pirate-bay.jpg'],['Result','Sold-out nights','A repeatable seasonal attraction that draws guests back year after year.','madrat-2.jpg']],
+      reveal:'madrat-1.jpg', gallery:['madrat-2.jpg','madrat-1.jpg','madrat-3.jpg','pirate-bay.jpg'],
+      stats:[['1000s','Guests / night'],['Seasonal','Walkthrough'],['Plopsa','Client'],['2024','Halloween']] },
+
+    rmh: { title:'Rose\u2019s Mystery House', script:'Rose\u2019s', l2:'Mystery House', disc:'Themed experience', client:'act2gether', year:'2025', loc:'Bucharest, RO',
+      hero:'rmh-sign.jpg', intro:'A fully themed experience venue in Bucharest \u2014 complete interior design, theming and on-site construction: a gothic bar, walk-through attractions and immersive escape rooms.',
+      steps:[['Challenge','A whole venue, abroad','Design and build an entire themed venue cross-border \u2014 bar, attractions and escape rooms \u2014 to a single dark narrative.','escape-study.jpg'],['Concept','One world, many rooms','Concept Factory set the gothic visual language and carried it through every space and prop.','escape-plasma.jpg'],['Production','Built &amp; installed on site','Fabricated in Herentals, shipped and installed in Bucharest with the local team.','escape-lockers.jpg'],['Result','Doors open','An immersive venue guests step into \u2014 every detail crafted to be believed.','rmh-sign.jpg']],
+      reveal:'escape-study.jpg', gallery:['rmh-sign.jpg','escape-study.jpg','escape-plasma.jpg','escape-soup.jpg','escape-lockers.jpg'],
+      stats:[['act2gether','Client'],['Bucharest','Location'],['2025','Delivered'],['3+','Attractions']] },
+
+    alice: { title:'Alice in Wonderland', script:'Alice', l2:'in Wonderland', disc:'Theatre decor', client:'Deep Bridge', year:'2026', loc:'Antwerp',
+      hero:'alice.jpg', intro:'A large-scale, colour-rich stage world for Deep Bridge\u2019s Alice in Wonderland \u2014 a fantastical set built to support a full cast and a touring run.',
+      steps:[['Challenge','Down the rabbit hole','A bold, surreal world that transforms across scenes and survives a tour.','annie-stage.jpg'],['Concept','Storybook, in 3D','Concept Factory translated illustration into buildable, movable scenic pieces.','muizenval-alcove.jpg'],['Production','Built to tour','Lightweight, durable construction and vivid scenic paint, made in-house.','atelier-build.jpg'],['Result','Showtime','A complete Wonderland the cast performs inside, night after night.','alice.jpg']],
+      reveal:'alice.jpg', gallery:['alice.jpg','annie-stage.jpg','muizenval-alcove.jpg','atelier-build.jpg'],
+      stats:[['Deep Bridge','Client'],['Touring','Production'],['2026','Premiere'],['100%','In-house']] },
+
+    annie: { title:'Annie', script:'Annie', l2:'The musical', disc:'Scenic fabrication', client:'Deep Bridge', year:'2025', loc:'Antwerp',
+      hero:'annie-stage.jpg', intro:'A grand musical set for Annie \u2014 a sweeping staircase, period interiors and scenic detail engineered to move between scenes and read from every seat.',
+      steps:[['Challenge','Grand, but mobile','A statement staircase and interiors that transform quickly and tour safely.','annie1.jpg'],['Concept','Period, perfected','Concept Factory drew and detailed each piece for an authentic 1930s look.','muizenval-room.jpg'],['Production','Sculpted &amp; painted','Built, sculpted and scenic-painted in the atelier, aged by hand.','atelier-build.jpg'],['Result','Encore','A coherent period world that anchors the whole production.','annie-stage.jpg']],
+      reveal:'annie-stage.jpg', gallery:['annie-stage.jpg','annie1.jpg','muizenval-room.jpg','atelier-build.jpg'],
+      stats:[['Deep Bridge','Client'],['Musical','Production'],['2025','Staged'],['100%','In-house']] },
+
+    duck: { title:'Duck Fishing', script:'Duck', l2:'Fishing', disc:'Theme park theming', client:'Plopsa', year:'2025', loc:'Plopsaland',
+      hero:'duck-fishing.jpg', intro:'A bright, durable themed game attraction \u2014 playful scenic build engineered for daily family crowds and easy operation.',
+      steps:[['Challenge','Fun that lasts','A cheerful themed environment that survives constant use and weather.','sprookjes.jpg'],['Concept','Playful &amp; bold','A clean, colourful theming language designed for families.','pirate-bay.jpg'],['Production','Tough finishes','Hardwearing build and finishes, made in-house.','atelier-build.jpg'],['Result','Open for play','A reliable attraction that runs all season.','duck-fishing.jpg']],
+      reveal:'duck-fishing.jpg', gallery:['duck-fishing.jpg','sprookjes.jpg','pirate-bay.jpg','atelier-build.jpg'],
+      stats:[['Plopsa','Client'],['Family','Attraction'],['2025','Open'],['100%','In-house']] },
+
+    event: { title:'Ik Leef Voor Jou', script:'Ik Leef', l2:'Voor Jou', disc:'Event production', client:'Production', year:'2025', loc:'Belgium',
+      hero:'event-show.jpg', intro:'A live show production \u2014 stage decor and scenic elements built and installed for a one-off event under full production lighting.',
+      steps:[['Challenge','One night, one shot','Decor that lands on time, performs under lights and strikes clean.','event-wide.jpg'],['Concept','Built for the moment','Concept Factory designed scenic elements that read big from the crowd.','ikleefvoorjou.jpg'],['Production','Fast &amp; precise','Fabricated in-house, installed and dressed on site.','stand-retail.jpg'],['Result','Lights up','A show-ready stage world, delivered for the night.','event-show.jpg']],
+      reveal:'event-show.jpg', gallery:['event-show.jpg','event-wide.jpg','ikleefvoorjou.jpg','stand-retail.jpg'],
+      stats:[['Live','Event'],['1 night','Run'],['2025','Staged'],['100%','In-house']] }
+  };
+  var ORDER = ['muizenval','aspe','madrat','rmh','alice','annie','duck','event'];
+
+  function qp(){ var m = location.search.match(/[?&]p=([\w-]+)/); return m ? m[1] : 'muizenval'; }
+  var slug = qp(); if (!PROJECTS[slug]) slug = 'muizenval';
+  var d = PROJECTS[slug];
+
+  document.title = 'Concept Factory \u2014 ' + d.title;
+  document.getElementById('cHero').src = P + d.hero;
+  document.getElementById('cHero').alt = d.title;
+  document.getElementById('cEyebrow').textContent = 'Case study \u2014 ' + d.disc;
+  document.getElementById('cScript').textContent = d.script;
+  document.getElementById('cL2').textContent = d.l2;
+  document.getElementById('cIntro').textContent = d.intro;
+
+  document.getElementById('cMeta').innerHTML =
+    metaCell(d.client,'Client') + metaCell(d.year,'Year') + metaCell(d.disc,'Discipline') + metaCell(d.loc,'Location');
+  function metaCell(v,k){ return '<div class="stat"><div class="v" style="font-size:clamp(20px,2.2vw,30px);">'+v+'</div><div class="k">'+k+'</div></div>'; }
+
+  document.getElementById('cSteps').innerHTML = d.steps.map(function(s,i){
+    var flip = i % 2 === 1 ? ' flip' : '';
+    var num = String(i+1).padStart(2,'0');
+    return '<div class="case-step'+flip+' reveal-up"><div><div class="case-step__n">'+num+' \u2014 '+s[0]+'</div><h2>'+s[1].replace(/, /,'<br>')+'</h2><p>'+s[2]+'</p></div>'+
+      '<div class="case-step__media"><img src="'+P+s[3]+'" alt="'+s[0]+'" /></div></div>';
+  }).join('');
+
+  document.getElementById('cRevealFin').src = P + d.reveal;
+  document.getElementById('cRevealBlue').src = P + d.reveal;
+
+  document.getElementById('cStats').innerHTML = d.stats.map(function(s){
+    return '<div class="stat"><div class="v">'+s[0]+'</div><div class="k">'+s[1]+'</div></div>';
+  }).join('');
+
+  var spans = ['g8','g4','g4','g4','g4'];
+  document.getElementById('cGallery').innerHTML = d.gallery.map(function(g,i){
+    return '<a class="'+(spans[i]||'g4')+'"><img src="'+P+g+'" alt="" /></a>';
+  }).join('');
+
+  var others = ORDER.filter(function(s){ return s!==slug; }).slice(0,3);
+  document.getElementById('cNext').innerHTML = others.map(function(s){
+    var p = PROJECTS[s];
+    return '<a class="tile" style="aspect-ratio:3/2.2;" href="case.html?p='+s+'"><img src="'+P+p.hero+'" alt="'+p.title+'" /><div class="tile__scrim"></div>'+
+      '<div class="tile__meta"><div class="tile__disc">'+p.disc+'</div><div class="tile__title">'+p.title+'</div>'+
+      '<span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>';
+  }).join('');
+
+  // reveal injected sections (own observer; fallback shows them regardless)
+  var io2 = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io2.unobserve(e.target); } }); }, { threshold: 0.06 });
+  document.querySelectorAll('.reveal-up').forEach(function(el){ io2.observe(el); });
+  setTimeout(function(){ document.querySelectorAll('.reveal-up').forEach(function(el){ el.classList.add('in'); }); }, 500);
+})();
+</script>
+</body>
+</html>

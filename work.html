@@ -1,0 +1,123 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Work — Portfolio" subtitle="Full project grid" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept Factory — Selected work</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="site.js" defer></script>
+<style>
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 44px; }
+  .filters button { font-family: var(--font-display); text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em; color: var(--ink-2); background: none; border: 1.5px solid var(--hair); border-radius: 999px; padding: 9px 18px; cursor: pointer; transition: .25s; }
+  .filters button:hover { color: #fff; border-color: var(--ink-2); }
+  .filters button.on { background: var(--cf-magenta); border-color: var(--cf-magenta); color: #fff; }
+  .pgrid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; }
+  .pgrid .tile { aspect-ratio: 3/2.2; }
+  .col6 { grid-column: span 6; } .col4 { grid-column: span 4; } .col8 { grid-column: span 8; }
+  .col6.tallx { aspect-ratio: 3/3.4; }
+  @media (max-width: 1080px) { .col6,.col4,.col8 { grid-column: span 6; } .col6.tallx { aspect-ratio: 3/2.2; } }
+  @media (max-width: 640px) { .pgrid { grid-template-columns: 1fr; } .col6,.col4,.col8 { grid-column: span 1; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__logo" href="index.html"><img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" /></a>
+  <div class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="work.html" class="active">Work</a>
+    <a href="industries.html">Industries</a>
+    <a href="about.html">About</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav__right">
+    <div class="unitsw">
+      <button class="unitsw__btn" aria-label="Switch unit"><span class="dot"></span><span class="cur">Concept Factory</span><svg class="icon chev"><use href="#i-chevron-down"/></svg></button>
+      <div class="unitsw__menu">
+        <div class="lbl">Concept Factory — units</div>
+        <a href="index.html" class="uitem active"><b>Concept Factory</b><span>Design &amp; build studio</span></a>
+        <a href="prop-factory.html" class="uitem"><b>Prop Factory</b><span>In-house prop unit</span></a>
+        <a href="shop.html" class="uitem"><b>The Production Line</b><span>Prop webshop</span></a>
+      </div>
+    </div>
+    <div class="lang"><span class="lang-en"><b>EN</b></span><span style="color:rgba(255,255,255,0.25)">/</span><span class="lang-nl">NL</span></div>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a project</a>
+    <button class="nav__burger" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  <span class="mm-units">Units</span><a href="prop-factory.html">Prop Factory</a><a href="shop.html">The Production Line</a>
+</div>
+
+<!-- PAGE HERO -->
+<header class="phero">
+  <div class="wrap phero__in">
+    <span class="eyebrow">Work — The What</span>
+    <h1><span class="script">Selected</span><span class="l2">work</span></h1>
+    <p class="lead">A selection of worlds built by Concept Factory — for theatre, television, theme parks and immersive experiences. Every project designed and made in-house.</p>
+  </div>
+</header>
+
+<!-- GRID -->
+<section class="sec-pad-sm" style="padding-top:0;">
+  <div class="wrap-wide">
+    <div class="filters reveal-up">
+      <button class="on" data-cat="all">All</button><button data-cat="theatre">Theatre</button><button data-cat="television">Television</button><button data-cat="theme-parks">Theme parks</button><button data-cat="immersive">Immersive</button><button data-cat="events">Events</button>
+    </div>
+    <div class="pgrid reveal-up">
+      <a data-cat="theatre" class="tile col6 tallx" href="case.html?p=muizenval"><img src="assets/photos/muizenval-room.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">001</span><div class="tile__meta"><div class="tile__disc">Theatre decor</div><div class="tile__title">De Muizenval</div><div class="tile__row">Deep Bridge · 2025</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <div class="col6" style="display:grid;gap:18px;">
+        <a data-cat="television" class="tile" href="#" style="aspect-ratio:3/1.55;"><img src="assets/photos/aspe_sfeer.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">002</span><div class="tile__meta"><div class="tile__disc">Immersive TV set</div><div class="tile__title">Aspe — Club Paparazzi</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+        <a data-cat="theatre" class="tile" href="#" style="aspect-ratio:3/1.55;"><img src="assets/photos/alice.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">003</span><div class="tile__meta"><div class="tile__disc">Theatre decor</div><div class="tile__title">Alice in Wonderland</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      </div>
+      <a data-cat="immersive" class="tile col4" href="case.html?p=rmh"><img src="assets/photos/escape-study.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">004</span><div class="tile__meta"><div class="tile__disc">Immersive experience</div><div class="tile__title">The Mine — Escape</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <a data-cat="theatre" class="tile col4" href="case.html?p=annie"><img src="assets/photos/annie1.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">005</span><div class="tile__meta"><div class="tile__disc">Scenic fabrication</div><div class="tile__title">Annie</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <a data-cat="theme-parks" class="tile col4" href="case.html?p=duck"><img src="assets/photos/duck-fishing.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">006</span><div class="tile__meta"><div class="tile__disc">Theme park theming</div><div class="tile__title">Duck Fishing</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <a data-cat="theatre" class="tile col8" href="case.html?p=muizenval"><img src="assets/photos/muizenval-alcove.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">007</span><div class="tile__meta"><div class="tile__disc">Theatre decor</div><div class="tile__title">The Mousetrap — Stage</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <a data-cat="immersive" class="tile col4" href="case.html?p=rmh"><img src="assets/photos/escape-lockers.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">008</span><div class="tile__meta"><div class="tile__disc">Immersive experience</div><div class="tile__title">Red Alert</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <a data-cat="immersive" class="tile col4" href="case.html?p=rmh"><img src="assets/photos/rmh-sign.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">009</span><div class="tile__meta"><div class="tile__disc">Themed interior</div><div class="tile__title">Rose's Mystery House</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <a data-cat="theme-parks" class="tile col4" href="case.html?p=duck"><img src="assets/photos/sprookjes.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">010</span><div class="tile__meta"><div class="tile__disc">Theme park theming</div><div class="tile__title">Sprookjeswandeling</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+      <a data-cat="events" class="tile col4" href="case.html?p=event"><img src="assets/photos/ikleefvoorjou.jpg" alt="" /><div class="tile__scrim"></div><span class="tile__idx">011</span><div class="tile__meta"><div class="tile__disc">Event production</div><div class="tile__title">Ik Leef Voor Jou</div><span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta__in">
+    <div class="wrap">
+      <span class="script">Your project</span>
+      <h2 class="dsp">could be next</h2>
+      <p>From a single prop to a full immersive world — tell Concept Factory the brief.</p>
+      <a href="contact.html" class="btn btn-dark">Start a project <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" />
+        <p>Creating winning concepts. Themed environments and decor, designed and built in-house in Herentals, Belgium.</p>
+        <div class="foot-soc"><a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a><a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a><a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="work.html">Work</a><a href="prop-factory.html">Prop Factory</a><a href="shop.html">Shop</a><a href="industries.html">Industries</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="#">Press</a></div>
+      <div class="foot-news"><h4 style="font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.16em;color:var(--ink-3);margin:0 0 16px;">Newsletter</h4><p>Behind-the-scenes from the atelier, a few times a year.</p><form onsubmit="return false;"><input type="email" placeholder="Your email" aria-label="Your email" /><button type="submit" aria-label="Subscribe"><svg class="icon"><use href="#i-send"/></svg></button></form></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Concept Factory BV — Grensstraat 3, 2200 Herentals, BE</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a> · <a href="legal.html#conditions">Voorwaarden</a> · NL / EN</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

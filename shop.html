@@ -1,0 +1,481 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="The Production Line — 3D model webshop" subtitle="Order large 3D-printed & robot-shaped objects" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept Factory — The Production Line</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="site.js" defer></script>
+<style>
+  .pline { display: flex; align-items: center; gap: 0; margin-top: 38px; max-width: 780px; }
+  .pline .node { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 9px; position: relative; }
+  .pline .node .icon { width: 26px; height: 26px; color: var(--cf-magenta); }
+  .pline .node span { font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.82); }
+  .pline .node::after { content: ""; position: absolute; top: 13px; left: 50%; width: 100%; height: 2px; background: var(--hair-mag); z-index: -1; }
+  .pline .node:last-child::after { display: none; }
+
+  .shopbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-bottom: 36px; flex-wrap: wrap; }
+  .filters { display: flex; gap: 10px; flex-wrap: wrap; }
+  .filters button { font-family: var(--font-display); text-transform: uppercase; font-size: 12px; letter-spacing: 0.1em; color: var(--ink-2); background: none; border: 1.5px solid var(--hair); border-radius: 999px; padding: 9px 17px; cursor: pointer; transition: .25s; }
+  .filters button:hover { color: #fff; border-color: var(--ink-2); }
+  .filters button.on { background: var(--cf-magenta); border-color: var(--cf-magenta); color: #fff; }
+
+  .shop-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .pcard { background: var(--site-panel); border: 1px solid var(--hair); border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; transition: border-color .3s, transform .3s; }
+  .pcard:hover { border-color: var(--hair-mag); transform: translateY(-4px); }
+
+  /* 3D model preview panel */
+  .mpanel { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; background: radial-gradient(120% 120% at 50% 18%, #0e1622 0%, #070a10 70%); }
+  .mpanel .grid { position: absolute; inset: 0; background-image: repeating-linear-gradient(0deg, rgba(120,200,255,0.16) 0 1px, transparent 1px 28px), repeating-linear-gradient(90deg, rgba(120,200,255,0.16) 0 1px, transparent 1px 28px); transition: opacity .4s; }
+  .mpanel .floor { position: absolute; left: 0; right: 0; bottom: 0; height: 38%; background: linear-gradient(to top, rgba(120,200,255,0.10), transparent); }
+  .mpanel .glyph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  .mpanel .glyph svg { width: 52%; height: 52%; color: #7fd0ff; transition: color .4s, transform .6s var(--ease-out); }
+  .mpanel .glyph svg .fillpart { fill: rgba(127,208,255,0.08); transition: fill .4s; }
+  .pcard:hover .mpanel .glyph svg { transform: rotate(-4deg) scale(1.03); }
+  .mpanel.solid .grid { opacity: 0; }
+  .mpanel.solid .glyph svg { color: var(--cf-magenta); }
+  .mpanel.solid .glyph svg .fillpart { fill: rgba(230,0,126,0.85); }
+  .mbadge { position: absolute; top: 12px; left: 12px; z-index: 3; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; color: rgba(150,215,255,0.92); background: rgba(6,10,16,0.6); border: 1px solid rgba(120,200,255,0.25); padding: 6px 10px; border-radius: 999px; }
+  .mpanel.solid .mbadge { color: #fff; border-color: var(--hair-mag); }
+  .mtoggle { position: absolute; bottom: 12px; right: 12px; z-index: 3; display: inline-flex; align-items: center; gap: 7px; font-family: var(--font-display); text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; background: rgba(6,7,12,0.7); backdrop-filter: blur(6px); border: 1px solid var(--hair); border-radius: 999px; padding: 7px 11px; color: #fff; cursor: pointer; transition: .2s; }
+  .mtoggle:hover { border-color: var(--cf-magenta); }
+  .mtoggle .d { width: 7px; height: 7px; border-radius: 50%; background: #7fd0ff; }
+  .mpanel.solid + .mtoggle .d, .pcard .mtoggle.on .d { background: var(--cf-magenta); }
+  .mdim { position: absolute; left: 12px; bottom: 12px; z-index: 3; font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+
+  .pcard__body { padding: 18px 18px 20px; display: flex; flex-direction: column; flex: 1; }
+  .pcard__cat { font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.14em; color: var(--cf-magenta); }
+  .pcard__name { font-family: var(--font-display); text-transform: uppercase; font-weight: 600; font-size: 19px; line-height: 1.05; margin: 7px 0 0; }
+  .pcard__meta { font-size: 12px; color: var(--ink-3); margin-top: 6px; }
+  .pcard__foot { display: flex; align-items: center; justify-content: space-between; margin-top: auto; padding-top: 16px; }
+  .pcard__price { font-family: var(--font-display); font-weight: 600; font-size: 16px; }
+  .pcard__price span { color: var(--ink-3); font-size: 11px; font-weight: 400; }
+  .pcard__view { font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em; color: #fff; background: none; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+  .pcard__view:hover { color: var(--cf-magenta); }
+  .pcard__view .icon { width: 15px; height: 15px; }
+
+  /* modal */
+  .modal { position: fixed; inset: 0; z-index: 300; display: flex; align-items: center; justify-content: center; padding: 24px; opacity: 0; pointer-events: none; transition: opacity .3s; }
+  .modal.open { opacity: 1; pointer-events: auto; }
+  .modal__bg { position: absolute; inset: 0; background: rgba(3,3,4,0.82); backdrop-filter: blur(6px); }
+  .modal__panel { position: relative; z-index: 2; width: min(960px, 100%); max-height: 90vh; overflow: auto; background: var(--site-panel-2); border: 1px solid var(--hair); border-radius: 8px; display: grid; grid-template-columns: 1.05fr 1fr; }
+  .modal__media { position: relative; min-height: 400px; }
+  .modal__media .mpanel { position: absolute; inset: 0; aspect-ratio: auto; }
+  .stagetabs { position: absolute; top: 16px; left: 16px; z-index: 4; display: flex; gap: 6px; }
+  .stagetabs button { font-family: var(--font-display); text-transform: uppercase; font-size: 10px; letter-spacing: 0.1em; padding: 7px 12px; border-radius: 999px; border: 1px solid var(--hair); background: rgba(6,7,12,0.7); backdrop-filter: blur(6px); color: #fff; cursor: pointer; transition: .2s; }
+  .stagetabs button.on { background: var(--cf-magenta); border-color: var(--cf-magenta); }
+  .modal__body { padding: 30px; }
+  .modal__close { position: absolute; top: 14px; right: 14px; z-index: 5; width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--hair); background: rgba(6,7,12,0.6); color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .modal__close:hover { background: var(--cf-magenta); border-color: var(--cf-magenta); }
+  .modal__cat { font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.14em; color: var(--cf-magenta); }
+  .modal__name { font-family: var(--font-display); text-transform: uppercase; font-weight: 700; font-size: 30px; line-height: 1.0; margin: 8px 0 0; }
+  .modal__desc { font-size: 14px; line-height: 1.6; color: var(--ink-2); margin: 14px 0 0; }
+  .specrow { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 16px; }
+  .specrow .sp { font-size: 12px; color: var(--ink-3); }
+  .specrow .sp b { display: block; font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.04em; color: #fff; margin-top: 3px; }
+  .opt { margin-top: 22px; }
+  .opt__label { font-family: var(--font-display); text-transform: uppercase; font-size: 12px; letter-spacing: 0.12em; color: var(--ink-2); margin-bottom: 10px; display: flex; justify-content: space-between; }
+  .opt__label b { color: var(--cf-magenta); font-weight: 600; }
+  .swatches { display: flex; gap: 8px; flex-wrap: wrap; }
+  .swatch { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: 1.5px solid var(--hair); border-radius: 999px; padding: 7px 13px 7px 8px; font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.07em; color: var(--ink-2); transition: .2s; }
+  .swatch .chip { width: 16px; height: 16px; border-radius: 50%; flex: 0 0 auto; border: 1px solid rgba(255,255,255,0.2); }
+  .swatch.on { border-color: var(--cf-magenta); color: #fff; }
+  .seg { display: inline-flex; border: 1.5px solid var(--hair); border-radius: 999px; overflow: hidden; }
+  .seg button { font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; padding: 9px 18px; background: none; border: none; color: var(--ink-2); cursor: pointer; transition: .2s; }
+  .seg button.on { background: var(--cf-magenta); color: #fff; }
+  .qty { display: inline-flex; align-items: center; border: 1.5px solid var(--hair); border-radius: 999px; overflow: hidden; }
+  .qty button { width: 38px; height: 40px; background: none; border: none; color: #fff; font-size: 18px; cursor: pointer; }
+  .qty button:hover { background: rgba(255,255,255,0.06); }
+  .qty span { min-width: 34px; text-align: center; font-family: var(--font-display); font-size: 15px; }
+  .modal__price { display: flex; align-items: baseline; gap: 10px; margin: 26px 0 0; padding-top: 20px; border-top: 1px solid var(--hair); }
+  .modal__price .big { font-family: var(--font-display); font-weight: 700; font-size: 38px; letter-spacing: -0.01em; }
+  .modal__price .unit { font-size: 13px; color: var(--ink-3); }
+  .modal__price .est { font-family: var(--font-display); text-transform: uppercase; font-size: 10px; letter-spacing: 0.12em; color: var(--cf-magenta); border: 1px solid var(--hair-mag); border-radius: 999px; padding: 4px 9px; margin-left: auto; }
+  .modal__actions { display: flex; gap: 12px; margin-top: 22px; }
+  .modal__actions .btn { flex: 1; }
+  .modal__note { font-size: 12px; color: var(--ink-3); margin-top: 16px; line-height: 1.5; display: flex; gap: 8px; }
+  .modal__note .icon { width: 15px; height: 15px; color: var(--cf-magenta); flex: 0 0 auto; margin-top: 1px; }
+
+  .cartbtn { position: relative; background: rgba(255,255,255,0.06); border: 1px solid var(--hair); border-radius: 999px; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; color: #fff; cursor: pointer; transition: .2s; }
+  .cartbtn:hover { border-color: var(--cf-magenta); }
+  .cartbtn .count { position: absolute; top: -5px; right: -5px; min-width: 19px; height: 19px; border-radius: 999px; background: var(--cf-magenta); color: #fff; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; padding: 0 5px; opacity: 0; transform: scale(0.6); transition: .2s; font-family: var(--font-body); }
+  .cartbtn.has .count { opacity: 1; transform: scale(1); }
+  .drawer { position: fixed; inset: 0; z-index: 320; pointer-events: none; }
+  .drawer__bg { position: absolute; inset: 0; background: rgba(3,3,4,0.7); opacity: 0; transition: .3s; }
+  .drawer__panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(420px, 100%); background: var(--site-panel-2); border-left: 1px solid var(--hair); transform: translateX(100%); transition: transform .35s var(--ease-out); display: flex; flex-direction: column; }
+  .drawer.open { pointer-events: auto; }
+  .drawer.open .drawer__bg { opacity: 1; }
+  .drawer.open .drawer__panel { transform: none; }
+  .drawer__head { display: flex; align-items: center; justify-content: space-between; padding: 22px 24px; border-bottom: 1px solid var(--hair); }
+  .drawer__head h3 { font-family: var(--font-display); text-transform: uppercase; font-size: 18px; margin: 0; }
+  .drawer__items { flex: 1; overflow: auto; padding: 12px 24px; }
+  .citem { display: flex; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--hair); align-items: center; }
+  .citem .ci-glyph { width: 56px; height: 56px; border-radius: 5px; background: #0a1019; display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+  .citem .ci-glyph svg { width: 60%; height: 60%; color: #7fd0ff; }
+  .citem__n { font-family: var(--font-display); text-transform: uppercase; font-size: 14px; font-weight: 600; }
+  .citem__m { font-size: 12px; color: var(--ink-3); margin-top: 3px; }
+  .citem__p { font-family: var(--font-display); font-size: 14px; margin-top: 6px; }
+  .citem__rm { background: none; border: none; color: var(--ink-3); cursor: pointer; font-size: 12px; text-decoration: underline; padding: 0; margin-top: 6px; }
+  .citem__rm:hover { color: var(--cf-magenta); }
+  .drawer__empty { color: var(--ink-3); font-size: 14px; text-align: center; padding: 50px 20px; }
+  .drawer__foot { padding: 22px 24px; border-top: 1px solid var(--hair); }
+  .drawer__total { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 16px; }
+  .drawer__total .l { font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.1em; color: var(--ink-2); }
+  .drawer__total .v { font-family: var(--font-display); font-weight: 700; font-size: 26px; }
+
+  .toast { position: fixed; bottom: 28px; left: 50%; transform: translate(-50%, 20px); z-index: 400; background: #fff; color: #000; font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.06em; padding: 14px 22px; border-radius: 5px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: .3s var(--ease-out); display: flex; align-items: center; gap: 10px; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+  .toast .icon { width: 18px; height: 18px; color: var(--cf-magenta); }
+
+  @media (max-width: 1080px) { .shop-grid { grid-template-columns: repeat(2,1fr); } }
+  @media (max-width: 760px) { .modal__panel { grid-template-columns: 1fr; } .modal__media { min-height: 280px; } }
+  @media (max-width: 560px) { .shop-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__logo" href="index.html"><img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" /></a>
+  <div class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="industries.html">Industries</a>
+    <a href="about.html">About</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav__right">
+    <div class="unitsw">
+      <button class="unitsw__btn" aria-label="Switch unit"><span class="dot"></span><span class="cur">The Production Line</span><svg class="icon chev"><use href="#i-chevron-down"/></svg></button>
+      <div class="unitsw__menu">
+        <div class="lbl">Concept Factory — units</div>
+        <a href="index.html" class="uitem"><b>Concept Factory</b><span>Design &amp; build studio</span></a>
+        <a href="prop-factory.html" class="uitem"><b>Prop Factory</b><span>In-house prop unit</span></a>
+        <a href="shop.html" class="uitem active"><b>The Production Line</b><span>3D model webshop</span></a>
+      </div>
+    </div>
+    <button class="cartbtn" id="cartBtn" aria-label="Cart"><svg class="icon"><use href="#i-box"/></svg><span class="count" id="cartCount">0</span></button>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a project</a>
+    <button class="nav__burger" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  <span class="mm-units">Units</span><a href="prop-factory.html">Prop Factory</a><a href="shop.html">The Production Line</a>
+</div>
+
+<!-- PAGE HERO -->
+<header class="phero">
+  <div class="wrap phero__in">
+    <span class="eyebrow">Concept Factory — webshop</span>
+    <h1><span class="script">The Production Line</span><span class="l2">Big 3D objects, made to order</span></h1>
+    <p class="lead">An online catalogue of oversized 3D models — anything Concept Factory can 3D-print or shape with the robot. A giant soda can, an XL pumpkin, sculpted letters. Pick a model, choose your finish, get an instant price.</p>
+    <div class="pline">
+      <div class="node"><svg class="icon"><use href="#i-box"/></svg><span>Model</span></div>
+      <div class="node"><svg class="icon"><use href="#i-layers"/></svg><span>Print / shape</span></div>
+      <div class="node"><svg class="icon"><use href="#i-settings"/></svg><span>Hardcoat</span></div>
+      <div class="node"><svg class="icon"><use href="#i-sparkles"/></svg><span>Finish</span></div>
+      <div class="node"><svg class="icon"><use href="#i-send"/></svg><span>Deliver</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- SHOP -->
+<section class="sec-pad-sm" style="padding-top:0;">
+  <div class="wrap-wide">
+    <div class="shopbar reveal-up">
+      <div class="filters" id="filters">
+        <button class="on" data-cat="all">All</button>
+        <button data-cat="Replicas">Replicas</button>
+        <button data-cat="Sculptures">Sculptures</button>
+        <button data-cat="Signage">Signage</button>
+        <button data-cat="Seasonal">Seasonal</button>
+        <button data-cat="Characters">Characters</button>
+      </div>
+      <span style="font-size:13px;color:var(--ink-3);">Tap <b style="color:#7fd0ff;">Solid</b> to preview the rendered model.</span>
+    </div>
+    <div class="shop-grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="panel sec-pad">
+  <div class="wrap">
+    <div class="sec-head reveal-up"><div><span class="sec-num">(01)</span><h2 class="dsp">How the line works</h2></div></div>
+    <div class="cards3 reveal-up" style="grid-template-columns:repeat(4,1fr);">
+      <div class="vcard"><div class="ico"><svg class="icon"><use href="#i-box"/></svg></div><h3>1 · Pick a model</h3><p>Choose an object and preview it as a 3D model — wireframe or solid.</p></div>
+      <div class="vcard"><div class="ico"><svg class="icon"><use href="#i-layers"/></svg></div><h3>2 · Print or shape</h3><p>3D-printed or Kuka-shaped from EPS foam, then hardcoated for strength.</p></div>
+      <div class="vcard"><div class="ico"><svg class="icon"><use href="#i-sparkles"/></svg></div><h3>3 · Finish</h3><p>Raw, hardcoat, hand-painted or branded wrap — price updates live.</p></div>
+      <div class="vcard"><div class="ico"><svg class="icon"><use href="#i-send"/></svg></div><h3>4 · Delivered</h3><p>Shipped to your set, stand or park. Custom sizes on request.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta__in"><div class="wrap">
+    <span class="script">Need a prop instead?</span>
+    <h2 class="dsp">That's the Prop Factory</h2>
+    <p>Furniture, decor walls, aged dressing and rentals live with the Prop Factory. The Production Line is for big printed &amp; shaped 3D objects.</p>
+    <a href="prop-factory.html" class="btn btn-dark">Visit Prop Factory <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+  </div></div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" />
+        <p>Creating winning concepts. Themed environments and decor, designed and built in-house in Herentals, Belgium.</p>
+        <div class="foot-soc"><a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a><a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a><a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="work.html">Work</a><a href="prop-factory.html">Prop Factory</a><a href="shop.html">Shop</a><a href="industries.html">Industries</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="#">Press</a></div>
+      <div class="foot-news"><h4 style="font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.16em;color:var(--ink-3);margin:0 0 16px;">Newsletter</h4><p>Behind-the-scenes from the atelier, a few times a year.</p><form onsubmit="return false;"><input type="email" placeholder="Your email" aria-label="Your email" /><button type="submit" aria-label="Subscribe"><svg class="icon"><use href="#i-send"/></svg></button></form></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Concept Factory BV — Grensstraat 3, 2200 Herentals, BE</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a> · <a href="legal.html#conditions">Voorwaarden</a> · NL / EN</span></div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal__bg" data-close></div>
+  <div class="modal__panel">
+    <button class="modal__close" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button>
+    <div class="modal__media" id="mMedia">
+      <div class="mpanel" id="mPanel"><div class="grid"></div><div class="floor"></div><div class="glyph" id="mGlyph"></div><span class="mbadge">3D MODEL · made to order</span><span class="mdim" id="mDimBadge"></span></div>
+      <div class="stagetabs">
+        <button id="tabWire" class="on">Wireframe</button>
+        <button id="tabSolid">Solid</button>
+      </div>
+    </div>
+    <div class="modal__body">
+      <div class="modal__cat" id="mCat"></div>
+      <div class="modal__name" id="mName"></div>
+      <p class="modal__desc" id="mDesc"></p>
+      <div class="specrow">
+        <div class="sp">Method<b id="mMethod"></b></div>
+        <div class="sp">Material<b id="mMat"></b></div>
+        <div class="sp">Size<b id="mDim"></b></div>
+      </div>
+
+      <div class="opt">
+        <div class="opt__label">Finish <b id="mFinishName">Raw foam</b></div>
+        <div class="swatches" id="mSwatches"></div>
+      </div>
+      <div class="opt" style="display:flex;gap:30px;flex-wrap:wrap;">
+        <div><div class="opt__label">Buy or rent</div>
+          <div class="seg" id="mMode"><button class="on" data-mode="buy">Buy</button><button data-mode="rent">Rent / week</button></div>
+        </div>
+        <div><div class="opt__label">Quantity</div>
+          <div class="qty"><button id="qMinus">–</button><span id="qVal">1</span><button id="qPlus">+</button></div>
+        </div>
+      </div>
+
+      <div class="modal__price">
+        <span class="big" id="mPrice">€0</span>
+        <span class="unit" id="mUnit">to buy</span>
+        <span class="est">Est. ex. VAT</span>
+      </div>
+      <div class="modal__actions">
+        <button class="btn btn-primary" id="addCart">Add to order <svg class="icon"><use href="#i-box"/></svg></button>
+        <a class="btn btn-ghost" href="contact.html">Request 3D render</a>
+      </div>
+      <div class="modal__note"><svg class="icon"><use href="#i-lightbulb"/></svg><span>Indicative estimate. Final price depends on size, model complexity and finish. Lead time typ. 1–3 weeks. Custom models &amp; brand replicas on request.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CART DRAWER -->
+<div class="drawer" id="drawer">
+  <div class="drawer__bg" data-dclose></div>
+  <div class="drawer__panel">
+    <div class="drawer__head"><h3>Your order</h3><button class="modal__close" data-dclose aria-label="Close" style="position:static;"><svg class="icon"><use href="#i-x"/></svg></button></div>
+    <div class="drawer__items" id="cartItems"></div>
+    <div class="drawer__foot">
+      <div class="drawer__total"><span class="l">Estimated total</span><span class="v" id="cartTotal">€0</span></div>
+      <button class="btn btn-primary" id="checkout" style="width:100%;">Request production run <svg class="icon"><use href="#i-arrow-right"/></svg></button>
+      <p style="font-size:12px;color:var(--ink-3);margin:12px 0 0;text-align:center;">No payment now — Concept Factory confirms specs &amp; quote first.</p>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><svg class="icon"><use href="#i-star"/></svg><span id="toastMsg">Added</span></div>
+
+<script>
+(function () {
+  // ---- 3D model glyphs (abstract wireframe placeholders) ----
+  var GLYPH = {
+    can: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><ellipse class="fillpart" cx="50" cy="24" rx="22" ry="9"/><path d="M28 24v52a22 9 0 0 0 44 0V24"/><path class="fillpart" d="M28 24v52a22 9 0 0 0 44 0V24Z"/><ellipse cx="50" cy="76" rx="22" ry="9"/></svg>',
+    pumpkin: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><circle class="fillpart" cx="50" cy="56" r="30"/><path d="M50 26v8"/><path d="M50 34c-6 0 -10 9 -10 22s4 22 10 22"/><path d="M50 34c6 0 10 9 10 22s-4 22 -10 22"/><path d="M36 30c0-5 6-7 10-6"/></svg>',
+    letter: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><path class="fillpart" d="M30 80 50 24 70 80"/><path d="M30 80 50 24 70 80"/><path d="M38 62h24"/><path d="M70 80l8-8M50 24l8-8M30 80l8-8" stroke-width="1.6"/></svg>',
+    cone: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><circle class="fillpart" cx="50" cy="30" r="18"/><path class="fillpart" d="M34 40 50 86 66 40"/><path d="M34 40 50 86 66 40"/><circle cx="50" cy="30" r="18"/><path d="M40 44q10 6 20 0" stroke-width="1.6"/></svg>',
+    trophy: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><path class="fillpart" d="M34 22h32v14a16 16 0 0 1-32 0Z"/><path d="M34 22h32v14a16 16 0 0 1-32 0Z"/><path d="M34 28H24a8 8 0 0 0 10 12M66 28h10a8 8 0 0 1-10 12"/><path d="M50 52v14M40 78h20M44 66h12v12H44z"/></svg>',
+    bottle: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><path class="fillpart" d="M44 16h12v14c0 6 8 8 8 18v28a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6V48c0-10 8-12 8-18Z"/><path d="M44 16h12v14c0 6 8 8 8 18v28a6 6 0 0 1-6 6H42a6 6 0 0 1-6-6V48c0-10 8-12 8-18Z"/><path d="M36 58h28" stroke-width="1.6"/></svg>',
+    figure: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><circle class="fillpart" cx="50" cy="26" r="10"/><path class="fillpart" d="M50 36c-10 0-16 8-16 20l4 28h24l4-28c0-12-6-20-16-20Z"/><path d="M50 36c-10 0-16 8-16 20l4 28h24l4-28c0-12-6-20-16-20Z"/><circle cx="50" cy="26" r="10"/></svg>',
+    rock: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><path class="fillpart" d="M22 70 34 40l20-8 24 14 4 24Z"/><path d="M22 70 34 40l20-8 24 14 4 24Z"/><path d="M34 40 54 56l28-10M54 56l-6 18" stroke-width="1.6"/></svg>',
+    sign: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><rect class="fillpart" x="20" y="30" width="60" height="32" rx="5"/><rect x="20" y="30" width="60" height="32" rx="5"/><path d="M30 62v18M70 62v18M26 80h12M64 80h12" stroke-width="1.8"/></svg>',
+    cube: '<svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="2.4"><path class="fillpart" d="M50 18 80 34v32L50 82 20 66V34Z"/><path d="M50 18 80 34v32L50 82 20 66V34Z"/><path d="M20 34 50 50l30-16M50 50v32" stroke-width="1.6"/></svg>'
+  };
+
+  var FINISHES = [
+    { id:'raw', name:'Raw foam', mult:1.0, col:'#d8cdb6' },
+    { id:'hard', name:'Hardcoat PU', mult:1.4, col:'#9aa3ad' },
+    { id:'paint', name:'Hand-painted', mult:1.7, col:'#e6007e' },
+    { id:'wrap', name:'Branded wrap', mult:1.9, col:'#2a6fdb' }
+  ];
+
+  var PRODUCTS = [
+    { id:'can', name:'Giant Soda Can', cat:'Replicas', glyph:'can', base:690, dim:'H 180 × Ø 90 cm', method:'3D print', mat:'EPS + PU hardcoat', desc:'Oversized brand-can replica — perfect for activations, fairs and photo moments. Printed in segments and seam-finished.' },
+    { id:'pumpkin', name:'XL Halloween Pumpkin', cat:'Seasonal', glyph:'pumpkin', base:520, dim:'Ø 120 cm', method:'Kuka-shaped', mat:'EPS + hardcoat', desc:'Big sculpted pumpkin for seasonal theming. Robot-milled from foam, hardcoated and painted to glow under light.' },
+    { id:'letters', name:'Oversized Letters (each)', cat:'Signage', glyph:'letter', base:180, dim:'H 100 cm, per letter', method:'CNC / 3D print', mat:'EPS / PU', desc:'Big standout letters for events and stages. Priced per letter; any typeface, any height.' },
+    { id:'cone', name:'Giant Ice-Cream Cone', cat:'Replicas', glyph:'cone', base:740, dim:'H 220 cm', method:'3D print', mat:'EPS + hardcoat', desc:'XL food replica with a glossy scoop — a crowd magnet for retail and parks.' },
+    { id:'trophy', name:'Oversized Trophy', cat:'Replicas', glyph:'trophy', base:560, dim:'H 150 cm', method:'3D print', mat:'EPS + metallic', desc:'Larger-than-life trophy cup for award shows and reveals. Metallic or branded finish.' },
+    { id:'bottle', name:'Giant Bottle', cat:'Replicas', glyph:'bottle', base:720, dim:'H 200 cm', method:'Kuka-shaped', mat:'EPS + hardcoat', desc:'Oversized bottle replica — drinks, cosmetics or fantasy. Robot-shaped for a clean silhouette.' },
+    { id:'figure', name:'Brand Mascot Figure', cat:'Characters', glyph:'figure', base:1450, dim:'H 180 cm', method:'3D print', mat:'EPS + PU', desc:'A full character or mascot brought into 3D — sculpted, printed and painted to your model sheet.' },
+    { id:'rock', name:'Sculpted Boulder', cat:'Sculptures', glyph:'rock', base:480, dim:'W 200 × H 120 cm', method:'Kuka-shaped', mat:'EPS + hardcoat', desc:'Themed rockwork and boulders for parks and stages. Lightweight, durable, hollow.' },
+    { id:'statue', name:'Foam Statue / Figure', cat:'Sculptures', glyph:'figure', base:1250, dim:'H 200 cm', method:'3D print', mat:'EPS + PU', desc:'A standing sculpted figure or statue, milled and finished by hand for exhibitions and sets.' },
+    { id:'logo', name:'3D Logo Sign', cat:'Signage', glyph:'sign', base:640, dim:'W 250 cm', method:'CNC / 3D print', mat:'EPS / PU', desc:'A dimensional logo or sign in 3D — backlit options available. Built to your brand artwork.' }
+  ];
+
+  function eur(n){ return '€' + Math.round(n).toLocaleString('en-US'); }
+
+  // ---- grid ----
+  var grid = document.getElementById('grid');
+  function cardHTML(p){
+    return '<article class="pcard" data-cat="'+p.cat+'">' +
+      '<div class="mpanel" data-open="'+p.id+'"><div class="grid"></div><div class="floor"></div>' +
+        '<div class="glyph">'+GLYPH[p.glyph]+'</div>' +
+        '<span class="mbadge">3D MODEL</span><span class="mdim">'+p.dim+'</span>' +
+      '</div>' +
+      '<button class="mtoggle" data-solid="'+p.id+'"><span class="d"></span>Solid</button>' +
+      '<div class="pcard__body">' +
+        '<div class="pcard__cat">'+p.cat+'</div>' +
+        '<div class="pcard__name">'+p.name+'</div>' +
+        '<div class="pcard__meta">'+p.method+' · '+p.mat+'</div>' +
+        '<div class="pcard__foot">' +
+          '<div class="pcard__price">'+eur(p.base)+' <span>from · ex VAT</span></div>' +
+          '<button class="pcard__view" data-open="'+p.id+'">Configure <svg class="icon"><use href="#i-arrow-right"/></svg></button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+  function renderGrid(cat){
+    grid.innerHTML = PRODUCTS.filter(function(p){ return cat==='all'||p.cat===cat; }).map(cardHTML).join('');
+  }
+  renderGrid('all');
+
+  document.getElementById('filters').addEventListener('click', function(e){
+    var b=e.target.closest('button'); if(!b) return;
+    this.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+    renderGrid(b.dataset.cat);
+  });
+
+  grid.addEventListener('click', function(e){
+    var sol = e.target.closest('[data-solid]');
+    if (sol){ e.stopPropagation(); var pc=sol.closest('.pcard'); var panel=pc.querySelector('.mpanel'); var on=panel.classList.toggle('solid'); sol.classList.toggle('on', on); sol.lastChild.textContent = on?'Wireframe':'Solid'; return; }
+    var open=e.target.closest('[data-open]');
+    if (open){ openModal(open.getAttribute('data-open')); }
+  });
+
+  // ---- modal ----
+  var modal=document.getElementById('modal');
+  var mPanel=document.getElementById('mPanel');
+  var state={ product:null, finish:FINISHES[0], mode:'buy', qty:1 };
+
+  function buildSwatches(){
+    document.getElementById('mSwatches').innerHTML = FINISHES.map(function(f,i){
+      return '<button class="swatch'+(i===0?' on':'')+'" data-finish="'+f.id+'"><span class="chip" style="background:'+f.col+'"></span>'+f.name+'</button>';
+    }).join('');
+  }
+  function unitPrice(){ return state.product.base * state.finish.mult * (state.mode==='rent'?0.18:1); }
+  function refreshPrice(){
+    document.getElementById('mPrice').textContent = eur(unitPrice()*state.qty);
+    document.getElementById('mUnit').textContent = state.mode==='rent'?'per week to rent':'to buy';
+    document.getElementById('mFinishName').textContent = state.finish.name;
+  }
+  function setStage(solid){
+    mPanel.classList.toggle('solid', solid);
+    document.getElementById('tabSolid').classList.toggle('on', solid);
+    document.getElementById('tabWire').classList.toggle('on', !solid);
+  }
+  function openModal(id){
+    var p=PRODUCTS.find(function(x){ return x.id===id; });
+    state={ product:p, finish:FINISHES[0], mode:'buy', qty:1 };
+    document.getElementById('mGlyph').innerHTML = GLYPH[p.glyph];
+    document.getElementById('mCat').textContent=p.cat;
+    document.getElementById('mName').textContent=p.name;
+    document.getElementById('mDesc').textContent=p.desc;
+    document.getElementById('mMethod').textContent=p.method;
+    document.getElementById('mMat').textContent=p.mat;
+    document.getElementById('mDim').textContent=p.dim;
+    document.getElementById('mDimBadge').textContent=p.dim;
+    document.getElementById('qVal').textContent='1';
+    buildSwatches();
+    document.getElementById('mMode').querySelectorAll('button').forEach(function(b,i){ b.classList.toggle('on', i===0); });
+    setStage(false); refreshPrice();
+    modal.classList.add('open'); document.body.style.overflow='hidden';
+  }
+  function closeModal(){ modal.classList.remove('open'); document.body.style.overflow=''; }
+  modal.addEventListener('click', function(e){ if(e.target.closest('[data-close]')) closeModal(); });
+  document.getElementById('mSwatches').addEventListener('click', function(e){
+    var b=e.target.closest('[data-finish]'); if(!b) return;
+    this.querySelectorAll('.swatch').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+    state.finish=FINISHES.find(function(f){ return f.id===b.dataset.finish; }); refreshPrice();
+  });
+  document.getElementById('mMode').addEventListener('click', function(e){
+    var b=e.target.closest('[data-mode]'); if(!b) return;
+    this.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); }); b.classList.add('on');
+    state.mode=b.dataset.mode; refreshPrice();
+  });
+  document.getElementById('qPlus').addEventListener('click', function(){ state.qty++; document.getElementById('qVal').textContent=state.qty; refreshPrice(); });
+  document.getElementById('qMinus').addEventListener('click', function(){ if(state.qty>1){ state.qty--; document.getElementById('qVal').textContent=state.qty; refreshPrice(); } });
+  document.getElementById('tabSolid').addEventListener('click', function(){ setStage(true); });
+  document.getElementById('tabWire').addEventListener('click', function(){ setStage(false); });
+
+  // ---- cart ----
+  var cart=[];
+  var drawer=document.getElementById('drawer');
+  function renderCart(){
+    var items=document.getElementById('cartItems');
+    document.getElementById('cartCount').textContent = cart.reduce(function(s,i){ return s+i.qty; },0);
+    document.getElementById('cartBtn').classList.toggle('has', cart.length>0);
+    if(!cart.length){ items.innerHTML='<div class="drawer__empty">Your order is empty.<br>Add models from the line.</div>'; document.getElementById('cartTotal').textContent='€0'; return; }
+    items.innerHTML = cart.map(function(c,i){
+      return '<div class="citem"><div class="ci-glyph">'+GLYPH[c.glyph]+'</div><div style="flex:1;"><div class="citem__n">'+c.name+'</div>'+
+        '<div class="citem__m">'+c.finishName+' · '+(c.mode==='rent'?'Rent/week':'Buy')+' · ×'+c.qty+'</div>'+
+        '<div class="citem__p">'+eur(c.price*c.qty)+(c.mode==='rent'?' /wk':'')+'</div>'+
+        '<button class="citem__rm" data-rm="'+i+'">Remove</button></div></div>';
+    }).join('');
+    document.getElementById('cartTotal').textContent = eur(cart.reduce(function(s,c){ return s+c.price*c.qty; },0));
+  }
+  document.getElementById('cartItems').addEventListener('click', function(e){
+    var rm=e.target.closest('[data-rm]'); if(!rm) return; cart.splice(+rm.dataset.rm,1); renderCart();
+  });
+  document.getElementById('addCart').addEventListener('click', function(){
+    cart.push({ name:state.product.name, glyph:state.product.glyph, finishName:state.finish.name, mode:state.mode, qty:state.qty, price:unitPrice() });
+    renderCart(); closeModal(); showToast('Added to your order');
+  });
+  function openDrawer(){ renderCart(); drawer.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeDrawer(){ drawer.classList.remove('open'); document.body.style.overflow=''; }
+  document.getElementById('cartBtn').addEventListener('click', openDrawer);
+  drawer.addEventListener('click', function(e){ if(e.target.closest('[data-dclose]')) closeDrawer(); });
+  document.getElementById('checkout').addEventListener('click', function(){
+    if(!cart.length){ showToast('Your order is empty'); return; }
+    cart=[]; renderCart(); closeDrawer(); showToast('Request sent — we\u2019ll be in touch!');
+  });
+
+  var toastT;
+  function showToast(msg){ document.getElementById('toastMsg').textContent=msg; var t=document.getElementById('toast'); t.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){ t.classList.remove('show'); },2600); }
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape'){ closeModal(); closeDrawer(); } });
+})();
+</script>
+</body>
+</html>

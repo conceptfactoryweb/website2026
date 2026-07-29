@@ -1,0 +1,158 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Legal — Privacy · Terms · Voorwaarden" subtitle="Legal pages" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept Factory — Legal</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="site.js" defer></script>
+<style>
+  .legal { display: grid; grid-template-columns: 240px 1fr; gap: 56px; align-items: start; }
+  .legal__toc { position: sticky; top: 100px; }
+  .legal__toc a { display: block; font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.08em; color: var(--ink-2); padding: 10px 0; border-bottom: 1px solid var(--hair); transition: color .2s; }
+  .legal__toc a:hover { color: #fff; }
+  .legal__body h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 700; font-size: clamp(26px,3vw,42px); margin: 0 0 6px; letter-spacing: -0.01em; }
+  .legal__body .upd { font-size: 12px; color: var(--ink-3); margin-bottom: 22px; }
+  .legal__body h3 { font-family: var(--font-display); text-transform: uppercase; font-size: 16px; letter-spacing: 0.04em; margin: 30px 0 10px; }
+  .legal__body p, .legal__body li { color: var(--ink-2); font-size: 15px; line-height: 1.72; }
+  .legal__body ul { padding-left: 20px; }
+  .legal__sec { padding-bottom: 64px; margin-bottom: 64px; border-bottom: 1px solid var(--hair); }
+  .legal__sec:last-child { border-bottom: none; }
+  .legal__note { background: var(--site-panel); border: 1px solid var(--hair); border-radius: 6px; padding: 16px 18px; font-size: 13px; color: var(--ink-3); margin-top: 18px; display: flex; gap: 10px; }
+  .legal__note .icon { width: 16px; height: 16px; color: var(--cf-magenta); flex: 0 0 auto; margin-top: 2px; }
+  @media (max-width: 820px){ .legal { grid-template-columns: 1fr; gap: 20px; } .legal__toc { position: static; display: flex; flex-wrap: wrap; gap: 8px; } .legal__toc a { border: 1px solid var(--hair); border-radius: 999px; padding: 8px 14px; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__logo" href="index.html"><img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" /></a>
+  <div class="nav__links">
+    <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="nav__right">
+    <div class="unitsw">
+      <button class="unitsw__btn" aria-label="Switch unit"><span class="dot"></span><span class="cur">Concept Factory</span><svg class="icon chev"><use href="#i-chevron-down"/></svg></button>
+      <div class="unitsw__menu">
+        <div class="lbl">Concept Factory — units</div>
+        <a href="index.html" class="uitem active"><b>Concept Factory</b><span>Design &amp; build studio</span></a>
+        <a href="prop-factory.html" class="uitem"><b>Prop Factory</b><span>In-house prop unit</span></a>
+        <a href="shop.html" class="uitem"><b>The Production Line</b><span>3D model webshop</span></a>
+      </div>
+    </div>
+    <div class="lang"><span class="lang-en"><b>EN</b></span><span style="color:rgba(255,255,255,0.25)">/</span><span class="lang-nl">NL</span></div>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a project</a>
+    <button class="nav__burger" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  <span class="mm-units">Units</span><a href="prop-factory.html">Prop Factory</a><a href="shop.html">The Production Line</a>
+</div>
+
+<!-- HERO -->
+<header class="phero">
+  <div class="wrap phero__in">
+    <span class="eyebrow">Legal</span>
+    <h1><span class="script">The small print</span><span class="l2">Privacy · Terms · Conditions</span></h1>
+    <p class="lead">The legal basics for using the Concept Factory site, the Prop Factory and The Production Line. Plain-language summaries with the formal text underneath.</p>
+  </div>
+</header>
+
+<section class="sec-pad-sm" style="padding-top:0;">
+  <div class="wrap">
+    <div class="legal">
+      <nav class="legal__toc">
+        <a href="#privacy">Privacy policy</a>
+        <a href="#terms">Terms of use</a>
+        <a href="#conditions">General conditions</a>
+        <a href="#cookies">Cookies</a>
+      </nav>
+      <div class="legal__body">
+
+        <!-- PRIVACY -->
+        <div class="legal__sec" id="privacy">
+          <h2>Privacy policy</h2>
+          <div class="upd">Last updated · June 2026</div>
+          <p>Concept Factory BV ("Concept Factory", "we") respects your privacy and handles personal data in line with the EU General Data Protection Regulation (GDPR). This policy explains what we collect and why.</p>
+          <h3>What we collect</h3>
+          <ul>
+            <li><b>Contact data</b> you submit through the project, quote or job forms — name, company, email, phone and your message.</li>
+            <li><b>Order data</b> from The Production Line — the models, finishes and quantities you request (no payment is taken on the site).</li>
+            <li><b>Technical data</b> — basic, anonymised analytics about how the site is used.</li>
+          </ul>
+          <h3>Why we use it</h3>
+          <p>To answer your enquiry, prepare quotes, deliver projects and orders, recruit for open roles, and improve the site. We never sell your data.</p>
+          <h3>How long we keep it</h3>
+          <p>Only as long as needed for the purpose above, or as required by law (e.g. invoicing). You can ask us to access, correct or delete your data at any time.</p>
+          <h3>Your rights</h3>
+          <p>Under the GDPR you can request access, rectification, erasure, restriction or portability of your data, and object to processing. Contact <a href="mailto:bjorn@conceptfactory.be" style="color:var(--cf-magenta);">bjorn@conceptfactory.be</a>.</p>
+          <div class="legal__note"><svg class="icon"><use href="#i-lightbulb"/></svg><span>Template text for the mockup — to be reviewed by Concept Factory and a legal advisor before go-live.</span></div>
+        </div>
+
+        <!-- TERMS -->
+        <div class="legal__sec" id="terms">
+          <h2>Terms of use</h2>
+          <div class="upd">Last updated · June 2026</div>
+          <p>By using this website you agree to these terms. The site is provided for information about Concept Factory, the Prop Factory and The Production Line.</p>
+          <h3>Content &amp; intellectual property</h3>
+          <p>All images, text, logos, designs and 3D models on this site are the property of Concept Factory BV or its clients and may not be reused without written permission.</p>
+          <h3>Estimates &amp; orders</h3>
+          <p>Prices shown on The Production Line are non-binding indications. No contract is formed until Concept Factory confirms specifications, lead time and a final quote in writing.</p>
+          <h3>Liability</h3>
+          <p>The site is offered "as is". Concept Factory is not liable for indirect damage arising from use of the site or reliance on indicative figures.</p>
+        </div>
+
+        <!-- CONDITIONS -->
+        <div class="legal__sec" id="conditions">
+          <h2>General conditions</h2>
+          <div class="upd">Algemene voorwaarden · June 2026</div>
+          <p>These general terms &amp; conditions apply to every offer, order and agreement between Concept Factory BV and its clients, unless agreed otherwise in writing.</p>
+          <h3>Quotes &amp; agreements</h3>
+          <p>Quotes are valid for 30 days. An agreement takes effect once a quote is signed or confirmed by email. Changes to scope may affect price and planning.</p>
+          <h3>Production &amp; delivery</h3>
+          <p>Lead times are indicative and start once briefing, designs and any advance are confirmed. Custom builds and 3D models are made to order and cannot be returned.</p>
+          <h3>Rental</h3>
+          <p>Rented props remain the property of Concept Factory. The client is responsible for damage or loss during the hire period at replacement value.</p>
+          <h3>Payment</h3>
+          <p>Unless agreed otherwise, an advance applies on confirmation with the balance on delivery. Invoices are payable within 30 days. Belgian law applies; disputes fall under the courts of the Antwerp district.</p>
+          <div class="legal__note"><svg class="icon"><use href="#i-lightbulb"/></svg><span>Indicative clauses for the mockup. Replace with Concept Factory's reviewed Dutch "Algemene voorwaarden" before publishing.</span></div>
+        </div>
+
+        <!-- COOKIES -->
+        <div class="legal__sec" id="cookies">
+          <h2>Cookies</h2>
+          <div class="upd">Last updated · June 2026</div>
+          <p>This site uses only essential and anonymised analytics cookies. No tracking or advertising cookies are set without your consent. You can clear cookies any time in your browser settings.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" />
+        <p>Creating winning concepts. Themed environments and decor, designed and built in-house in Herentals, Belgium.</p>
+        <div class="foot-soc"><a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a><a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a><a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="work.html">Work</a><a href="prop-factory.html">Prop Factory</a><a href="shop.html">Shop</a><a href="industries.html">Industries</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="#">Press</a></div>
+      <div class="foot-news"><h4 style="font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.16em;color:var(--ink-3);margin:0 0 16px;">Newsletter</h4><p>Behind-the-scenes from the atelier, a few times a year.</p><form onsubmit="return false;"><input type="email" placeholder="Your email" aria-label="Your email" /><button type="submit" aria-label="Subscribe"><svg class="icon"><use href="#i-send"/></svg></button></form></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Concept Factory BV — Grensstraat 3, 2200 Herentals, BE</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a> · NL / EN</span></div>
+  </div>
+</footer>
+
+</body>
+</html>

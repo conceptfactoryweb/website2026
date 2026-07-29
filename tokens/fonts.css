@@ -1,0 +1,16 @@
+/* ============================================================
+   Concept Factory — Font faces
+   Display:  Oswald  (the brand/logo typeface — "Concept Factory"
+             is set in Oswald Bold, the tagline in Oswald Regular)
+   Accent:   Lora italic  (editorial subtitles & pull-quotes —
+             SUBSTITUTE for the unnamed book-italic serif used on
+             the social/portfolio frames; swap if the real face
+             is provided)
+   Script:   Kaushan Script  (the magenta brush wordmark — "Concepts" —
+             SUBSTITUTE for the brand's hand-brushed accent; swap if the
+             real face is provided)
+   Neutral:  Helvetica Neue / Arial system stack (brand-accurate —
+             project titles on the photo frames are set in a plain
+             bold grotesque; no webfont needed)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Oswald:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;1,400;1,500;1,600&display=swap');

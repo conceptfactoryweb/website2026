@@ -1,0 +1,42 @@
+/* ============================================================
+   Concept Factory — Typography tokens
+   ============================================================ */
+:root {
+  /* --- Families --- */
+  --font-display: 'Oswald', 'Arial Narrow', sans-serif;     /* brand / headlines (UPPERCASE) */
+  --font-sans: 'Helvetica Neue', Arial, 'Liberation Sans', sans-serif; /* UI + project titles */
+  --font-serif: 'Lora', Georgia, 'Times New Roman', serif;  /* italic subtitles & quotes */
+  --font-script: 'Kaushan Script', 'Brush Script MT', cursive; /* magenta brush accent — "Concepts" */
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  /* --- Display scale (Oswald, condensed, set tight & UPPERCASE) --- */
+  --type-display-1: 700 88px/0.98 var(--font-display);
+  --type-display-2: 700 64px/1.0 var(--font-display);
+  --type-display-3: 600 44px/1.04 var(--font-display);
+  --type-heading: 600 30px/1.1 var(--font-display);
+  --type-eyebrow: 600 14px/1.2 var(--font-display);   /* tracked labels */
+
+  /* --- Project-title scale (Helvetica/Arial bold — the photo-frame titles) --- */
+  --type-title-1: 700 40px/1.05 var(--font-sans);
+  --type-title-2: 700 28px/1.1 var(--font-sans);
+
+  /* --- Body (neutral grotesque) --- */
+  --type-body-lg: 400 19px/1.6 var(--font-sans);
+  --type-body: 400 16px/1.6 var(--font-sans);
+  --type-body-sm: 400 14px/1.55 var(--font-sans);
+  --type-caption: 400 12px/1.4 var(--font-sans);
+
+  /* --- Serif accent (italic) --- */
+  --type-serif-lg: italic 500 26px/1.35 var(--font-serif);
+  --type-serif: italic 400 18px/1.45 var(--font-serif);
+
+  /* --- Script accent (magenta brush wordmark) --- */
+  --type-script-xl: 400 120px/0.9 var(--font-script);
+  --type-script: 400 56px/0.95 var(--font-script);
+
+  /* --- Tracking --- */
+  --tracking-display: -0.01em;   /* Oswald set slightly tight */
+  --tracking-eyebrow: 0.16em;    /* wide tracked labels / overlines */
+  --tracking-tagline: 0.22em;    /* logo tagline spacing */
+  --tracking-body: 0;
+}

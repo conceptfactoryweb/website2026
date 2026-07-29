@@ -1,0 +1,59 @@
+/* ============================================================
+   Concept Factory — Color tokens
+   Brand palette pulled directly from the logo color sheet:
+   magenta #e6007e · grey #706f6f · black #000000 · white
+   ============================================================ */
+:root {
+  /* --- Brand core --- */
+  --cf-magenta: #e6007e;       /* the single brand accent */
+  --cf-magenta-600: #c30069;   /* hover / pressed */
+  --cf-magenta-050: #fbe5f1;   /* tint wash */
+  --cf-black: #000000;
+  --cf-grey: #706f6f;          /* logo grey (factory icon + tagline) */
+  --cf-white: #ffffff;
+
+  /* --- Neutral / ink scale (warm-neutral grey ramp around #706f6f) --- */
+  --cf-ink-900: #0a0a0a;
+  --cf-ink-800: #1a1a1a;
+  --cf-ink-700: #333333;
+  --cf-ink-600: #4d4d4d;
+  --cf-ink-500: #706f6f;       /* = brand grey */
+  --cf-ink-400: #969595;
+  --cf-ink-300: #bcbbbb;
+  --cf-ink-200: #d8d7d7;
+  --cf-ink-100: #ececeb;
+  --cf-ink-050: #f5f5f4;
+
+  /* --- Editorial darks (the moody photo-overlay surfaces) --- */
+  --cf-night: #0d0e12;         /* near-black with a cool cast */
+  --cf-night-700: #16181f;
+
+  /* ---------- Semantic aliases ---------- */
+  --color-accent: var(--cf-magenta);
+  --color-accent-hover: var(--cf-magenta-600);
+  --color-accent-wash: var(--cf-magenta-050);
+
+  --text-strong: var(--cf-black);
+  --text-body: var(--cf-ink-700);
+  --text-muted: var(--cf-ink-500);
+  --text-faint: var(--cf-ink-400);
+  --text-on-dark: var(--cf-white);
+  --text-on-accent: var(--cf-white);
+
+  --surface-page: var(--cf-white);
+  --surface-raised: var(--cf-white);
+  --surface-sunken: var(--cf-ink-050);
+  --surface-card: var(--cf-white);
+  --surface-dark: var(--cf-night);
+  --surface-inverse: var(--cf-black);
+
+  --border-subtle: var(--cf-ink-200);
+  --border-default: var(--cf-ink-300);
+  --border-strong: var(--cf-ink-700);
+  --border-on-dark: rgba(255, 255, 255, 0.22);
+
+  /* Status (kept minimal — brand has no semantic palette of its own) */
+  --color-success: #1f8a4c;
+  --color-warning: #d9892b;
+  --color-danger: #c0392b;
+}

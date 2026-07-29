@@ -1,0 +1,207 @@
+<!-- @dsCard group="Website" viewport="1440x900" name="Industries" subtitle="Sector detail pages" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Concept Factory — Industries</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="site.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<script src="site.js" defer></script>
+<style>
+  .ind-row { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 60px; align-items: center; }
+  .ind-row.flip .ind-row__media { order: -1; }
+  .ind-row__media { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .ind-row__media .tile { aspect-ratio: 3/3.6; }
+  .ind-row__media .tile:first-child { grid-row: span 2; aspect-ratio: auto; }
+  .ind-row .num { font-family: var(--font-display); font-weight: 700; font-size: 15px; color: var(--cf-magenta); letter-spacing: 0.1em; }
+  .ind-row h2 { font-family: var(--font-display); text-transform: uppercase; font-weight: 700; font-size: clamp(30px, 3.6vw, 54px); line-height: 1.0; margin: 14px 0 0; letter-spacing: -0.01em; }
+  .ind-row p { color: var(--ink-2); font-size: 16px; line-height: 1.65; margin: 20px 0 0; max-width: 46ch; }
+  .ind-row .chips { display: flex; gap: 9px; flex-wrap: wrap; margin-top: 24px; }
+  .ind-row .chips span { font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.1em; color: var(--ink-2); border: 1px solid var(--hair); border-radius: 999px; padding: 7px 13px; }
+  .ind-sep { height: 1px; background: var(--hair); margin: clamp(60px,8vw,110px) 0; }
+  @media (max-width: 920px) {
+    .ind-row { grid-template-columns: 1fr; gap: 34px; }
+    .ind-row.flip .ind-row__media { order: 0; }
+    .ind-row__media .tile, .ind-row__media .tile:first-child { aspect-ratio: 3/2.2; grid-row: auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav__logo" href="index.html"><img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" /></a>
+  <div class="nav__links">
+    <a href="index.html">Home</a>
+    <a href="work.html">Work</a>
+    <a href="industries.html" class="active">Industries</a>
+    <a href="about.html">About</a>
+    <a href="careers.html">Careers</a>
+    <a href="contact.html">Contact</a>
+  </div>
+  <div class="nav__right">
+    <div class="unitsw">
+      <button class="unitsw__btn" aria-label="Switch unit"><span class="dot"></span><span class="cur">Concept Factory</span><svg class="icon chev"><use href="#i-chevron-down"/></svg></button>
+      <div class="unitsw__menu">
+        <div class="lbl">Concept Factory — units</div>
+        <a href="index.html" class="uitem active"><b>Concept Factory</b><span>Design &amp; build studio</span></a>
+        <a href="prop-factory.html" class="uitem"><b>Prop Factory</b><span>In-house prop unit</span></a>
+        <a href="shop.html" class="uitem"><b>The Production Line</b><span>Prop webshop</span></a>
+      </div>
+    </div>
+    <div class="lang"><span class="lang-en"><b>EN</b></span><span style="color:rgba(255,255,255,0.25)">/</span><span class="lang-nl">NL</span></div>
+    <a href="contact.html" class="btn btn-primary btn-sm">Start a project</a>
+    <button class="nav__burger" aria-label="Menu"><svg class="icon"><use href="#i-menu"/></svg></button>
+  </div>
+</nav>
+<div class="mobile-menu">
+  <a href="index.html">Home</a><a href="work.html">Work</a><a href="industries.html">Industries</a><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a>
+  <span class="mm-units">Units</span><a href="prop-factory.html">Prop Factory</a><a href="shop.html">The Production Line</a>
+</div>
+
+<!-- PAGE HERO -->
+<header class="phero phero--img">
+  <div class="phero__bg"><img src="assets/photos/aspe_sfeer.jpg" alt="An immersive environment built by Concept Factory" /></div>
+  <div class="wrap phero__in">
+    <span class="eyebrow">Industries — Who we build for</span>
+    <h1><span class="script">Built for</span><span class="l2">every audience</span></h1>
+    <p class="lead">Theme parks, broadcasters, theatres, brands and museums — Concept Factory builds worlds for anyone who needs an audience to feel something real.</p>
+  </div>
+</header>
+
+<section class="sec-pad">
+  <div class="wrap">
+
+    <!-- 1 THEME PARKS -->
+    <div class="ind-row reveal-up" id="theme-parks">
+      <div>
+        <span class="num">(01)</span>
+        <h2>Theme Parks<br>&amp; Attractions</h2>
+        <p>From a single themed corner to a full walkthrough attraction, Concept Factory designs and builds durable, weatherproof theming that survives millions of guests — and still reads like magic up close.</p>
+        <div class="chips"><span>Attraction theming</span><span>Walkthroughs</span><span>Facades &amp; props</span><span>Seasonal events</span></div>
+      </div>
+      <div class="ind-row__media">
+        <a class="tile" href="case.html?p=duck"><img src="assets/photos/duck-fishing.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Theme park</div><div class="tile__title">Duck Fishing</div></div></a>
+        <a class="tile" href="case.html?p=duck"><img src="assets/photos/sprookjes.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Walkthrough</div><div class="tile__title">Sprookjes</div></div></a>
+        <a class="tile" href="case.html?p=rmh"><img src="assets/photos/escape-lockers.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Escape</div><div class="tile__title">Red Alert</div></div></a>
+      </div>
+    </div>
+    <div class="ind-sep"></div>
+
+    <!-- 2 THEATRE -->
+    <div class="ind-row flip reveal-up" id="theatre">
+      <div>
+        <span class="num">(02)</span>
+        <h2>Theatre<br>&amp; Stage</h2>
+        <p>Full stage worlds for musicals and productions — large-scale scenic builds engineered to move, tour and transform, crafted with the detail a front-row seat demands.</p>
+        <div class="chips"><span>Set construction</span><span>Scenic paint</span><span>Mechanics</span><span>Touring builds</span></div>
+      </div>
+      <div class="ind-row__media">
+        <a class="tile" href="case.html?p=muizenval"><img src="assets/photos/muizenval-room.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Theatre</div><div class="tile__title">De Muizenval</div></div></a>
+        <a class="tile" href="case.html?p=alice"><img src="assets/photos/alice.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Theatre</div><div class="tile__title">Alice</div></div></a>
+        <a class="tile" href="case.html?p=annie"><img src="assets/photos/annie1.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Theatre</div><div class="tile__title">Annie</div></div></a>
+      </div>
+    </div>
+    <div class="ind-sep"></div>
+
+    <!-- 3 TV & FILM -->
+    <div class="ind-row reveal-up" id="tv-film">
+      <div>
+        <span class="num">(03)</span>
+        <h2>Television<br>&amp; Film</h2>
+        <p>Broadcast sets and film decor built fast and built right — from immersive game-show worlds to period interiors, ready for camera and a live audience.</p>
+        <div class="chips"><span>Studio sets</span><span>Game-show worlds</span><span>Period decor</span><span>Fast turnarounds</span></div>
+      </div>
+      <div class="ind-row__media">
+        <a class="tile" href="case.html?p=aspe"><img src="assets/photos/aspe_sfeer.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">TV set</div><div class="tile__title">Aspe — Club</div></div></a>
+        <a class="tile" href="case.html?p=aspe"><img src="assets/photos/aspe_club.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">TV set</div><div class="tile__title">Paparazzi</div></div></a>
+        <a class="tile" href="case.html?p=muizenval"><img src="assets/photos/muizenval-alcove.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Decor</div><div class="tile__title">Period set</div></div></a>
+      </div>
+    </div>
+    <div class="ind-sep"></div>
+
+    <!-- 4 BRANDS & RETAIL -->
+    <div class="ind-row flip reveal-up" id="brands">
+      <div>
+        <span class="num">(04)</span>
+        <h2>Brands<br>&amp; Retail</h2>
+        <p>Branded environments, pop-ups and flagship moments that turn a space into an experience — bespoke fabrication that puts a brand's world into three dimensions.</p>
+        <div class="chips"><span>Pop-ups</span><span>Flagship spaces</span><span>Brand worlds</span><span>Custom installs</span></div>
+      </div>
+      <div class="ind-row__media">
+        <a class="tile" href="case.html?p=rmh"><img src="assets/photos/rmh-sign.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Branded interior</div><div class="tile__title">Rose's Mystery House</div></div></a>
+        <a class="tile" href="case.html?p=rmh"><img src="assets/photos/escape-study.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Experience</div><div class="tile__title">The Study</div></div></a>
+        <a class="tile" href="case.html?p=muizenval"><img src="assets/photos/atelier-build.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Fabrication</div><div class="tile__title">Custom build</div></div></a>
+      </div>
+    </div>
+    <div class="ind-sep"></div>
+
+    <!-- 5 EVENTS -->
+    <div class="ind-row reveal-up" id="events">
+      <div>
+        <span class="num">(05)</span>
+        <h2>Events<br>&amp; Experiences</h2>
+        <p>One-night spectacles and touring experiences — decor that lands on time, performs under lights and breaks down clean, without ever looking temporary.</p>
+        <div class="chips"><span>Show decor</span><span>Stages</span><span>Immersive events</span><span>Pop-up worlds</span></div>
+      </div>
+      <div class="ind-row__media">
+        <a class="tile" href="case.html?p=event"><img src="assets/photos/ikleefvoorjou.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Event</div><div class="tile__title">Ik Leef Voor Jou</div></div></a>
+        <a class="tile" href="case.html?p=aspe"><img src="assets/photos/aspe_sfeer.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Show</div><div class="tile__title">Club night</div></div></a>
+        <a class="tile" href="case.html?p=duck"><img src="assets/photos/sprookjes.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Experience</div><div class="tile__title">Walkthrough</div></div></a>
+      </div>
+    </div>
+    <div class="ind-sep"></div>
+
+    <!-- 6 MUSEUMS -->
+    <div class="ind-row flip reveal-up" id="museums">
+      <div>
+        <span class="num">(06)</span>
+        <h2>Museums<br>&amp; Culture</h2>
+        <p>Exhibition design and scenography that brings stories to life — immersive cultural spaces and artefact-grade props built with curatorial care.</p>
+        <div class="chips"><span>Scenography</span><span>Exhibition build</span><span>Props &amp; artefacts</span><span>Immersive rooms</span></div>
+      </div>
+      <div class="ind-row__media">
+        <a class="tile" href="case.html?p=rmh"><img src="assets/photos/escape-plasma.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Scenography</div><div class="tile__title">The Archive</div></div></a>
+        <a class="tile" href="case.html?p=rmh"><img src="assets/photos/escape-soup.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Props</div><div class="tile__title">Artefacts</div></div></a>
+        <a class="tile" href="case.html?p=muizenval"><img src="assets/photos/muizenval-alcove.jpg" alt="" /><div class="tile__scrim"></div><div class="tile__meta"><div class="tile__disc">Immersive room</div><div class="tile__title">The Parlour</div></div></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <div class="cta__in">
+    <div class="wrap">
+      <span class="script">Your sector</span>
+      <h2 class="dsp">your audience, your world</h2>
+      <p>Whatever the field, Concept Factory builds the experience your audience remembers.</p>
+      <a href="contact.html" class="btn btn-dark">Start a project <svg class="icon"><use href="#i-arrow-right"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <img src="assets/logos/cf-logo-white.svg" alt="Concept Factory" />
+        <p>Creating winning concepts. Themed environments and decor, designed and built in-house in Herentals, Belgium.</p>
+        <div class="foot-soc"><a href="#" aria-label="Instagram"><svg class="icon"><use href="#i-instagram"/></svg></a><a href="#" aria-label="LinkedIn"><svg class="icon"><use href="#i-linkedin"/></svg></a><a href="#" aria-label="Facebook"><svg class="icon"><use href="#i-facebook"/></svg></a></div>
+      </div>
+      <div class="foot-col"><h4>Explore</h4><a href="work.html">Work</a><a href="prop-factory.html">Prop Factory</a><a href="shop.html">Shop</a><a href="industries.html">Industries</a></div>
+      <div class="foot-col"><h4>Company</h4><a href="about.html">About</a><a href="careers.html">Careers</a><a href="contact.html">Contact</a><a href="#">Press</a></div>
+      <div class="foot-news"><h4 style="font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.16em;color:var(--ink-3);margin:0 0 16px;">Newsletter</h4><p>Behind-the-scenes from the atelier, a few times a year.</p><form onsubmit="return false;"><input type="email" placeholder="Your email" aria-label="Your email" /><button type="submit" aria-label="Subscribe"><svg class="icon"><use href="#i-send"/></svg></button></form></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Concept Factory BV — Grensstraat 3, 2200 Herentals, BE</span><span><a href="legal.html#privacy">Privacy</a> · <a href="legal.html#terms">Terms</a> · <a href="legal.html#conditions">Voorwaarden</a> · NL / EN</span></div>
+  </div>
+</footer>
+
+</body>
+</html>
