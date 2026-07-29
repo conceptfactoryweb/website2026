@@ -101,6 +101,10 @@
         sizeInner();
       }
       sizeInner();
+      // start fully in blueprint; user drags left to reveal the finished photo
+      var START = 0.96;
+      blue.style.width = (START * 100) + '%';
+      handle.style.left = (START * 100) + '%';
       window.addEventListener('resize', sizeInner);
       box.addEventListener('mousedown', function (e) { dragging = true; setPos(e.clientX); });
       window.addEventListener('mousemove', function (e) { if (dragging) setPos(e.clientX); });
