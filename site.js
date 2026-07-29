@@ -52,6 +52,20 @@
     else document.addEventListener('DOMContentLoaded', fn);
   }
 
+  // form feedback (contact, newsletter) — delegated + registered early so no other init error can break it
+  document.addEventListener('submit', function (e) {
+    var f = e.target && e.target.closest ? e.target.closest('form[data-netlify]') : null;
+    if (!f) return;
+    e.preventDefault();
+    if (f.dataset.done) return;
+    f.dataset.done = '1';
+    fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() }).catch(function () {});
+    var msg = document.createElement('div');
+    msg.textContent = f.querySelector('textarea') ? "Thanks — your enquiry is on its way. Concept Factory will be in touch." : "Thanks — you're subscribed.";
+    msg.style.cssText = 'font-family:var(--font-display);text-transform:uppercase;letter-spacing:0.05em;font-size:14px;color:var(--cf-magenta);padding:16px 0;line-height:1.5;';
+    f.replaceWith(msg);
+  });
+
   ready(function () {
     injectSprite();
 
@@ -137,19 +151,6 @@
       });
     });
 
-    // form feedback (contact, newsletter)
-    document.querySelectorAll('form[data-netlify]').forEach(function (f) {
-      f.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (f.dataset.done) return;
-        f.dataset.done = '1';
-        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() }).catch(function () {});
-        var msg = document.createElement('div');
-        msg.textContent = f.querySelector('textarea') ? "Thanks — your enquiry is on its way. Concept Factory will be in touch." : "Thanks — you're subscribed.";
-        msg.style.cssText = 'font-family:var(--font-display);text-transform:uppercase;letter-spacing:0.05em;font-size:14px;color:var(--cf-magenta);padding:16px 0;line-height:1.5;';
-        f.replaceWith(msg);
-      });
-    });
   });
 
   // ---- NL / EN translation (text-node based, brand names kept) ----
