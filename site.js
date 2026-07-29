@@ -138,11 +138,12 @@
     });
 
     // form feedback (contact, newsletter)
-    document.querySelectorAll('form').forEach(function (f) {
+    document.querySelectorAll('form[data-netlify]').forEach(function (f) {
       f.addEventListener('submit', function (e) {
         e.preventDefault();
         if (f.dataset.done) return;
         f.dataset.done = '1';
+        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: new URLSearchParams(new FormData(f)).toString() }).catch(function () {});
         var msg = document.createElement('div');
         msg.textContent = f.querySelector('textarea') ? "Thanks — your enquiry is on its way. Concept Factory will be in touch." : "Thanks — you're subscribed.";
         msg.style.cssText = 'font-family:var(--font-display);text-transform:uppercase;letter-spacing:0.05em;font-size:14px;color:var(--cf-magenta);padding:16px 0;line-height:1.5;';
