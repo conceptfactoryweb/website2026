@@ -86,7 +86,9 @@
   <div class="wrap">
     <div class="contact-grid">
       <!-- FORM -->
-      <form class="reveal-up" onsubmit="return false;">
+      <form class="reveal-up" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="contact" />
+        <p hidden><label>Leave empty: <input name="bot-field" /></label></p>
         <div class="field">
           <label>What can we build for you?</label>
           <div class="chips">
@@ -99,14 +101,14 @@
           </div>
         </div>
         <div class="field-row">
-          <div class="field"><label>Name</label><input type="text" placeholder="Your name" /></div>
-          <div class="field"><label>Company</label><input type="text" placeholder="Company / organisation" /></div>
+          <div class="field"><label>Name</label><input type="text" name="name" placeholder="Your name" required /></div>
+          <div class="field"><label>Company</label><input type="text" name="company" placeholder="Company / organisation" /></div>
         </div>
         <div class="field-row">
-          <div class="field"><label>Email</label><input type="email" placeholder="you@company.com" /></div>
-          <div class="field"><label>Phone</label><input type="tel" placeholder="+32 ..." /></div>
+          <div class="field"><label>Email</label><input type="email" name="email" placeholder="you@company.com" required /></div>
+          <div class="field"><label>Phone</label><input type="tel" name="phone" placeholder="+32 ..." /></div>
         </div>
-        <div class="field"><label>Tell us about the project</label><textarea placeholder="The idea, the scale, the deadline — as much or as little as you have."></textarea></div>
+        <div class="field"><label>Tell us about the project</label><textarea name="message" placeholder="The idea, the scale, the deadline — as much or as little as you have."></textarea></div>
         <button type="submit" class="btn btn-primary">Send enquiry <svg class="icon"><use href="#i-send"/></svg></button>
       </form>
 
