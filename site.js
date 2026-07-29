@@ -189,7 +189,7 @@
     // CTA
     "Let's create":"Laten we creëren","something unforgettable":"iets onvergetelijks","your next world":"jouw volgende wereld","Your project":"Jouw project","could be next":"kan de volgende zijn","Need a prop?":"Een prop nodig?","Let's make it":"Laten we het maken","Need a prop instead?":"Toch een prop nodig?","That's the Prop Factory":"Dat is de Prop Factory","Your sector":"Jouw sector","your audience, your world":"jouw publiek, jouw wereld","Build with us":"Bouw met ons","Can't find it?":"Niet gevonden?","We'll build it from scratch":"Wij bouwen het van nul","Your stage":"Jouw podium","is next":"is de volgende",
     // footer
-    "Explore":"Ontdek","Newsletter":"Nieuwsbrief","Press":"Pers","Privacy":"Privacy","Terms":"Voorwaarden","Voorwaarden":"Voorwaarden","Shop":"Shop","Prop Factory":"Prop Factory",
+    "Explore":"Ontdek","Newsletter":"Nieuwsbrief","Press":"Pers","Privacy":"Privacy","Terms":"Gebruiksvoorwaarden","Voorwaarden":"Algemene voorwaarden","Shop":"Shop","Prop Factory":"Prop Factory",
     "Creating winning concepts. Themed environments and decor, designed and built in-house in Herentals, Belgium.":"Winnende concepten creëren. Thematische omgevingen en decor, in-house ontworpen en gebouwd in Herentals, België.",
     "Behind-the-scenes from the atelier, a few times a year.":"Behind-the-scenes uit het atelier, een paar keer per jaar.","Your email":"Je e-mail",
     // stats
