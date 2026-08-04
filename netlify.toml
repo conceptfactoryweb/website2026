@@ -1,2 +1,10 @@
 [build]
   publish = "."
+
+[[edge_functions]]
+  path = "/actuals"
+  function = "actuals-auth"
+
+[[edge_functions]]
+  path = "/actuals.html"
+  function = "actuals-auth"
