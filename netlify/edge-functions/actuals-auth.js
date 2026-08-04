@@ -1,15 +1,36 @@
 // HTTP Basic Auth voor /actuals — vertrouwelijke cijfers.
-// Eén of meerdere logins staan in de Netlify-omgevingsvariabele ACTUALS_CREDS,
-// als komma-gescheiden "gebruiker:wachtwoord"-paren (niet in de repo).
-// Voorbeeld: rob:geheim1,bjorn:geheim2
-// Zonder geldige env var weigert de functie iedereen (fail-closed).
+// Logins in Netlify env var ACTUALS_CREDS: komma- of newline-gescheiden "user:pass".
+function readEnv(name){
+  try { if (typeof Netlify !== "undefined" && Netlify.env) return Netlify.env.get(name) || ""; } catch(_){}
+  try { if (typeof Deno !== "undefined" && Deno.env) return Deno.env.get(name) || ""; } catch(_){}
+  return "";
+}
 export default async (request, context) => {
-  const raw = Netlify.env.get("ACTUALS_CREDS") || "";
-  const allowed = raw.split(",").map(s => s.trim()).filter(Boolean);
+  const raw = readEnv("ACTUALS_CREDS");
+  const map = {};
+  raw.split(/[,\n]/).forEach(pair => {
+    const i = pair.indexOf(":");
+    if (i > 0) { const u = pair.slice(0, i).trim(); const p = pair.slice(i + 1).trim(); if (u) map[u] = p; }
+  });
+  const configured = Object.keys(map).length;
+
+  // Tijdelijke, veilige diagnose: onthult enkel het AANTAL logins, geen waarden.
+  const url = new URL(request.url);
+  if (url.searchParams.get("diag") === "1") {
+    return new Response(JSON.stringify({ loginsConfigured: configured }), {
+      status: 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
+    });
+  }
+
   const auth = request.headers.get("authorization") || "";
   let ok = false;
-  if (allowed.length && auth.startsWith("Basic ")) {
-    try { ok = allowed.includes(atob(auth.slice(6))); } catch (_) { ok = false; }
+  if (configured && auth.startsWith("Basic ")) {
+    try {
+      const dec = atob(auth.slice(6));
+      const j = dec.indexOf(":");
+      const u = dec.slice(0, j), p = dec.slice(j + 1);
+      ok = Object.prototype.hasOwnProperty.call(map, u) && map[u] === p;
+    } catch(_) { ok = false; }
   }
   if (!ok) {
     return new Response("Authenticatie vereist.", {
