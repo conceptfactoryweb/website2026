@@ -66,6 +66,13 @@ tr.total td{font-weight:700;border-top:2px solid var(--line);background:#191c24}
 .chip{padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;font-size:12.5px;font-weight:600}
 .chip.on{background:var(--magenta);color:#fff;border-color:var(--magenta)}
 .note{color:var(--muted);font-size:12.5px;margin:-6px 0 16px}
+.goalhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px;gap:10px}
+.goaltitle{font-family:'Oswald';text-transform:uppercase;letter-spacing:.5px;font-size:14px}
+.goalpct{font-family:'Oswald';font-weight:700;font-size:22px}
+.goalbar{height:12px;background:var(--panel2);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.goalfill{height:100%;border-radius:999px;transition:width .8s ease}
+.goalvals{margin-top:11px;font-size:13.5px}
+.goalnote{margin-top:4px;font-size:12.5px;color:var(--muted)}
 .err-banner{background:#3a1520;border:1px solid #5c2030;color:#ffb3c1;padding:12px 16px;border-radius:8px;margin-bottom:18px;font-size:13.5px}
 .demo-banner{background:#2a2413;border:1px solid #4d4320;color:#f2d98a;padding:10px 16px;border-radius:8px;margin-bottom:18px;font-size:13px}
 </style>
@@ -78,6 +85,7 @@ tr.total td{font-weight:700;border-top:2px solid var(--line);background:#191c24}
     <div class="tab active" data-view="pipeline" onclick="switchView('pipeline')">Pipeline</div>
     <div class="tab" data-view="nacalc" onclick="switchView('nacalc')">Nacalculatie</div>
     <div class="tab" data-view="financieel" onclick="switchView('financieel')">Financieel</div>
+    <div class="tab" data-view="doelen" onclick="switchView('doelen')">Doelen</div>
   </div>
   <div class="controls">
     <button class="btn" onclick="loadAll()"><span id="spin">⟳</span> Vernieuw</button>
@@ -89,6 +97,7 @@ tr.total td{font-weight:700;border-top:2px solid var(--line);background:#191c24}
   <div id="view-pipeline"></div>
   <div id="view-nacalc" class="hidden"></div>
   <div id="view-financieel" class="hidden"></div>
+  <div id="view-doelen" class="hidden"></div>
 </main>
 
 <script>
@@ -96,6 +105,7 @@ tr.total td{font-weight:700;border-top:2px solid var(--line);background:#191c24}
 const SHEET_PIPELINE = "1MbTRTnWCx95SnNZ2SGg8uhRZXo26q1m2SWzcccQbvhw";
 const SHEET_NACALC   = "1UU3HPbi0yi-8iHENd9KRwuhLk0FXx3ZUGANs33AT9qQ";
 const SHEET_FIN      = "1qfHeqx4cklvsMJ2Is3LKkOsncVU3Gf6ort_l-Yu8kpk";
+const SHEET_DOELEN   = "1R_SoGClCPUBLGccmAWO7Uvtk-QqXRl0Xc8nNxWjkeH0";
 
 const DEMO_PIPELINE = [
  ["Voorbeeldproject A","Klant A","Decor","O26XXXX","Bevestigd","25000","0.3","","","—","Demo"],
@@ -107,6 +117,9 @@ const DEMO_NACALC = [
 ];
 const DEMO_FIN = [
  ["KPI","Voorbeeld-KPI","0","0","Demo"],
+];
+const DEMO_DOELEN = [
+ ["Voorbeelddoel","0","5","10","EUR","Demo"],
 ];
 
 /* en-US numeriek (gviz geeft punt-decimaal, geen duizendtal) */
@@ -124,17 +137,21 @@ async function fetchSheet(id){
   const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);
   const rows=parseCSV(await r.text());return rows.slice(1).filter(r=>r.some(c=>String(c).trim()!==''));}
 
-let PIPE=[],NAC=[],FIN=[],charts={},statusFilter=null,nacFilter=null,live=false;
+let PIPE=[],NAC=[],FIN=[],DOEL=[],charts={},statusFilter=null,nacFilter=null,live=false;
 const SC={'offerte':'var(--amber)','bevestigd':'var(--magenta)','productie':'var(--blue)','geleverd':'var(--green)','innen':'var(--green)','geind':'var(--green)','verloren':'#6b7280','afgewerkt':'var(--green)','actief':'var(--amber)'};
 function statusColor(s){s=(s||'').toLowerCase();for(const k in SC)if(s.includes(k))return SC[k];return 'var(--muted)';}
 
 async function loadAll(){
   document.getElementById('spin').textContent='…';document.getElementById('msg').innerHTML='';
-  try{[PIPE,NAC,FIN]=await Promise.all([fetchSheet(SHEET_PIPELINE),fetchSheet(SHEET_NACALC),fetchSheet(SHEET_FIN)]);live=true;}
-  catch(e){PIPE=DEMO_PIPELINE;NAC=DEMO_NACALC;FIN=DEMO_FIN;live=false;
-    document.getElementById('msg').innerHTML='<div class="err-banner">Kon een Google Sheet niet laden ('+e.message+'). Demo-data getoond. Zet alle drie de Sheets op “iedereen met de link – lezer”.</div>';}
+  const res=await Promise.allSettled([fetchSheet(SHEET_PIPELINE),fetchSheet(SHEET_NACALC),fetchSheet(SHEET_FIN),fetchSheet(SHEET_DOELEN)]);
+  PIPE=res[0].status==='fulfilled'?res[0].value:DEMO_PIPELINE;
+  NAC =res[1].status==='fulfilled'?res[1].value:DEMO_NACALC;
+  FIN =res[2].status==='fulfilled'?res[2].value:DEMO_FIN;
+  DOEL=res[3].status==='fulfilled'?res[3].value:DEMO_DOELEN;
+  const fails=res.filter(r=>r.status==='rejected').length;live=fails===0;
+  if(fails)document.getElementById('msg').innerHTML='<div class="err-banner">'+fails+' Sheet(s) niet leesbaar — zet elke Sheet op “iedereen met de link – lezer”. De overige tabs tonen wel live data.</div>';
   document.getElementById('lastupd').textContent='Bijgewerkt '+new Date().toLocaleString('nl-BE',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});
-  document.getElementById('spin').textContent='⟳';renderPipeline();renderNacalc();renderFinancieel();
+  document.getElementById('spin').textContent='⟳';renderPipeline();renderNacalc();renderFinancieel();renderDoelen();
 }
 
 /* ========== PIPELINE ========== */
@@ -261,8 +278,22 @@ function drawWaterfall(id,items){destroy(id);const e=document.getElementById(id)
   charts[id]=new Chart(e,{type:'bar',data:{labels:items.map(i=>i.label),datasets:[{data,backgroundColor:colors,borderRadius:4}]},
     options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>euro(deltas[c.dataIndex])}}},
       scales:{y:{ticks:{callback:v=>'€'+(v/1000)+'k'}},x:{ticks:{maxRotation:45,minRotation:30,font:{size:10}}}}}});}
+function renderDoelen(){
+  const rows=DOEL.map(r=>({doel:r[0],start:num(r[1]),huidig:num(r[2]),streef:num(r[3]),eenheid:String(r[4]||'').trim(),toel:r[5]}));
+  const fmt=(v,u)=>u==='%'?(isNaN(v)?'—':Math.round(v)+'%'):euro(v);
+  let h='<h2 class="section">Doelen 2026 — afgeleid uit de cijfers</h2><div class="grid2">';
+  rows.forEach(g=>{
+    let p=(g.streef-g.start)===0?0:(g.huidig-g.start)/(g.streef-g.start);p=Math.max(0,Math.min(1,p));
+    const pc=Math.round(p*100),col=p<0.4?'var(--red)':(p<0.75?'var(--amber)':'var(--green)');
+    h+=`<div class="card"><div class="goalhead"><span class="goaltitle">${g.doel}</span><span class="goalpct" style="color:${resolve(col)}">${pc}%</span></div>`
+      +`<div class="goalbar"><div class="goalfill" style="width:${pc}%;background:${resolve(col)}"></div></div>`
+      +`<div class="goalvals">Nu <b>${fmt(g.huidig,g.eenheid)}</b> → doel <b>${fmt(g.streef,g.eenheid)}</b></div>`
+      +(g.toel?`<div class="goalnote">${g.toel}</div>`:'')+'</div>';});
+  h+='</div><div class="note">Streefwaarden zijn afgeleid uit de analyse en vrij aanpasbaar in de Sheet “CF Actuals - Doelen”. Rode draad: structureel 30% marge lost eigen vermogen, cashbuffer én managementvergoeding samen op.</div>';
+  document.getElementById('view-doelen').innerHTML=h;
+}
 function switchView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
-  ['pipeline','nacalc','financieel'].forEach(x=>document.getElementById('view-'+x).classList.toggle('hidden',x!==v));}
+  ['pipeline','nacalc','financieel','doelen'].forEach(x=>document.getElementById('view-'+x).classList.toggle('hidden',x!==v));}
 loadAll();
 </script>
 </body>
