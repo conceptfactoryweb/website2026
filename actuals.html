@@ -193,7 +193,7 @@ function setNacFilter(s){nacFilter=s;renderNacalc();}
 
 /* ========== FINANCIEEL ========== */
 function renderFinancieel(){
-  const rows=FIN.map(r=>({cat:r[0],post:r[1],waarde:num(r[2]),nadruk:String(r[3])==='1',toel:r[4]}));
+  const rows=FIN.map(r=>({cat:String(r[0]||'').split('\t')[0].trim(),post:r[1],waarde:num(r[2]),nadruk:String(r[3]).trim()==='1',toel:r[4]}));
   const kpi=rows.filter(r=>(r.cat||'').toLowerCase()==='kpi');
   const titles={'resultatenrekening':'Resultatenrekening H1 (jan–jun)','resultaat':'Jaarprognose 2026','btw':'BTW-situatie','cashflow':'Cashflow (04/08)','cash-vooruitzicht':'Cash-vooruitzicht tot jaareinde'};
   const order=['resultatenrekening','resultaat','btw','cashflow','cash-vooruitzicht'];
