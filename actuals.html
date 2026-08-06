@@ -146,9 +146,9 @@ function renderPipeline(){
   const bev=has('bevestigd').concat(has('productie')),off=has('offerte'),inn=has('geleverd');
   const kpis=[
     {lab:'Bevestigd + productie',val:euro(sum(bev)),sub:'≈ '+euro(sumM(bev))+' marge',acc:'var(--magenta)'},
-    {lab:'Offerte uit',val:euro(sum(off)),sub:off.length+' offertes open',acc:'var(--amber)'},
+    {lab:'Offerte uit',val:euro(sum(off)),sub:off.length+' offertes · niet in prognose',acc:'var(--amber)'},
     {lab:'Geleverd — te innen',val:euro(sum(inn)),sub:'openstaande vordering',acc:'var(--green)'},
-    {lab:'Totaal actief',val:euro(sum(rows.filter(r=>!(r.status||'').toLowerCase().includes('verloren')))),sub:rows.length+' projecten',acc:'var(--blue)'},
+    {lab:'Vastgelegd totaal',val:euro(sum(bev)+sum(inn)),sub:'bevestigd + geleverd · excl. offertes',acc:'var(--blue)'},
   ];
   const statuses=[...new Set(rows.map(r=>r.status))];
   let h='<h2 class="section">Pipeline</h2><div class="kpis">'+kpis.map(k=>`<div class="kpi" style="--accent:${k.acc}"><div class="lab">${k.lab}</div><div class="val">${k.val}</div><div class="sub">${k.sub}</div></div>`).join('')+'</div>';
@@ -195,17 +195,19 @@ function setNacFilter(s){nacFilter=s;renderNacalc();}
 function renderFinancieel(){
   const rows=FIN.map(r=>({cat:r[0],post:r[1],waarde:num(r[2]),nadruk:String(r[3])==='1',toel:r[4]}));
   const kpi=rows.filter(r=>(r.cat||'').toLowerCase()==='kpi');
-  const tbl=cat=>rows.filter(r=>(r.cat||'').toLowerCase()===cat);
+  const titles={'resultatenrekening':'Resultatenrekening H1 (jan–jun)','resultaat':'Jaarprognose 2026','btw':'BTW-situatie','cashflow':'Cashflow (04/08)','cash-vooruitzicht':'Cash-vooruitzicht tot jaareinde'};
+  const order=['resultatenrekening','resultaat','btw','cashflow','cash-vooruitzicht'];
+  let cats=[...new Set(rows.map(r=>(r.cat||'').toLowerCase()).filter(c=>c&&c!=='kpi'))];
+  cats.sort((a,b)=>{const ia=order.indexOf(a),ib=order.indexOf(b);return (ia<0?99:ia)-(ib<0?99:ib);});
   let h='<h2 class="section">Financiële analyse 2026</h2><div class="kpis">';
   kpi.forEach(k=>{const acc=k.waarde<0?'var(--red)':'var(--magenta)';
     h+=`<div class="kpi" style="--accent:${acc}"><div class="lab">${k.post}</div><div class="val ${k.waarde<0?'neg':''}">${euro(k.waarde)}</div><div class="sub">${k.toel||''}</div></div>`;});
-  h+='</div>';
-  const mk=(title,cat)=>{const rs=tbl(cat);if(!rs.length)return'';
-    let t=`<div class="card"><h3>${title}</h3><div class="tablewrap" style="box-shadow:none;border:none"><table style="min-width:0"><tbody>`;
-    rs.forEach(r=>{t+=`<tr class="${r.nadruk?'total':''}"><td>${r.post}${r.toel?` <span style="color:var(--muted);font-weight:400">· ${r.toel}</span>`:''}</td><td class="num ${r.waarde<0?'neg':''}">${euro(r.waarde)}</td></tr>`;});
-    return t+'</tbody></table></div></div>';};
-  h+='<div class="grid2">'+mk('Resultaat & jaarprognose','resultaat')+mk('Cashflow (04/08)','cashflow')+'</div>';
-  h+='<div class="note">Bron: gecorrigeerde analyse jan–jul 2026 (Exact + Robaws). Operationeel draait rond break-even; het nettoresultaat wordt gedragen door de eenmalige Backstage-kwijtschelding. Aandachtspunten: dunne marge en cashflow (BTW).</div>';
+  h+='</div><div class="grid2">';
+  cats.forEach(c=>{const rs=rows.filter(r=>(r.cat||'').toLowerCase()===c);if(!rs.length)return;
+    h+=`<div class="card"><h3>${titles[c]||rs[0].cat}</h3><div class="tablewrap" style="box-shadow:none;border:none"><table style="min-width:0"><tbody>`;
+    rs.forEach(r=>{h+=`<tr class="${r.nadruk?'total':''}"><td>${r.post}${r.toel?` <span style="color:var(--muted);font-weight:400">· ${r.toel}</span>`:''}</td><td class="num ${r.waarde<0?'neg':''}">${euro(r.waarde)}</td></tr>`;});
+    h+='</tbody></table></div></div>';});
+  h+='</div><div class="note">Bron: gecorrigeerde analyse jan–jul 2026 (Exact + Robaws). Operationeel draait rond break-even; het nettoresultaat wordt gedragen door de eenmalige Backstage-kwijtschelding. Offertes-uit tellen nooit mee in een prognose.</div>';
   document.getElementById('view-financieel').innerHTML=h;
 }
 
