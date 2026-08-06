@@ -156,27 +156,28 @@ async function loadAll(){
 
 /* ========== PIPELINE ========== */
 function renderPipeline(){
-  const rows=PIPE.map(r=>({proj:r[0],klant:r[1],type:r[2],onr:r[3],status:r[4],verkoop:num(r[5]),marge:marge(r[6]),inn:r[8],opm:r[10]}));
+  const rows=PIPE.map(r=>({proj:r[0],klant:r[1],onr:r[3],status:r[4],contract:num(r[5]),forward:num(r[6]),pgef:num(r[7]),pontv:num(r[8]),marge:marge(r[9]),opm:r[10]}));
   const has=s=>rows.filter(r=>(r.status||'').toLowerCase().includes(s));
-  const sum=a=>a.reduce((t,r)=>t+(isNaN(r.verkoop)?0:r.verkoop),0);
-  const sumM=a=>a.reduce((t,r)=>t+(isNaN(r.verkoop)?0:r.verkoop*r.marge),0);
+  const sumC=a=>a.reduce((t,r)=>t+(isNaN(r.contract)?0:r.contract),0);
+  const sumF=a=>a.reduce((t,r)=>t+(isNaN(r.forward)?0:r.forward),0);
   const bev=has('bevestigd').concat(has('productie')),off=has('offerte'),inn=has('geleverd');
+  const pctI=n=>isNaN(n)?'—':Math.round(n)+'%';
   const kpis=[
-    {lab:'Bevestigd + productie',val:euro(sum(bev)),sub:'≈ '+euro(sumM(bev))+' marge',acc:'var(--magenta)'},
-    {lab:'Offerte uit',val:euro(sum(off)),sub:off.length+' offertes · niet in prognose',acc:'var(--amber)'},
-    {lab:'Geleverd — te innen',val:euro(sum(inn)),sub:'openstaande vordering',acc:'var(--green)'},
-    {lab:'Vastgelegd totaal',val:euro(sum(bev)+sum(inn)),sub:'bevestigd + geleverd · excl. offertes',acc:'var(--blue)'},
+    {lab:'Bevestigd (contract)',val:euro(sumC(bev)),sub:'waarvan '+euro(sumF(bev))+' nog te factureren',acc:'var(--magenta)'},
+    {lab:'Nog te factureren (H2)',val:euro(sumF(bev)),sub:'forward-marge @30% ≈ '+euro(sumF(bev)*0.3),acc:'var(--blue)'},
+    {lab:'Offerte uit',val:euro(sumC(off)),sub:off.length+' offertes · niet in prognose',acc:'var(--amber)'},
+    {lab:'Geleverd — te innen',val:euro(sumC(inn)),sub:'levering afgerond',acc:'var(--green)'},
   ];
   const statuses=[...new Set(rows.map(r=>r.status))];
   let h='<h2 class="section">Pipeline</h2><div class="kpis">'+kpis.map(k=>`<div class="kpi" style="--accent:${k.acc}"><div class="lab">${k.lab}</div><div class="val">${k.val}</div><div class="sub">${k.sub}</div></div>`).join('')+'</div>';
-  h+='<div class="grid2"><div class="card"><h3>Verkoop per project</h3><div class="chartwrap"><canvas id="cPipe"></canvas></div></div><div class="card"><h3>Verdeling per status</h3><div class="chartwrap"><canvas id="cStatus"></canvas></div></div></div>';
+  h+='<div class="grid2"><div class="card"><h3>Contractwaarde per project</h3><div class="chartwrap"><canvas id="cPipe"></canvas></div></div><div class="card"><h3>Verdeling per status (contract)</h3><div class="chartwrap"><canvas id="cStatus"></canvas></div></div></div>';
   h+='<div class="filters">'+['Alle',...statuses].map(s=>`<span class="chip${(statusFilter===s||(!statusFilter&&s==='Alle'))?' on':''}" onclick="setFilter('${(s||'').replace(/'/g,'')}')">${s||'—'}</span>`).join('')+'</div>';
-  h+='<div class="tablewrap"><table><thead><tr><th>Project</th><th>Klant</th><th>Offerte</th><th>Status</th><th class="num">Verkoop</th><th class="num">Marge</th><th>Inning</th><th>Opmerking</th></tr></thead><tbody>';
-  rows.filter(r=>!statusFilter||statusFilter==='Alle'||r.status===statusFilter).forEach(r=>{h+=`<tr><td>${r.proj}</td><td>${r.klant||''}</td><td>${r.onr||''}</td><td><span class="pill" style="background:${statusColor(r.status)}22;color:${statusColor(r.status)}">${r.status||'—'}</span></td><td class="num">${euro(r.verkoop)}</td><td class="num">${euro(isNaN(r.verkoop)?NaN:r.verkoop*r.marge)}</td><td>${r.inn||''}</td><td style="white-space:normal;color:var(--muted)">${r.opm||''}</td></tr>`;});
+  h+='<div class="tablewrap"><table><thead><tr><th>Project</th><th>Klant</th><th>Status</th><th class="num">Contractwaarde</th><th class="num">Nog te factureren</th><th class="num">% gefactureerd</th><th class="num">% ontvangen</th><th>Opmerking</th></tr></thead><tbody>';
+  rows.filter(r=>!statusFilter||statusFilter==='Alle'||r.status===statusFilter).forEach(r=>{h+=`<tr><td>${r.proj}</td><td>${r.klant||''}</td><td><span class="pill" style="background:${statusColor(r.status)}22;color:${statusColor(r.status)}">${r.status||'—'}</span></td><td class="num">${euro(r.contract)}</td><td class="num">${euro(r.forward)}</td><td class="num">${pctI(r.pgef)}</td><td class="num">${pctI(r.pontv)}</td><td style="white-space:normal;color:var(--muted)">${r.opm||''}</td></tr>`;});
   h+='</tbody></table></div>';document.getElementById('view-pipeline').innerHTML=h;
-  const named=rows.filter(r=>!isNaN(r.verkoop)).sort((a,b)=>b.verkoop-a.verkoop);
-  drawBar('cPipe',named.map(r=>r.proj),named.map(r=>r.verkoop),named.map(r=>statusColor(r.status)));
-  const byS={};rows.forEach(r=>{if(!isNaN(r.verkoop))byS[r.status]=(byS[r.status]||0)+r.verkoop});
+  const named=rows.filter(r=>!isNaN(r.contract)&&r.contract>0).sort((a,b)=>b.contract-a.contract);
+  drawBar('cPipe',named.map(r=>r.proj),named.map(r=>r.contract),named.map(r=>statusColor(r.status)));
+  const byS={};rows.forEach(r=>{if(!isNaN(r.contract))byS[r.status]=(byS[r.status]||0)+r.contract});
   drawDoughnut('cStatus',Object.keys(byS),Object.values(byS),Object.keys(byS).map(statusColor));
 }
 function setFilter(s){statusFilter=s;renderPipeline();}
@@ -219,9 +220,9 @@ function renderFinancieel(){
   let h='<h2 class="section">Financiële analyse 2026</h2><div class="kpis">';
   kpi.forEach(k=>{const acc=k.waarde<0?'var(--red)':'var(--magenta)';
     h+=`<div class="kpi" style="--accent:${acc}"><div class="lab">${k.post}</div><div class="val ${k.waarde<0?'neg':''}">${euro(k.waarde)}</div><div class="sub">${k.toel||''}</div></div>`;});
-  const pR=PIPE.map(r=>({proj:r[0],status:r[4],verkoop:num(r[5]),marge:marge(r[6])}));
-  const conf=pR.filter(r=>{const s=(r.status||'').toLowerCase();return (s.includes('bevestigd')||s.includes('productie'))&&!isNaN(r.verkoop);}).sort((a,b)=>b.verkoop-a.verkoop);
-  const confTot=conf.reduce((t,r)=>t+r.verkoop,0),confM=conf.reduce((t,r)=>t+r.verkoop*(r.marge||0.30),0);
+  const pR=PIPE.map(r=>({proj:r[0],status:r[4],forward:num(r[6]),marge:marge(r[9])}));
+  const conf=pR.filter(r=>{const s=(r.status||'').toLowerCase();return (s.includes('bevestigd')||s.includes('productie'))&&!isNaN(r.forward)&&r.forward>0;}).sort((a,b)=>b.forward-a.forward);
+  const confTot=conf.reduce((t,r)=>t+r.forward,0),confM=conf.reduce((t,r)=>t+r.forward*(r.marge||0.30),0);
   h+='</div>';
   h+='<div class="card" style="margin-bottom:20px"><h3>Bevestigde pipeline H2 — voedt de prognose</h3>'
     +'<div style="font-family:Oswald;font-size:24px;font-weight:700;margin-bottom:6px">'+euro(confTot)+' <span style="color:var(--muted);font-size:14px;font-weight:400">verkoop · ≈ '+euro(confM)+' marge @30% · '+conf.length+' bevestigde projecten</span></div>'
