@@ -202,13 +202,46 @@ function renderFinancieel(){
   let h='<h2 class="section">Financiële analyse 2026</h2><div class="kpis">';
   kpi.forEach(k=>{const acc=k.waarde<0?'var(--red)':'var(--magenta)';
     h+=`<div class="kpi" style="--accent:${acc}"><div class="lab">${k.post}</div><div class="val ${k.waarde<0?'neg':''}">${euro(k.waarde)}</div><div class="sub">${k.toel||''}</div></div>`;});
-  h+='</div><div class="grid2">';
+  h+='</div><div class="grid2">'
+    +'<div class="card"><h3>Waar gaat elke euro omzet naartoe?</h3><div class="chartwrap"><canvas id="cFinKost"></canvas></div></div>'
+    +'<div class="card"><h3>Cash-brug tot jaareinde</h3><div class="chartwrap"><canvas id="cFinCash"></canvas></div></div>'
+    +'<div class="card"><h3>Resultaat-opbouw H1</h3><div class="chartwrap"><canvas id="cFinRes"></canvas></div></div>'
+    +'<div class="card"><h3>Jaarprognose 2026 — resultaat</h3><div class="chartwrap"><canvas id="cFinProg"></canvas></div></div>'
+    +'</div>';
+  h+='<div class="grid2">';
   cats.forEach(c=>{const rs=rows.filter(r=>(r.cat||'').toLowerCase()===c);if(!rs.length)return;
     h+=`<div class="card"><h3>${titles[c]||rs[0].cat}</h3><div class="tablewrap" style="box-shadow:none;border:none"><table style="min-width:0"><tbody>`;
     rs.forEach(r=>{h+=`<tr class="${r.nadruk?'total':''}"><td>${r.post}${r.toel?` <span style="color:var(--muted);font-weight:400">· ${r.toel}</span>`:''}</td><td class="num ${r.waarde<0?'neg':''}">${euro(r.waarde)}</td></tr>`;});
     h+='</tbody></table></div></div>';});
   h+='</div><div class="note">Bron: gecorrigeerde analyse jan–jul 2026 (Exact + Robaws). Operationeel draait rond break-even; het nettoresultaat wordt gedragen door de eenmalige Backstage-kwijtschelding. Offertes-uit tellen nooit mee in een prognose.</div>';
   document.getElementById('view-financieel').innerHTML=h;
+  const val=(ck,pk)=>{const r=rows.find(x=>x.cat.toLowerCase()===ck&&String(x.post||'').toLowerCase().includes(pk));return r?r.waarde:0;};
+  const R='resultatenrekening',CV='cash-vooruitzicht',RS='resultaat';
+  const omzet=val(R,'omzet h1')+val(R,'overige bedrijfsopbrengsten');
+  drawDoughnut('cFinKost',['Aankopen/crew','Personeel','Diensten','Afschrijvingen','Resultaat'],
+    [Math.abs(val(R,'aankopen')),Math.abs(val(R,'eigen personeel')),Math.abs(val(R,'diensten')),Math.abs(val(R,'afschrijvingen')),Math.max(val(R,'operationeel resultaat h1'),0)],
+    ['var(--magenta)','var(--blue)','var(--amber)','var(--grey)','var(--green)']);
+  drawWaterfall('cFinCash',[
+    {label:'Cash nu',value:val(CV,'netto cash nu'),type:'total'},
+    {label:'− Uitbetalingen',value:val(CV,'uitbetalingen'),type:'delta'},
+    {label:'+ Pipeline-marge',value:val(CV,'marge bevestigde'),type:'delta'},
+    {label:'Jaareinde',value:val(CV,'verwacht jaareinde'),type:'total'}]);
+  drawWaterfall('cFinRes',[
+    {label:'Omzet',value:omzet,type:'total'},
+    {label:'− Aankopen',value:val(R,'aankopen'),type:'delta'},
+    {label:'− Diensten',value:val(R,'diensten'),type:'delta'},
+    {label:'− Personeel',value:val(R,'eigen personeel'),type:'delta'},
+    {label:'− Afschr.+fin',value:val(R,'afschrijvingen')+val(R,'financieel resultaat'),type:'delta'},
+    {label:'= Operationeel',value:val(R,'operationeel resultaat h1'),type:'total'},
+    {label:'+ Backstage',value:val(R,'backstage'),type:'delta'},
+    {label:'= Netto',value:val(R,'h1-resultaat totaal'),type:'total'}]);
+  drawWaterfall('cFinProg',[
+    {label:'Op. YTD',value:val(RS,'operationeel ytd'),type:'total'},
+    {label:'+ Marge forward',value:val(RS,'marge forward'),type:'delta'},
+    {label:'− Overhead H2',value:val(RS,'overhead'),type:'delta'},
+    {label:'= Op. 2026',value:val(RS,'operationeel resultaat 2026'),type:'total'},
+    {label:'+ Backstage',value:val(RS,'backstage'),type:'delta'},
+    {label:'= Netto 2026',value:val(RS,'netto resultaat 2026'),type:'total'}]);
 }
 
 /* ========== CHARTS ========== */
@@ -220,6 +253,14 @@ function drawBar(id,l,d,c){destroy(id);const e=document.getElementById(id);if(!e
 function drawDoughnut(id,l,d,c){destroy(id);const e=document.getElementById(id);if(!e)return;charts[id]=new Chart(e,{type:'doughnut',data:{labels:l,datasets:[{data:d,backgroundColor:c.map(resolve),borderWidth:0}]},options:{maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right',labels:{boxWidth:12,padding:12}},tooltip:{callbacks:{label:x=>x.label+': '+euro(x.raw)}}}}});}
 function drawGrouped(id,l,a,b){destroy(id);const e=document.getElementById(id);if(!e)return;charts[id]=new Chart(e,{type:'bar',data:{labels:l,datasets:[{label:'Werkelijke verkoop',data:a,backgroundColor:resolve('var(--magenta)'),borderRadius:5},{label:'Juiste prijs (30%)',data:b,backgroundColor:resolve('var(--blue)'),borderRadius:5}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:x=>x.dataset.label+': '+euro(x.raw)}}},scales:{y:{ticks:{callback:v=>'€'+(v/1000)+'k'}},x:{ticks:{maxRotation:50,minRotation:25,font:{size:10}}}}}});}
 
+function drawWaterfall(id,items){destroy(id);const e=document.getElementById(id);if(!e)return;
+  let cum=0;const data=[],colors=[],deltas=[];
+  items.forEach(it=>{
+    if(it.type==='total'||it.type==='start'){data.push([Math.min(0,it.value),Math.max(0,it.value)]);colors.push(resolve('var(--blue)'));deltas.push(it.value);cum=it.value;}
+    else{const s=cum,en=cum+it.value;data.push([Math.min(s,en),Math.max(s,en)]);colors.push(resolve(it.value>=0?'var(--green)':'var(--red)'));deltas.push(it.value);cum=en;}});
+  charts[id]=new Chart(e,{type:'bar',data:{labels:items.map(i=>i.label),datasets:[{data,backgroundColor:colors,borderRadius:4}]},
+    options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>euro(deltas[c.dataIndex])}}},
+      scales:{y:{ticks:{callback:v=>'€'+(v/1000)+'k'}},x:{ticks:{maxRotation:45,minRotation:30,font:{size:10}}}}}});}
 function switchView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
   ['pipeline','nacalc','financieel'].forEach(x=>document.getElementById('view-'+x).classList.toggle('hidden',x!==v));}
 loadAll();
