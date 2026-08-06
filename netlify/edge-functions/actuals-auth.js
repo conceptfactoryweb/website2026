@@ -14,13 +14,6 @@ export default async (request, context) => {
   });
   const configured = Object.keys(map).length;
 
-  // Tijdelijke, veilige diagnose: onthult enkel het AANTAL logins, geen waarden.
-  const url = new URL(request.url);
-  if (url.searchParams.get("diag") === "1") {
-    return new Response(JSON.stringify({ loginsConfigured: configured }), {
-      status: 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
-    });
-  }
 
   const auth = request.headers.get("authorization") || "";
   let ok = false;

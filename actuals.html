@@ -25,7 +25,6 @@ body{background:radial-gradient(1100px 520px at 82% -12%,#3a0f4922,transparent),
   color:var(--text);font-family:'Inter',system-ui,-apple-system,Arial,sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
 .hidden{display:none!important}
 h1,h2,h3,.disp{font-family:'Oswald',sans-serif;text-transform:uppercase;letter-spacing:.5px}
-
 header{display:flex;align-items:center;gap:20px;padding:20px 26px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(13,14,18,.88);backdrop-filter:blur(8px);z-index:20;flex-wrap:wrap}
 .wm{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:.9;user-select:none}
 .wm .l1{font-family:'Oswald';font-weight:700;letter-spacing:1px;font-size:20px}
@@ -33,21 +32,20 @@ header{display:flex;align-items:center;gap:20px;padding:20px 26px;border-bottom:
 .wm .tag{font-size:9px;letter-spacing:2.5px;color:var(--muted);margin-top:5px;font-weight:600;font-family:'Inter'}
 .spacer{flex:1}
 .tabs{display:flex;gap:6px;background:var(--panel);padding:5px;border-radius:8px;border:1px solid var(--line)}
-.tab{padding:8px 16px;border-radius:6px;cursor:pointer;font-weight:600;color:var(--muted);font-size:13px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.6px;transition:.15s}
+.tab{padding:8px 15px;border-radius:6px;cursor:pointer;font-weight:600;color:var(--muted);font-size:13px;font-family:'Oswald';text-transform:uppercase;letter-spacing:.6px;transition:.15s}
 .tab.active{background:var(--magenta);color:#fff}
 .tab:hover:not(.active){color:var(--text)}
 .controls{display:flex;align-items:center;gap:10px}
 .btn{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:9px 14px;border-radius:6px;cursor:pointer;font-size:13px;display:inline-flex;gap:7px;align-items:center;font-family:'Inter'}
 .btn:hover{border-color:var(--magenta)}
 .upd{color:var(--muted);font-size:12px}
-
 main{padding:26px;max-width:1280px;margin:0 auto}
 h2.section{font-size:13px;letter-spacing:2px;color:var(--muted);margin:8px 0 14px;font-weight:600}
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px;margin-bottom:26px}
 .kpi{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden}
 .kpi::after{content:"";position:absolute;right:-30px;top:-30px;width:90px;height:90px;border-radius:50%;background:var(--accent,var(--magenta));opacity:.12}
 .kpi .lab{font-size:12px;color:var(--muted);letter-spacing:.4px;text-transform:uppercase;font-weight:600;font-family:'Oswald'}
-.kpi .val{font-family:'Oswald';font-size:28px;font-weight:700;margin-top:8px}
+.kpi .val{font-family:'Oswald';font-size:26px;font-weight:700;margin-top:8px}
 .kpi .sub{font-size:12px;color:var(--muted);margin-top:4px}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:26px}
 @media(max-width:900px){.grid2{grid-template-columns:1fr}}
@@ -60,23 +58,26 @@ th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line);whit
 th{color:var(--muted);font-weight:600;font-size:11px;letter-spacing:.5px;text-transform:uppercase;position:sticky;top:0;background:var(--panel2);font-family:'Oswald'}
 tbody tr:hover{background:var(--panel2)}
 td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+tr.total td{font-weight:700;border-top:2px solid var(--line);background:#191c24}
 .pill{display:inline-block;padding:3px 10px;border-radius:999px;font-size:12px;font-weight:600}
 .neg{color:var(--red);font-weight:700}
 .pos{color:var(--green);font-weight:700}
 .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
 .chip{padding:6px 13px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer;font-size:12.5px;font-weight:600}
 .chip.on{background:var(--magenta);color:#fff;border-color:var(--magenta)}
+.note{color:var(--muted);font-size:12.5px;margin:-6px 0 16px}
 .err-banner{background:#3a1520;border:1px solid #5c2030;color:#ffb3c1;padding:12px 16px;border-radius:8px;margin-bottom:18px;font-size:13.5px}
 .demo-banner{background:#2a2413;border:1px solid #4d4320;color:#f2d98a;padding:10px 16px;border-radius:8px;margin-bottom:18px;font-size:13px}
 </style>
 </head>
 <body>
 <header>
-  <div class="wm"><div class="l1">CONCEPT</div><div class="l2">FACTORY</div><div class="tag">ACTUALS · PIPELINE & MARGE</div></div>
+  <div class="wm"><div class="l1">CONCEPT</div><div class="l2">FACTORY</div><div class="tag">ACTUALS</div></div>
   <div class="spacer"></div>
   <div class="tabs">
     <div class="tab active" data-view="pipeline" onclick="switchView('pipeline')">Pipeline</div>
     <div class="tab" data-view="nacalc" onclick="switchView('nacalc')">Nacalculatie</div>
+    <div class="tab" data-view="financieel" onclick="switchView('financieel')">Financieel</div>
   </div>
   <div class="controls">
     <button class="btn" onclick="loadAll()"><span id="spin">⟳</span> Vernieuw</button>
@@ -87,29 +88,32 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
   <div id="msg"></div>
   <div id="view-pipeline"></div>
   <div id="view-nacalc" class="hidden"></div>
+  <div id="view-financieel" class="hidden"></div>
 </main>
 
 <script>
-/* ====== CONFIG — twee Google Sheets (Rob's Drive) ====== */
+/* ====== CONFIG — Google Sheets (Rob's Drive) ====== */
 const SHEET_PIPELINE = "1MbTRTnWCx95SnNZ2SGg8uhRZXo26q1m2SWzcccQbvhw";
-const SHEET_NACALC   = "14xRtfXrz6jZ26IsqlR_d9jycv5ubzwy4CNI3Pqnpdec";
+const SHEET_NACALC   = "1UU3HPbi0yi-8iHENd9KRwuhLk0FXx3ZUGANs33AT9qQ";
+const SHEET_FIN      = "1qfHeqx4cklvsMJ2Is3LKkOsncVU3Gf6ort_l-Yu8kpk";
 
-/* Neutrale demo — GEEN echte cijfers (fallback als de Sheets niet leesbaar zijn). */
 const DEMO_PIPELINE = [
- ["Voorbeeldproject A","Klant A","Decor","O26XXXX","Bevestigd","25000","0.30","","","—","Demo"],
- ["Voorbeeldproject B","Klant B","EPS sculptuur","O26XXXX","Offerte uit","12000","0.30","","","—","Demo"],
- ["Voorbeeldproject C","Klant C","Maatwerk","O26XXXX","Geleverd - te innen","18000","0.30","","","—","Demo"],
- ["Voorbeeldproject D","Klant D","Decor","","In productie","30000","0.30","","","—","Demo"],
+ ["Voorbeeldproject A","Klant A","Decor","O26XXXX","Bevestigd","25000","0.3","","","—","Demo"],
+ ["Voorbeeldproject B","Klant B","EPS sculptuur","O26XXXX","Offerte uit","12000","0.3","","","—","Demo"],
 ];
 const DEMO_NACALC = [
- ["Voorbeeldproject A","Klant A","25000","4000","6000","5000","1500","Demo"],
- ["Voorbeeldproject B","Klant B","12000","5000","2000","2500","500","Demo"],
- ["Voorbeeldproject C","Klant C","18000","3000","4000","4000","1000","Demo"],
+ ["Voorbeeldproject A","afgewerkt","25000","4000","6000","5000","1500",""],
+ ["Voorbeeldproject B","actief","12000","5000","2000","2500","500",""],
+];
+const DEMO_FIN = [
+ ["KPI","Voorbeeld-KPI","0","0","Demo"],
 ];
 
+/* en-US numeriek (gviz geeft punt-decimaal, geen duizendtal) */
+const num=s=>{ if(s===''||s==null) return NaN; const v=parseFloat(String(s).replace(/[^0-9.\-]/g,'')); return v; };
+const marge=s=>{ if(s==null||s==='') return 0.30; let v=parseFloat(String(s).replace('%','').replace(',','.').replace(/[^0-9.\-]/g,'')); if(isNaN(v)) return 0.30; if(v>1) v=v/100; return v; };
 const euro=n=>isNaN(n)||n===null?'—':new Intl.NumberFormat('nl-BE',{style:'currency',currency:'EUR',maximumFractionDigits:0}).format(n);
 const pct=n=>isNaN(n)?'—':(n*100).toFixed(1).replace('.',',')+'%';
-const num=s=>{if(s===''||s==null)return NaN;return parseFloat(String(s).replace(/\s/g,'').replace(/\./g,'').replace(',','.').replace(/[^0-9.\-]/g,''));};
 function parseCSV(t){const rows=[];let row=[],f='',q=false;
   for(let i=0;i<t.length;i++){const c=t[i];
     if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}
@@ -120,22 +124,22 @@ async function fetchSheet(id){
   const r=await fetch(url,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);
   const rows=parseCSV(await r.text());return rows.slice(1).filter(r=>r.some(c=>String(c).trim()!==''));}
 
-let PIPE=[],NAC=[],charts={},statusFilter=null,live=false;
-const SC={'offerte':'var(--amber)','bevestigd':'var(--magenta)','productie':'var(--blue)','geleverd':'var(--green)','innen':'var(--green)','geind':'var(--green)','verloren':'#6b7280'};
+let PIPE=[],NAC=[],FIN=[],charts={},statusFilter=null,nacFilter=null,live=false;
+const SC={'offerte':'var(--amber)','bevestigd':'var(--magenta)','productie':'var(--blue)','geleverd':'var(--green)','innen':'var(--green)','geind':'var(--green)','verloren':'#6b7280','afgewerkt':'var(--green)','actief':'var(--amber)'};
 function statusColor(s){s=(s||'').toLowerCase();for(const k in SC)if(s.includes(k))return SC[k];return 'var(--muted)';}
 
 async function loadAll(){
   document.getElementById('spin').textContent='…';document.getElementById('msg').innerHTML='';
-  try{[PIPE,NAC]=await Promise.all([fetchSheet(SHEET_PIPELINE),fetchSheet(SHEET_NACALC)]);live=true;}
-  catch(e){PIPE=DEMO_PIPELINE;NAC=DEMO_NACALC;live=false;
-    document.getElementById('msg').innerHTML='<div class="err-banner">Kon de Google Sheets niet laden ('+e.message+'). Demo-data getoond. Zet beide Sheets op “iedereen met de link – lezer”.</div>';}
-  if(!live && !document.querySelector('.err-banner'))
-    document.getElementById('msg').innerHTML='<div class="demo-banner">Demo-data.</div>';
+  try{[PIPE,NAC,FIN]=await Promise.all([fetchSheet(SHEET_PIPELINE),fetchSheet(SHEET_NACALC),fetchSheet(SHEET_FIN)]);live=true;}
+  catch(e){PIPE=DEMO_PIPELINE;NAC=DEMO_NACALC;FIN=DEMO_FIN;live=false;
+    document.getElementById('msg').innerHTML='<div class="err-banner">Kon een Google Sheet niet laden ('+e.message+'). Demo-data getoond. Zet alle drie de Sheets op “iedereen met de link – lezer”.</div>';}
   document.getElementById('lastupd').textContent='Bijgewerkt '+new Date().toLocaleString('nl-BE',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});
-  document.getElementById('spin').textContent='⟳';renderPipeline();renderNacalc();
+  document.getElementById('spin').textContent='⟳';renderPipeline();renderNacalc();renderFinancieel();
 }
+
+/* ========== PIPELINE ========== */
 function renderPipeline(){
-  const rows=PIPE.map(r=>({proj:r[0],klant:r[1],type:r[2],onr:r[3],status:r[4],verkoop:num(r[5]),marge:num(r[6])||0.30,inn:r[8],opm:r[10]}));
+  const rows=PIPE.map(r=>({proj:r[0],klant:r[1],type:r[2],onr:r[3],status:r[4],verkoop:num(r[5]),marge:marge(r[6]),inn:r[8],opm:r[10]}));
   const has=s=>rows.filter(r=>(r.status||'').toLowerCase().includes(s));
   const sum=a=>a.reduce((t,r)=>t+(isNaN(r.verkoop)?0:r.verkoop),0);
   const sumM=a=>a.reduce((t,r)=>t+(isNaN(r.verkoop)?0:r.verkoop*r.marge),0);
@@ -159,31 +163,63 @@ function renderPipeline(){
   drawDoughnut('cStatus',Object.keys(byS),Object.values(byS),Object.keys(byS).map(statusColor));
 }
 function setFilter(s){statusFilter=s;renderPipeline();}
+
+/* ========== NACALCULATIE ========== */
 function renderNacalc(){
-  const rows=NAC.map(r=>{const v=num(r[2]),mat=num(r[3])||0,fr=num(r[4])||0,lo=num(r[5])||0,ov=num(r[6])||0;
-    const k=mat+fr+lo+ov,m=v-k,p=v?m/v:0,j=k/0.7,d=v-j;return{proj:r[0],v,k,m,p,j,d,les:r[7]};});
-  const tl=rows.filter(r=>r.d<0),tot=tl.reduce((t,r)=>t+r.d,0),gem=rows.length?rows.reduce((t,r)=>t+r.p,0)/rows.length:0;
+  const all=NAC.map(r=>{const v=num(r[2]),mat=num(r[3])||0,fr=num(r[4])||0,lo=num(r[5])||0,ov=num(r[6])||0;
+    const k=mat+fr+lo+ov,m=v-k,p=v?m/v:0,j=k/0.7,d=v-j;return{proj:r[0],status:r[1]||'',v,k,m,p,j,d,les:r[7]};});
+  const done=all.filter(r=>(r.status||'').toLowerCase().includes('afgewerkt'));
+  const base=done.length?done:all;
+  const tl=base.filter(r=>r.d<0),tot=tl.reduce((t,r)=>t+r.d,0),gem=base.length?base.reduce((t,r)=>t+r.p,0)/base.length:0;
   const kpis=[
-    {lab:'Afgewerkte projecten',val:rows.length,sub:'in nacalculatie',acc:'var(--blue)'},
-    {lab:'Gem. netto marge',val:pct(gem),sub:'streef ≥ 30%',acc:gem<0.3?'var(--red)':'var(--green)'},
-    {lab:'Te laag geprijsd',val:tl.length+'/'+rows.length,sub:'onder juiste prijs',acc:'var(--amber)'},
-    {lab:'Totale onderprijzing',val:euro(tot),sub:'gemiste marge',acc:'var(--red)'},
+    {lab:'Projecten (afgewerkt)',val:done.length+' / '+all.length,sub:'totaal in nacalc',acc:'var(--blue)'},
+    {lab:'Gem. netto marge',val:pct(gem),sub:'afgewerkte projecten · streef ≥30%',acc:gem<0.3?'var(--red)':'var(--green)'},
+    {lab:'Te laag geprijsd',val:tl.length+'/'+base.length,sub:'onder juiste prijs',acc:'var(--amber)'},
+    {lab:'Totale onderprijzing',val:euro(tot),sub:'gemiste marge (afgewerkt)',acc:'var(--red)'},
   ];
-  let h='<h2 class="section">Nacalculatie — geoffreerd vs. juiste prijs</h2><div class="kpis">'+kpis.map(k=>`<div class="kpi" style="--accent:${k.acc}"><div class="lab">${k.lab}</div><div class="val">${k.val}</div><div class="sub">${k.sub}</div></div>`).join('')+'</div>';
-  h+='<div class="card" style="margin-bottom:26px"><h3>Werkelijke verkoop vs. juiste prijs (30% marge)</h3><div class="chartwrap"><canvas id="cNac"></canvas></div></div>';
-  h+='<div class="tablewrap"><table><thead><tr><th>Project</th><th class="num">Verkoop</th><th class="num">Totale kost</th><th class="num">Netto marge</th><th class="num">Netto %</th><th class="num">Juiste prijs</th><th class="num">Verschil</th><th>Les</th></tr></thead><tbody>';
-  rows.forEach(r=>{const cl=r.d<0?'neg':'pos';h+=`<tr><td>${r.proj}</td><td class="num">${euro(r.v)}</td><td class="num">${euro(r.k)}</td><td class="num ${r.m<0?'neg':''}">${euro(r.m)}</td><td class="num ${r.p<0.3?'neg':'pos'}">${pct(r.p)}</td><td class="num">${euro(r.j)}</td><td class="num ${cl}">${euro(r.d)}</td><td style="white-space:normal;color:var(--muted)">${r.les||''}</td></tr>`;});
+  const statuses=[...new Set(all.map(r=>r.status))];
+  let h='<h2 class="section">Nacalculatie — geoffreerd vs. juiste prijs (@30% na álle loon)</h2><div class="kpis">'+kpis.map(k=>`<div class="kpi" style="--accent:${k.acc}"><div class="lab">${k.lab}</div><div class="val">${k.val}</div><div class="sub">${k.sub}</div></div>`).join('')+'</div>';
+  h+='<div class="card" style="margin-bottom:26px"><h3>Werkelijke verkoop vs. juiste prijs</h3><div class="chartwrap"><canvas id="cNac"></canvas></div></div>';
+  h+='<div class="note">Kengetallen o.b.v. <b>afgewerkte</b> projecten. “Actief” = lopend: kosten/omzet nog niet volledig geboekt, dus de marge kan vertekend zijn.</div>';
+  h+='<div class="filters">'+['Alle',...statuses].map(s=>`<span class="chip${(nacFilter===s||(!nacFilter&&s==='Alle'))?' on':''}" onclick="setNacFilter('${(s||'').replace(/'/g,'')}')">${s||'—'}</span>`).join('')+'</div>';
+  h+='<div class="tablewrap"><table><thead><tr><th>Project</th><th>Status</th><th class="num">Verkoop</th><th class="num">Totale kost</th><th class="num">Netto marge</th><th class="num">Netto %</th><th class="num">Juiste prijs</th><th class="num">Verschil</th></tr></thead><tbody>';
+  all.filter(r=>!nacFilter||nacFilter==='Alle'||r.status===nacFilter).sort((a,b)=>b.v-a.v).forEach(r=>{const cl=r.d<0?'neg':'pos';
+    h+=`<tr><td>${r.proj}</td><td><span class="pill" style="background:${statusColor(r.status)}22;color:${statusColor(r.status)}">${r.status||'—'}</span></td><td class="num">${euro(r.v)}</td><td class="num">${euro(r.k)}</td><td class="num ${r.m<0?'neg':''}">${euro(r.m)}</td><td class="num ${r.p<0.3?'neg':'pos'}">${pct(r.p)}</td><td class="num">${euro(r.j)}</td><td class="num ${cl}">${euro(r.d)}</td></tr>`;});
   h+='</tbody></table></div>';document.getElementById('view-nacalc').innerHTML=h;
-  drawGrouped('cNac',rows.map(r=>r.proj),rows.map(r=>r.v),rows.map(r=>r.j));
+  const ch=base.slice().sort((a,b)=>b.v-a.v);
+  drawGrouped('cNac',ch.map(r=>r.proj),ch.map(r=>r.v),ch.map(r=>r.j));
 }
+function setNacFilter(s){nacFilter=s;renderNacalc();}
+
+/* ========== FINANCIEEL ========== */
+function renderFinancieel(){
+  const rows=FIN.map(r=>({cat:r[0],post:r[1],waarde:num(r[2]),nadruk:String(r[3])==='1',toel:r[4]}));
+  const kpi=rows.filter(r=>(r.cat||'').toLowerCase()==='kpi');
+  const tbl=cat=>rows.filter(r=>(r.cat||'').toLowerCase()===cat);
+  let h='<h2 class="section">Financiële analyse 2026</h2><div class="kpis">';
+  kpi.forEach(k=>{const acc=k.waarde<0?'var(--red)':'var(--magenta)';
+    h+=`<div class="kpi" style="--accent:${acc}"><div class="lab">${k.post}</div><div class="val ${k.waarde<0?'neg':''}">${euro(k.waarde)}</div><div class="sub">${k.toel||''}</div></div>`;});
+  h+='</div>';
+  const mk=(title,cat)=>{const rs=tbl(cat);if(!rs.length)return'';
+    let t=`<div class="card"><h3>${title}</h3><div class="tablewrap" style="box-shadow:none;border:none"><table style="min-width:0"><tbody>`;
+    rs.forEach(r=>{t+=`<tr class="${r.nadruk?'total':''}"><td>${r.post}${r.toel?` <span style="color:var(--muted);font-weight:400">· ${r.toel}</span>`:''}</td><td class="num ${r.waarde<0?'neg':''}">${euro(r.waarde)}</td></tr>`;});
+    return t+'</tbody></table></div></div>';};
+  h+='<div class="grid2">'+mk('Resultaat & jaarprognose','resultaat')+mk('Cashflow (04/08)','cashflow')+'</div>';
+  h+='<div class="note">Bron: gecorrigeerde analyse jan–jul 2026 (Exact + Robaws). Operationeel draait rond break-even; het nettoresultaat wordt gedragen door de eenmalige Backstage-kwijtschelding. Aandachtspunten: dunne marge en cashflow (BTW).</div>';
+  document.getElementById('view-financieel').innerHTML=h;
+}
+
+/* ========== CHARTS ========== */
 const cssv=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const resolve=c=>c.startsWith('var(')?cssv(c.slice(4,-1)):c;
 Chart.defaults.color='#8b90a0';Chart.defaults.font.family="'Inter',system-ui,Arial";Chart.defaults.borderColor='#282c36';
 function destroy(id){if(charts[id]){charts[id].destroy();delete charts[id];}}
-function drawBar(id,l,d,c){destroy(id);const e=document.getElementById(id);if(!e)return;charts[id]=new Chart(e,{type:'bar',data:{labels:l,datasets:[{data:d,backgroundColor:c.map(resolve),borderRadius:5}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>euro(x.raw)}}},scales:{y:{ticks:{callback:v=>'€'+(v/1000)+'k'}},x:{ticks:{maxRotation:40,minRotation:20,font:{size:11}}}}}});}
+function drawBar(id,l,d,c){destroy(id);const e=document.getElementById(id);if(!e)return;charts[id]=new Chart(e,{type:'bar',data:{labels:l,datasets:[{data:d,backgroundColor:c.map(resolve),borderRadius:5}]},options:{maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:x=>euro(x.raw)}}},scales:{y:{ticks:{callback:v=>'€'+(v/1000)+'k'}},x:{ticks:{maxRotation:50,minRotation:25,font:{size:10}}}}}});}
 function drawDoughnut(id,l,d,c){destroy(id);const e=document.getElementById(id);if(!e)return;charts[id]=new Chart(e,{type:'doughnut',data:{labels:l,datasets:[{data:d,backgroundColor:c.map(resolve),borderWidth:0}]},options:{maintainAspectRatio:false,cutout:'62%',plugins:{legend:{position:'right',labels:{boxWidth:12,padding:12}},tooltip:{callbacks:{label:x=>x.label+': '+euro(x.raw)}}}}});}
-function drawGrouped(id,l,a,b){destroy(id);const e=document.getElementById(id);if(!e)return;charts[id]=new Chart(e,{type:'bar',data:{labels:l,datasets:[{label:'Werkelijke verkoop',data:a,backgroundColor:resolve('var(--magenta)'),borderRadius:5},{label:'Juiste prijs (30%)',data:b,backgroundColor:resolve('var(--blue)'),borderRadius:5}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:x=>x.dataset.label+': '+euro(x.raw)}}},scales:{y:{ticks:{callback:v=>'€'+(v/1000)+'k'}},x:{ticks:{font:{size:11}}}}}});}
-function switchView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));document.getElementById('view-pipeline').classList.toggle('hidden',v!=='pipeline');document.getElementById('view-nacalc').classList.toggle('hidden',v!=='nacalc');}
+function drawGrouped(id,l,a,b){destroy(id);const e=document.getElementById(id);if(!e)return;charts[id]=new Chart(e,{type:'bar',data:{labels:l,datasets:[{label:'Werkelijke verkoop',data:a,backgroundColor:resolve('var(--magenta)'),borderRadius:5},{label:'Juiste prijs (30%)',data:b,backgroundColor:resolve('var(--blue)'),borderRadius:5}]},options:{maintainAspectRatio:false,plugins:{legend:{position:'top'},tooltip:{callbacks:{label:x=>x.dataset.label+': '+euro(x.raw)}}},scales:{y:{ticks:{callback:v=>'€'+(v/1000)+'k'}},x:{ticks:{maxRotation:50,minRotation:25,font:{size:10}}}}}});}
+
+function switchView(v){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===v));
+  ['pipeline','nacalc','financieel'].forEach(x=>document.getElementById('view-'+x).classList.toggle('hidden',x!==v));}
 loadAll();
 </script>
 </body>
