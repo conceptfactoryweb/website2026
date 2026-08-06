@@ -6,7 +6,7 @@ function readEnv(name){
   return "";
 }
 export default async (request, context) => {
-  const raw = readEnv("ACTUALS_CREDS");
+  const raw = readEnv("ACTUALS_CREDS") || readEnv("ACTUALS_CRED");
   const map = {};
   raw.split(/[,\n]/).forEach(pair => {
     const i = pair.indexOf(":");
