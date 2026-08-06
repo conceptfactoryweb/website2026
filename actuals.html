@@ -219,7 +219,15 @@ function renderFinancieel(){
   let h='<h2 class="section">Financiële analyse 2026</h2><div class="kpis">';
   kpi.forEach(k=>{const acc=k.waarde<0?'var(--red)':'var(--magenta)';
     h+=`<div class="kpi" style="--accent:${acc}"><div class="lab">${k.post}</div><div class="val ${k.waarde<0?'neg':''}">${euro(k.waarde)}</div><div class="sub">${k.toel||''}</div></div>`;});
-  h+='</div><div class="grid2">'
+  const pR=PIPE.map(r=>({proj:r[0],status:r[4],verkoop:num(r[5]),marge:marge(r[6])}));
+  const conf=pR.filter(r=>{const s=(r.status||'').toLowerCase();return (s.includes('bevestigd')||s.includes('productie'))&&!isNaN(r.verkoop);}).sort((a,b)=>b.verkoop-a.verkoop);
+  const confTot=conf.reduce((t,r)=>t+r.verkoop,0),confM=conf.reduce((t,r)=>t+r.verkoop*(r.marge||0.30),0);
+  h+='</div>';
+  h+='<div class="card" style="margin-bottom:20px"><h3>Bevestigde pipeline H2 — voedt de prognose</h3>'
+    +'<div style="font-family:Oswald;font-size:24px;font-weight:700;margin-bottom:6px">'+euro(confTot)+' <span style="color:var(--muted);font-size:14px;font-weight:400">verkoop · ≈ '+euro(confM)+' marge @30% · '+conf.length+' bevestigde projecten</span></div>'
+    +'<div class="chartwrap" style="height:230px"><canvas id="cFinPipe"></canvas></div>'
+    +'<div class="goalnote">Enkel bevestigd + in productie (offertes-uit niet meegerekend). Dit is het fundament onder de H2-prognose.</div></div>';
+  h+='<div class="grid2">'
     +'<div class="card"><h3>Waar gaat elke euro omzet naartoe?</h3><div class="chartwrap"><canvas id="cFinKost"></canvas></div></div>'
     +'<div class="card"><h3>Cash-brug tot jaareinde</h3><div class="chartwrap"><canvas id="cFinCash"></canvas></div></div>'
     +'<div class="card"><h3>Resultaat-opbouw H1</h3><div class="chartwrap"><canvas id="cFinRes"></canvas></div></div>'
@@ -232,6 +240,7 @@ function renderFinancieel(){
     h+='</tbody></table></div></div>';});
   h+='</div><div class="note">Bron: gecorrigeerde analyse jan–jul 2026 (Exact + Robaws). Operationeel draait rond break-even; het nettoresultaat wordt gedragen door de eenmalige Backstage-kwijtschelding. Offertes-uit tellen nooit mee in een prognose.</div>';
   document.getElementById('view-financieel').innerHTML=h;
+  drawBar('cFinPipe',conf.map(r=>r.proj),conf.map(r=>r.verkoop),conf.map(()=>'var(--magenta)'));
   const val=(ck,pk)=>{const r=rows.find(x=>x.cat.toLowerCase()===ck&&String(x.post||'').toLowerCase().includes(pk));return r?r.waarde:0;};
   const R='resultatenrekening',CV='cash-vooruitzicht',RS='resultaat';
   const omzet=val(R,'omzet h1')+val(R,'overige bedrijfsopbrengsten');
