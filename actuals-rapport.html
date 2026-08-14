@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="nl" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<title>CF Actuals — live analyse</title>
+<style>
+:root{
+  --page:#0d0d0f; --surface-1:#17171a; --surface-2:#1f1f23; --surface-3:#26262b;
+  --text-primary:#fff; --text-secondary:#b9b8b2; --text-muted:#85847e;
+  --grid:#2a2a2e; --axis:#3a3a3f; --border:rgba(255,255,255,.10);
+  --s1:#e6007e; --s2:#3987e5; --s3:#199e70; --s4:#c98500; --s5:#9085e9; --s6:#d95926;
+  --pos:#3987e5; --neg:#d95926; --deemph:#4a4a50;
+  --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
+}
+:root[data-theme="light"]{
+  --page:#f6f6f4; --surface-1:#fcfcfb; --surface-2:#f1f1ee; --surface-3:#e8e8e3;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#898781;
+  --grid:#e5e4dd; --axis:#c3c2b7; --border:rgba(11,11,11,.10);
+  --s2:#2a78d6; --s3:#1baf7a; --s4:#eda100; --s5:#4a3aa7; --s6:#eb6834;
+  --pos:#2a78d6; --neg:#eb6834; --deemph:#c9c8c2;
+}
+*{box-sizing:border-box} html,body{margin:0}
+body{background:var(--page);color:var(--text-primary);font-size:14px;line-height:1.55;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:26px 20px 70px}
+h1,h2,h3{text-transform:uppercase;letter-spacing:.09em;font-weight:600;margin:0}
+h1{font-size:20px;letter-spacing:.12em} h2{font-size:13px;letter-spacing:.14em;color:var(--text-secondary)}
+h3{font-size:12px;letter-spacing:.12em;color:var(--text-secondary)}
+.sub{font-style:italic;color:var(--text-secondary);font-size:13px;text-transform:none;letter-spacing:0;font-weight:400}
+.eyebrow{font-size:10.5px;color:var(--text-muted);letter-spacing:.16em;text-transform:uppercase}
+
+/* gate */
+#gate{position:fixed;inset:0;background:var(--page);display:flex;align-items:center;justify-content:center;z-index:200}
+#gate .box{width:min(360px,90vw);text-align:center}
+#gate .dot{width:13px;height:13px;background:var(--s1);margin:0 auto 20px}
+#gate input{width:100%;padding:11px 13px;background:var(--surface-2);border:1px solid var(--border);
+  color:var(--text-primary);font:inherit;margin-top:16px}
+#gate button{width:100%;margin-top:9px;padding:11px;background:var(--s1);color:#fff;border:0;
+  font:inherit;font-size:11px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;cursor:pointer}
+#gate .err{color:var(--critical);font-size:12px;margin-top:10px;min-height:17px}
+#app{display:none}
+
+header.top{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;justify-content:space-between;
+  border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand .dot{width:11px;height:11px;background:var(--s1);flex:none}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+button.tg{font:inherit;font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--surface-2);
+  color:var(--text-secondary);border:1px solid var(--border);padding:7px 12px;cursor:pointer}
+button.tg:hover{background:var(--surface-3);color:var(--text-primary)}
+.stamp{font-size:11px;color:var(--text-muted)}
+
+nav.tabs{display:flex;gap:2px;flex-wrap:wrap;margin-bottom:20px;border-bottom:1px solid var(--border)}
+nav.tabs button{font:inherit;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  background:none;border:0;border-bottom:2px solid transparent;color:var(--text-muted);padding:9px 14px;cursor:pointer}
+nav.tabs button:hover{color:var(--text-primary)}
+nav.tabs button[aria-selected="true"]{color:var(--text-primary);border-bottom-color:var(--s1)}
+section[role="tabpanel"]{display:none} section[role="tabpanel"].on{display:block}
+
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))} .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media(max-width:1060px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:720px){.g2,.g3,.g4{grid-template-columns:1fr}}
+.card{background:var(--surface-1);border:1px solid var(--border);padding:16px 16px 12px;min-width:0}
+.card.wide{grid-column:1/-1}
+.cardhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.cardnote{font-size:11.5px;color:var(--text-muted);margin:3px 0 10px;line-height:1.45}
+button.tbl{font:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;background:none;
+  color:var(--text-muted);border:1px solid var(--border);padding:4px 8px;cursor:pointer;flex:none}
+button.tbl:hover{color:var(--text-primary)}
+
+.tile .lab{font-size:11px;color:var(--text-muted);letter-spacing:.06em;text-transform:uppercase}
+.tile .val{font-size:24px;font-weight:600;margin-top:3px}
+.tile .dl{font-size:11.5px;color:var(--text-secondary);margin-top:3px}
+
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:2px 0 10px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--text-secondary)}
+.legend i{width:11px;height:11px;display:inline-block;flex:none}
+
+.chart svg{display:block;width:100%;height:auto;overflow:visible}
+.tick{fill:var(--text-muted);font-size:10.5px;font-variant-numeric:tabular-nums}
+.dlab{fill:var(--text-secondary);font-size:10.5px;font-weight:600}
+.dlab.strong{fill:var(--text-primary)}
+.gl{stroke:var(--grid);stroke-width:1;shape-rendering:crispEdges}
+.ax{stroke:var(--axis);stroke-width:1;shape-rendering:crispEdges}
+.hit{fill:transparent;cursor:pointer} .hit:focus{outline:2px solid var(--s2);outline-offset:1px}
+
+#tip{position:fixed;z-index:150;pointer-events:none;opacity:0;transition:opacity .1s;background:var(--surface-3);
+  border:1px solid var(--border);padding:8px 10px;font-size:12px;max-width:290px;box-shadow:0 6px 22px rgba(0,0,0,.35)}
+#tip b{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--text-muted);margin-bottom:3px}
+#tip .r{display:flex;justify-content:space-between;gap:14px}
+#tip .r s{text-decoration:none;font-variant-numeric:tabular-nums;font-weight:600}
+#tip .r em{font-style:normal;color:var(--text-secondary)}
+
+.tw{display:none;overflow-x:auto;margin-top:6px;max-width:100%} .tw.on{display:block}
+table{border-collapse:collapse;width:100%;font-size:12px}
+th,td{text-align:left;padding:6px 9px;border-bottom:1px solid var(--border);white-space:nowrap}
+th{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--text-muted);font-weight:600}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+tbody tr:hover{background:var(--surface-2)}
+tfoot td{font-weight:600;border-top:1px solid var(--axis);border-bottom:none}
+
+.meter{padding:12px 0;border-bottom:1px solid var(--border)} .meter:last-child{border-bottom:none}
+.mhead{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:6px}
+.mname{font-size:13px;font-weight:600} .mval{font-size:12.5px;color:var(--text-secondary);flex:none;font-variant-numeric:tabular-nums}
+.track{height:9px;background:var(--surface-3);position:relative;overflow:hidden}
+.fill{height:100%;position:absolute;left:0;top:0}
+.mfoot{display:flex;justify-content:space-between;gap:12px;margin-top:6px;font-size:11px;color:var(--text-muted)}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;flex:none}
+
+.hero{background:var(--surface-1);border:1px solid var(--border);padding:20px;display:flex;
+ flex-wrap:wrap;gap:24px;justify-content:space-between;align-items:center}
+.heronum{font-size:48px;font-weight:600;line-height:1;letter-spacing:-.02em}
+.heroside{display:flex;gap:24px;flex-wrap:wrap}
+.heroside .k{font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:.1em}
+.heroside .v{font-size:18px;font-weight:600;margin-top:2px}
+.diag{padding:11px 0;border-bottom:1px solid var(--border);font-size:12.5px;color:var(--text-secondary)}
+.diag:last-child{border-bottom:none}
+.diag b{color:var(--text-primary)}
+.diag .dh{display:flex;gap:7px;align-items:center;margin-bottom:3px}
+.banner{padding:11px 14px;font-size:12.5px;margin-bottom:14px;border-left:3px solid var(--warning);background:var(--surface-2)}
+.banner.err{border-left-color:var(--critical)}
+.banner.ok{border-left-color:var(--good)}
+.banner b{display:block;text-transform:uppercase;font-size:11px;letter-spacing:.08em;margin-bottom:3px}
+.skel{opacity:.35}
+footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--border);font-size:11.5px;color:var(--text-muted)}
+</style>
+</head>
+<body>
+<div id="tip" role="status" aria-live="polite"></div>
+
+<div id="gate">
+  <div class="box">
+    <div class="dot"></div>
+    <div class="eyebrow">Concept Factory</div>
+    <h1 style="font-size:16px;margin-top:6px">CF Actuals</h1>
+    <div class="sub" style="margin-top:8px">Interne financiële monitor</div>
+    <input id="pw" type="password" placeholder="Wachtwoord" autocomplete="current-password">
+    <button id="go">Openen</button>
+    <div class="err" id="gerr"></div>
+  </div>
+</div>
+
+<div id="app"><div class="wrap">
+  <header class="top">
+    <div>
+      <div class="brand"><span class="dot"></span><h1>CF Actuals — live analyse</h1></div>
+      <div class="sub" style="margin-top:6px">Live gevoed uit de zes sheets in de Drive-map <b>CF Actuals — brondata financieel dashboard</b>. Wijzig je een sheet, dan wijzigt deze pagina.</div>
+    </div>
+    <div class="toolbar">
+      <span class="stamp" id="stamp"></span>
+      <button class="tg" id="refresh">⟳ Vernieuw</button>
+      <button class="tg" id="thm" aria-pressed="false">Licht thema</button>
+    </div>
+  </header>
+
+  <div id="banners"></div>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" data-p="pAna" aria-selected="true">Analyse</button>
+    <button role="tab" data-p="pOver" aria-selected="false">Overzicht</button>
+    <button role="tab" data-p="pPipe" aria-selected="false">Pipeline</button>
+    <button role="tab" data-p="pNac" aria-selected="false">Nacalculatie</button>
+    <button role="tab" data-p="pFin" aria-selected="false">Financieel</button>
+    <button role="tab" data-p="pDoel" aria-selected="false">Doelen</button>
+  </nav>
+
+  <section role="tabpanel" id="pAna" class="on">
+    <div id="anaHero"></div>
+    <div class="grid g4" style="margin-top:14px" id="anaKpi"></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <div class="cardhead"><div><h3>Werkkapitaal-brug</h3></div><button class="tbl" data-t="tBrug">Tabel</button></div>
+        <div class="cardnote">Van bankstand naar wat er werkelijk vrij is, met alle bekende korte-termijnposten. Live berekend uit Kern en Verplichtingen.</div>
+        <div class="legend"><span><i style="background:var(--pos)"></i>Bijtelling</span><span><i style="background:var(--neg)"></i>Aftrek</span><span><i style="background:var(--deemph)"></i>Tussenstand</span></div>
+        <div class="chart" id="cBrug"></div><div class="tw" id="tBrug"></div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h3>Ouderdom: te ontvangen vs. te betalen</h3></div><button class="tbl" data-t="tAge">Tabel</button></div>
+        <div class="cardnote">Uit de Kern-sheet. Zit het zwaartepunt van de vorderingen rechts en dat van de schulden links, dan financier je je klanten.</div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>Te ontvangen</span><span><i style="background:var(--s2)"></i>Te betalen</span></div>
+        <div class="chart" id="cAge"></div><div class="tw" id="tAge"></div>
+      </div>
+    </div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <div class="cardhead"><div><h3>Jaareinde-scenario's</h3></div><button class="tbl" data-t="tScen">Tabel</button></div>
+        <div class="cardnote">Netto cash min de openstaande verplichtingen van dit jaar, plus de marge op wat nog te factureren is — bij drie margeniveaus.</div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>Verwachte positie</span><span><i style="background:var(--warning)" class="ln"></i>Streefbuffer</span></div>
+        <div class="chart" id="cScen"></div><div class="tw" id="tScen"></div>
+      </div>
+      <div class="card"><div><h3>Diagnose</h3></div>
+        <div class="cardnote">Live afgeleid uit de sheets — geen vaste tekst.</div>
+        <div id="anaDiag"></div>
+      </div>
+    </div>
+    <div class="card wide" style="margin-top:14px">
+      <div class="cardhead"><div><h3>Openstaande verplichtingen</h3></div><button class="tbl" data-t="tVerpl">Tabel</button></div>
+      <div class="cardnote">Uit de Verplichtingen-sheet. Regels met status "Betaald" vallen weg uit de brug en de scenario's.</div>
+      <div class="tw on" id="tVerpl"></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="pOver">
+    <div class="grid g4" id="kpis"></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <div class="cardhead"><div><h3>Pipeline per status</h3></div><button class="tbl" data-t="tStat">Tabel</button></div>
+        <div class="cardnote">Contractwaarde tegenover wat er nog te factureren is.</div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>Contractwaarde</span><span><i style="background:var(--s2)"></i>Nog te factureren</span></div>
+        <div class="chart" id="cStat"></div><div class="tw" id="tStat"></div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h3>Marge per afgerond project t.o.v. doel</h3></div><button class="tbl" data-t="tMg">Tabel</button></div>
+        <div class="cardnote">Afwijking in procentpunten t.o.v. de doelmarge van 30 %.</div>
+        <div class="legend"><span><i style="background:var(--pos)"></i>Boven doel</span><span><i style="background:var(--neg)"></i>Onder doel</span></div>
+        <div class="chart" id="cMg"></div><div class="tw" id="tMg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="pPipe">
+    <div class="grid g4" id="pipeKpi"></div>
+    <div class="card wide" style="margin-top:14px">
+      <div class="cardhead"><div><h3>Alle projecten in de pipeline</h3></div><button class="tbl" data-t="tPipeAll">Grafiek</button></div>
+      <div class="cardnote">Gesorteerd op contractwaarde. Rijen waar de kolommen in de sheet verschoven zijn, worden automatisch rechtgezet.</div>
+      <div class="chart" id="cPipeAll"></div><div class="tw on" id="tPipeAll"></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="pNac">
+    <div class="grid g3" id="nacKpi"></div>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <div class="cardhead"><div><h3>Gefactureerd vs. juiste prijs @ 30 %</h3></div><button class="tbl" data-t="tOnd">Tabel</button></div>
+        <div class="cardnote">De afstand tussen de punten is wat er te weinig of te veel aangerekend werd.</div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>Gefactureerd</span><span><i style="background:var(--deemph)"></i>Juiste prijs</span></div>
+        <div class="chart" id="cOnd"></div><div class="tw" id="tOnd"></div>
+      </div>
+      <div class="card">
+        <div class="cardhead"><div><h3>Kostenmix</h3></div><button class="tbl" data-t="tMix">Tabel</button></div>
+        <div class="cardnote">Over alle projecten in de nacalculatie-sheet.</div>
+        <div class="legend"><span><i style="background:var(--s1)"></i>Freelance</span><span><i style="background:var(--s2)"></i>Materiaal</span><span><i style="background:var(--s3)"></i>Eigen loon</span><span><i style="background:var(--s4)"></i>Overhead</span></div>
+        <div class="chart" id="cMix"></div><div class="tw" id="tMix"></div>
+      </div>
+    </div>
+    <div class="card wide" style="margin-top:14px">
+      <div><h3>Nacalculatie per project</h3></div>
+      <div class="cardnote">Kost = materiaal + freelance + eigen loon + overhead. Juiste prijs = kost ÷ 0,70.</div>
+      <div class="tw on" id="tNac"></div>
+    </div>
+  </section>
+
+  <section role="tabpanel" id="pFin"><div id="finBody"></div></section>
+
+  <section role="tabpanel" id="pDoel">
+    <div class="card wide"><div><h3>Doelen</h3></div>
+      <div class="cardnote">Elke meter loopt van startpunt naar streefwaarde. Statuslabels staan naast de balk, nooit enkel in kleur.</div>
+      <div id="meters"></div></div>
+  </section>
+
+  <footer>
+    <b>Intern.</b> Deze pagina is niet geïndexeerd en enkel bedoeld voor Björn en Rob.
+    De cijfers komen live uit de Google-Sheets <em>CF Actuals — Pipeline / Nacalculatie / Financieel / Doelen</em>;
+    de brondocumenten en de vul-instructies staan in de Claude-omgeving <em>CF - Finance</em>.
+    Rekenkundige weergave van aangeleverde cijfers — geen boekhoudkundig of financieel advies.
+  </footer>
+</div></div>
+
+<script>
+/* ══ CONFIG ══ */
+const PASSWORD = "concept2026";
+const SHEETS = {
+  pipeline:  "1MbTRTnWCx95SnNZ2SGg8uhRZXo26q1m2SWzcccQbvhw",
+  nacalc:    "1UU3HPbi0yi-8iHENd9KRwuhLk0FXx3ZUGANs33AT9qQ",
+  financieel:"1qfHeqx4cklvsMJ2Is3LKkOsncVU3Gf6ort_l-Yu8kpk",
+  doelen:    "1R_SoGClCPUBLGccmAWO7Uvtk-QqXRl0Xc8nNxWjkeH0",
+  kern:      "1a7UNlWPMpn7UoTWVDAY5AGlKe6O55LghSpiubOfDFa0",
+  verpl:     "1vWNAcR5f0oxuIzKl2hjksurPnGcYnztpAA5Iac4UWw8"
+};
+const STATUSSEN=["offerte uit","bevestigd","in productie","geleverd - te innen","geleverd — te innen","geïnd","geind","verloren"];
+const DOELMARGE=0.30;
+
+/* ══ HELPERS ══ */
+const $=s=>document.querySelector(s);
+const eur=n=>(n<0?"− ":"")+"€ "+Math.abs(Math.round(n)).toLocaleString("nl-BE");
+const eurK=n=>{const a=Math.abs(n);return (n<0?"− ":"")+"€ "+(a>=1000?(a/1000).toLocaleString("nl-BE",{maximumFractionDigits:a>=10000?0:1})+"K":Math.round(a))};
+const dec1=n=>n.toLocaleString("nl-BE",{minimumFractionDigits:1,maximumFractionDigits:1});
+const pct=n=>dec1(n)+" %"; const pp=n=>(n>=0?"+ ":"− ")+dec1(Math.abs(n))+" pp";
+const esc=s=>String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+function nm(s){ /* getal uit sheet-cel, NL of EN notatie */
+  if(s==null||s==="")return NaN; let t=String(s).replace(/[€\s%]/g,"").replace(/ /g,"");
+  if(/,\d{1,2}$/.test(t)) t=t.replace(/\./g,"").replace(",",".") ; else t=t.replace(/,/g,"");
+  const v=parseFloat(t); return isNaN(v)?NaN:v;
+}
+function niceMax(v,st=4){if(!(v>0))return 1;const raw=v/st,mag=Math.pow(10,Math.floor(Math.log10(raw)));
+  const n=[1,2,2.5,5,10].find(x=>raw/mag<=x)||10;return n*mag*st;}
+const rTop=(x,y,w,h,r)=>{r=Math.max(0,Math.min(r,w/2,h));return `M${x} ${y+h}L${x} ${y+r}Q${x} ${y} ${x+r} ${y}L${x+w-r} ${y}Q${x+w} ${y} ${x+w} ${y+r}L${x+w} ${y+h}Z`};
+const rR=(x,y,w,h,r)=>{r=Math.max(0,Math.min(r,w,h/2));return `M${x} ${y}L${x+w-r} ${y}Q${x+w} ${y} ${x+w} ${y+r}L${x+w} ${y+h-r}Q${x+w} ${y+h} ${x+w-r} ${y+h}L${x} ${y+h}Z`};
+const rL=(x,y,w,h,r)=>{r=Math.max(0,Math.min(r,w,h/2));return `M${x+w} ${y}L${x+r} ${y}Q${x} ${y} ${x} ${y+r}L${x} ${y+h-r}Q${x} ${y+h} ${x+r} ${y+h}L${x+w} ${y+h}Z`};
+const CAP=22, GAP=2;
+
+const tip=$("#tip");
+document.addEventListener("mousemove",e=>{const el=e.target.closest?.("[data-tip]");
+  if(el){tip.innerHTML=el.getAttribute("data-tip");tip.style.opacity=1;
+    const r=tip.getBoundingClientRect();let l=e.clientX+14,t=e.clientY-r.height-12;
+    if(l+r.width>innerWidth-8)l=e.clientX-r.width-14; if(t<8)t=e.clientY+18;
+    tip.style.left=l+"px";tip.style.top=t+"px";}else tip.style.opacity=0;},{passive:true});
+document.addEventListener("focusin",e=>{const el=e.target.closest?.("[data-tip]");
+  if(el){tip.innerHTML=el.getAttribute("data-tip");tip.style.opacity=1;
+    const r=el.getBoundingClientRect();tip.style.left=(r.left)+"px";tip.style.top=(r.top-tip.getBoundingClientRect().height-10)+"px";}});
+document.addEventListener("focusout",()=>tip.style.opacity=0);
+const tt=(t,rows)=>`<b>${esc(t)}</b>`+rows.map(r=>`<div class="r"><em>${esc(r[0])}</em><s>${esc(r[1])}</s></div>`).join("");
+
+/* ══ CSV ══ */
+function parseCSV(t){const rows=[];let row=[],f="",q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true; else if(c===","){row.push(f);f=""}
+    else if(c==="\n"){row.push(f);f="";rows.push(row);row=[]}
+    else if(c!=="\r")f+=c;}
+  row.push(f); if(row.length>1||row[0]!=="")rows.push(row);
+  return rows.filter(r=>r.some(c=>String(c).trim()!==""));}
+async function fetchSheet(id){
+  const url=`https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:csv&_=${Date.now()}`;
+  const ac=new AbortController(), to=setTimeout(()=>ac.abort(),12000);
+  let r; try{ r=await fetch(url,{cache:"no-store",signal:ac.signal}); }
+  catch(e){ throw new Error(e.name==="AbortError"?"geen antwoord binnen 12 s":"netwerkfout of geblokkeerd door de browser"); }
+  finally{ clearTimeout(to); }
+  if(!r.ok) throw new Error(r.status===404?"Sheet niet gevonden (ID fout?)":"HTTP "+r.status);
+  const txt=await r.text();
+  if(/^\s*</.test(txt)) throw new Error("geen toegang — zet de Sheet op “iedereen met de link – lezer”");
+  return parseCSV(txt);}
+/* lege dataset: nette boodschap in plaats van een kapotte as */
+function empty(el,msg){el.innerHTML=`<div style="padding:26px 4px;color:var(--text-muted);font-size:12.5px">${esc(msg)}</div>`;return true;}
+
+/* ══ CHARTS ══ */
+function frame(el,h,pl,pr,pt,pb){const W=Math.max(280,el.clientWidth||el.parentElement.clientWidth||620);
+  return {W,H:h,pl,pr,pt,pb,iw:W-pl-pr,ih:h-pt-pb};}
+function yAx(f,max,fmt,t=4){let s="";for(let i=0;i<=t;i++){const v=max/t*i,y=f.pt+f.ih-f.ih/t*i;
+  s+=`<line class="gl" x1="${f.pl}" y1="${y}" x2="${f.pl+f.iw}" y2="${y}"/><text class="tick" x="${f.pl-8}" y="${y+3.5}" text-anchor="end">${fmt(v)}</text>`}return s;}
+function grouped(el,items,keys,{h=250,fmt=eurK}={}){
+  if(!items.length)return empty(el,"Geen data in deze sheet.");
+  const f=frame(el,h,58,14,16,44),max=niceMax(Math.max(...items.flatMap(d=>keys.map(k=>d[k.key]||0))));
+  const step=f.iw/items.length,bw=Math.min(CAP,(step-16)/keys.length-GAP);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img">`+yAx(f,max,fmt);
+  items.forEach((d,i)=>{const gw=bw*keys.length+GAP*(keys.length-1),x0=f.pl+step*i+(step-gw)/2;
+    keys.forEach((k,j)=>{const bh=Math.max(1,(d[k.key]||0)/max*f.ih);
+      s+=`<path d="${rTop(x0+j*(bw+GAP),f.pt+f.ih-bh,bw,bh,4)}" fill="${k.color}"/>`});
+    const w=String(d.label).split(" ");const l1=w.slice(0,2).join(" "),l2=w.slice(2).join(" ");
+    s+=`<text class="tick" x="${f.pl+step*i+step/2}" y="${f.pt+f.ih+17}" text-anchor="middle">${esc(l1)}</text>`;
+    if(l2)s+=`<text class="tick" x="${f.pl+step*i+step/2}" y="${f.pt+f.ih+30}" text-anchor="middle">${esc(l2)}</text>`;
+    s+=`<rect class="hit" x="${f.pl+step*i}" y="${f.pt}" width="${step}" height="${f.ih}" tabindex="0" data-tip="${esc(tt(d.label,keys.map(k=>[k.name,eur(d[k.key]||0)])))}"/>`});
+  el.innerHTML=s+`<line class="ax" x1="${f.pl}" y1="${f.pt+f.ih}" x2="${f.pl+f.iw}" y2="${f.pt+f.ih}"/></svg>`;}
+function hbars(el,items,{color="var(--s1)",rowH=25,labelW=190,fmt=eurK}={}){
+  if(!items.length)return empty(el,"Geen data in deze sheet.");
+  const f=frame(el,items.length*rowH+16,labelW,66,6,6),max=Math.max(...items.map(d=>d.value))||1,bh=Math.min(CAP-6,rowH-9);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img">`;
+  items.forEach((d,i)=>{const y=f.pt+i*rowH+(rowH-bh)/2,bw=Math.max(2,d.value/max*f.iw);
+    s+=`<text class="tick" x="${f.pl-9}" y="${y+bh/2+3.5}" text-anchor="end">${esc(d.label)}</text>
+        <path d="${rR(f.pl,y,bw,bh,4)}" fill="${color}"/>
+        <text class="dlab" x="${f.pl+bw+8}" y="${y+bh/2+3.5}">${fmt(d.value)}</text>
+        <rect class="hit" x="0" y="${f.pt+i*rowH}" width="${f.W}" height="${rowH}" tabindex="0" data-tip="${esc(tt(d.label,[["Bedrag",eur(d.value)]].concat(d.extra||[])))}"/>`});
+  el.innerHTML=s+"</svg>";}
+function diverging(el,items,{rowH=24,labelW=178}={}){
+  if(!items.length)return empty(el,"Geen afgeronde projecten met marge in de sheet.");
+  const f=frame(el,items.length*rowH+22,labelW,20,8,14);
+  const m=Math.max(...items.map(d=>Math.abs(d.value)))||1,max=Math.ceil(m/10)*10;
+  const cx=f.pl+f.iw/2,half=Math.max(30,f.iw/2-62),bh=Math.min(CAP-6,rowH-8);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img">`;
+  [-max,-max/2,0,max/2,max].forEach(v=>{const x=cx+v/max*half;
+    s+=`<line class="${v===0?"ax":"gl"}" x1="${x}" y1="${f.pt-2}" x2="${x}" y2="${f.pt+f.ih}"/>
+        <text class="tick" x="${x}" y="${f.pt+f.ih+12}" text-anchor="middle">${v===0?"doel 30 %":(v>0?"+":"−")+Math.abs(v)+" pp"}</text>`});
+  items.forEach((d,i)=>{const y=f.pt+i*rowH+(rowH-bh)/2,w=Math.max(2,Math.abs(d.value)/max*half),po=d.value>=0;
+    s+=`<text class="tick" x="${f.pl-9}" y="${y+bh/2+3.5}" text-anchor="end">${esc(d.label)}</text>`;
+    s+=po?`<path d="${rR(cx,y,w,bh,4)}" fill="var(--pos)"/>`:`<path d="${rL(cx-w,y,w,bh,4)}" fill="var(--neg)"/>`;
+    s+=`<text class="dlab" x="${po?cx+w+8:cx-w-8}" y="${y+bh/2+3.5}" text-anchor="${po?"start":"end"}">${pp(d.value)}</text>
+        <rect class="hit" x="0" y="${f.pt+i*rowH}" width="${f.W}" height="${rowH}" tabindex="0" data-tip="${esc(tt(d.label,d.extra||[]))}"/>`});
+  el.innerHTML=s+"</svg>";}
+function dumbbell(el,items,{rowH=27,labelW=190}={}){
+  if(!items.length)return empty(el,"Geen data in deze sheet.");
+  const f=frame(el,items.length*rowH+16,labelW,78,8,8),max=Math.max(...items.flatMap(d=>[d.a,d.b]))||1;
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img">`;
+  items.forEach((d,i)=>{const y=f.pt+i*rowH+rowH/2,xa=f.pl+d.a/max*f.iw,xb=f.pl+d.b/max*f.iw,g=d.a-d.b;
+    s+=`<text class="tick" x="${f.pl-9}" y="${y+3.5}" text-anchor="end">${esc(d.label)}</text>
+        <line x1="${Math.min(xa,xb)}" y1="${y}" x2="${Math.max(xa,xb)}" y2="${y}" stroke="var(--axis)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="${xb}" cy="${y}" r="5" fill="var(--deemph)" stroke="var(--surface-1)" stroke-width="2"/>
+        <circle cx="${xa}" cy="${y}" r="5" fill="var(--s1)" stroke="var(--surface-1)" stroke-width="2"/>
+        <text class="dlab" x="${f.pl+f.iw+8}" y="${y+3.5}" fill="${g<0?"var(--neg)":"var(--pos)"}">${(g>0?"+":"−")+eurK(Math.abs(g)).replace("€ ","")}</text>
+        <rect class="hit" x="0" y="${f.pt+i*rowH}" width="${f.W}" height="${rowH}" tabindex="0" data-tip="${esc(tt(d.label,[["Gefactureerd",eur(d.a)],["Juiste prijs @30 %",eur(d.b)],["Verschil",eur(g)]]))}"/>`});
+  el.innerHTML=s+"</svg>";}
+function stackedOne(el,segs,{h=104}={}){
+  segs=segs.filter(g=>g.value>0);
+  if(!segs.length)return empty(el,"Geen kostgegevens in de sheet.");
+  const f=frame(el,h,4,4,10,44),tot=segs.reduce((a,b)=>a+b.value,0),bh=40;let x=f.pl;
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img">`;
+  segs.forEach(g=>{const w=g.value/tot*(f.iw-GAP*(segs.length-1)),lbl=dec1(g.value/tot*100)+" %";
+    s+=`<rect x="${x}" y="${f.pt}" width="${w}" height="${bh}" fill="${g.color}"/>`;
+    if(w>46)s+=`<text x="${x+w/2}" y="${f.pt+bh/2+4}" text-anchor="middle" font-size="11.5" font-weight="600" fill="#fff">${lbl}</text>`;
+    s+=`<text class="tick" x="${x+w/2}" y="${f.pt+bh+18}" text-anchor="middle">${esc(g.name)}</text>
+        <text class="dlab" x="${x+w/2}" y="${f.pt+bh+32}" text-anchor="middle">${eurK(g.value)}</text>
+        <rect class="hit" x="${x}" y="${f.pt}" width="${w}" height="${bh}" tabindex="0" data-tip="${esc(tt(g.name,[["Bedrag",eur(g.value)],["Aandeel",lbl]]))}"/>`;
+    x+=w+GAP});
+  el.innerHTML=s+"</svg>";}
+function bridge(el,steps){
+  if(!steps.length)return empty(el,"Geen data.");
+  const rowH=30,f=frame(el,steps.length*rowH+26,206,88,8,18);
+  let run=0; const pts=steps.map(st=>{
+    if(st.type==="start"){run=st.v;return {...st,from:0,to:run,abs:run};}
+    if(st.type==="total")return {...st,from:0,to:run,abs:run};
+    const from=run; run+=st.v; return {...st,from,to:run,abs:run};});
+  const max=niceMax(Math.max(...pts.flatMap(x=>[x.from,x.to,x.abs,0])));
+  const X=v=>f.pl+Math.max(0,v)/max*f.iw, bh=Math.min(CAP-6,rowH-11);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img">`;
+  for(let i=0;i<=4;i++){const x=f.pl+f.iw/4*i;
+    s+=`<line class="gl" x1="${x}" y1="${f.pt-2}" x2="${x}" y2="${f.pt+f.ih}"/>
+        <text class="tick" x="${x}" y="${f.pt+f.ih+13}" text-anchor="middle">${eurK(max/4*i)}</text>`}
+  pts.forEach((x2,i)=>{
+    const y=f.pt+i*rowH+(rowH-bh)/2, isTot=x2.type==="total"||x2.type==="start";
+    const a=isTot?f.pl:X(Math.min(x2.from,x2.to)), bX=isTot?X(x2.abs):X(Math.max(x2.from,x2.to));
+    const col=isTot?"var(--deemph)":(x2.v>=0?"var(--pos)":"var(--neg)");
+    s+=`<text class="tick" x="${f.pl-9}" y="${y+bh/2+3.5}" text-anchor="end"${isTot?' style="fill:var(--text-secondary);font-weight:600"':''}>${esc(x2.label)}</text>
+        <path d="${rR(a,y,Math.max(2,bX-a),bh,4)}" fill="${col}"/>
+        <text class="dlab${isTot?" strong":""}" x="${bX+8}" y="${y+bh/2+3.5}">${isTot?eur(x2.abs):(x2.v>0?"+":"−")+eurK(Math.abs(x2.v)).replace("€ ","")}</text>
+        <rect class="hit" x="0" y="${f.pt+i*rowH}" width="${f.W}" height="${rowH}" tabindex="0" data-tip="${esc(tt(x2.label,isTot?[["Stand",eur(x2.abs)]]:[["Mutatie",eur(x2.v)],["Stand erna",eur(x2.abs)]]))}"/>`});
+  el.innerHTML=s+"</svg>";}
+function scenChart(el,items,target){
+  if(!items.length)return empty(el,"Geen data.");
+  const f=frame(el,232,58,14,18,44),max=niceMax(Math.max(target,...items.map(d=>d.value),0));
+  const step=f.iw/items.length,bw=Math.min(CAP+4,step-40);
+  let s=`<svg viewBox="0 0 ${f.W} ${f.H}" role="img">`+yAx(f,max,eurK);
+  const ty=f.pt+f.ih-target/max*f.ih;
+  s+=`<line x1="${f.pl}" y1="${ty}" x2="${f.pl+f.iw}" y2="${ty}" stroke="var(--warning)" stroke-width="2"/>
+      <text class="dlab" x="${f.pl+f.iw}" y="${ty-7}" text-anchor="end" style="fill:var(--warning)">streefbuffer ${eurK(target)}</text>`;
+  items.forEach((d,i)=>{
+    const bh=Math.max(2,Math.max(0,d.value)/max*f.ih),x=f.pl+step*i+(step-bw)/2,y=f.pt+f.ih-bh;
+    s+=`<path d="${rTop(x,y,bw,bh,4)}" fill="var(--s1)"/>
+        <text class="dlab strong" x="${x+bw/2}" y="${y-7}" text-anchor="middle">${eurK(d.value)}</text>`;
+    const w=String(d.label).split(" "),l1=w.slice(0,2).join(" "),l2=w.slice(2).join(" ");
+    s+=`<text class="tick" x="${x+bw/2}" y="${f.pt+f.ih+17}" text-anchor="middle">${esc(l1)}</text>`;
+    if(l2)s+=`<text class="tick" x="${x+bw/2}" y="${f.pt+f.ih+30}" text-anchor="middle">${esc(l2)}</text>`;
+    s+=`<rect class="hit" x="${f.pl+step*i}" y="${f.pt}" width="${step}" height="${f.ih}" tabindex="0" data-tip="${esc(tt(d.label,[["Verwacht jaareinde",eur(d.value)],["Streefbuffer",eur(target)],["Verschil",eur(d.value-target)]]))}"/>`});
+  el.innerHTML=s+`<line class="ax" x1="${f.pl}" y1="${f.pt+f.ih}" x2="${f.pl+f.iw}" y2="${f.pt+f.ih}"/></svg>`;}
+function table(el,cols,rows,foot){el.innerHTML=`<table><thead><tr>${cols.map(c=>`<th class="${c.n?"n":""}">${esc(c.t)}</th>`).join("")}</tr></thead><tbody>${
+  rows.map(r=>`<tr>${r.map((v,i)=>`<td class="${cols[i].n?"n":""}">${v}</td>`).join("")}</tr>`).join("")}</tbody>${
+  foot?`<tfoot><tr>${foot.map((v,i)=>`<td class="${cols[i].n?"n":""}">${v}</td>`).join("")}</tr></tfoot>`:""}</table>`;}
+const ICO={good:'<svg width="11" height="11" viewBox="0 0 12 12"><path d="M1 6.5l3 3L11 2" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+ warning:'<svg width="11" height="11" viewBox="0 0 12 12"><path d="M6 1l5 9H1z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 4.6v2.2" stroke="currentColor" stroke-width="1.6"/><circle cx="6" cy="8.4" r=".8" fill="currentColor"/></svg>',
+ serious:'<svg width="11" height="11" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M6 3.2v3.2" stroke="currentColor" stroke-width="1.7"/><circle cx="6" cy="8.6" r=".85" fill="currentColor"/></svg>',
+ critical:'<svg width="11" height="11" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4 4l4 4M8 4l-4 4" stroke="currentColor" stroke-width="1.7"/></svg>'};
+const LBL={good:"Op koers",warning:"Aandacht",serious:"Achterop",critical:"Kritiek"};
+const badge=(s,t)=>`<span class="badge" style="color:var(--${s})">${ICO[s]}${esc(t||LBL[s])}</span>`;
+const tiles=(el,arr)=>el.innerHTML=arr.map(k=>`<div class="card tile"><div class="lab">${esc(k.lab)}</div>
+  <div class="val"${k.col?` style="color:var(--${k.col})"`:""}>${k.val}</div><div class="dl">${k.dl||""}</div></div>`).join("");
+
+/* ══ PARSERS ══ */
+function parsePipeline(rows){
+  const out=[];
+  for(const r of rows.slice(1)){
+    const li=r.findIndex(c=>STATUSSEN.includes(String(c).trim().toLowerCase()));
+    if(li<1) continue;
+    out.push({project:r[0]||"—", klant:(li>1?r[1]:"")||"—", status:String(r[li]).trim(),
+      contract:nm(r[li+1])||0, open:nm(r[li+2])||0,
+      gefact:nm(r[li+3]), ontv:nm(r[li+4]), marge:nm(r[li+5]),
+      opm:(r.slice(li+6).filter(Boolean).join(", ")||"")});
+  }
+  return out;}
+function parseNacalc(rows){
+  return rows.slice(1).map(r=>{
+    const v=nm(r[2])||0,mat=nm(r[3])||0,fl=nm(r[4])||0,el=nm(r[5])||0,oh=nm(r[6])||0;
+    const kost=mat+fl+el+oh;
+    return {p:r[0]||"—",st:(r[1]||"").trim(),v,mat,fl,el,oh,kost,marge:v-kost,
+      mp:v?(v-kost)/v*100:NaN,jp:kost/(1-DOELMARGE),onder:v-kost/(1-DOELMARGE)};
+  }).filter(d=>d.v>0||d.kost>0);}
+function parseFin(rows){
+  const out=[];
+  for(const r of rows.slice(1)){
+    let cat=String(r[0]||"").split("\t")[0].trim();      // tab-lek in de sheet opvangen
+    const post=String(r[1]||"").trim(), w=nm(r[2]);
+    if(!post||isNaN(w))continue;
+    out.push({cat:cat||"Overig",post,w,sub:nm(r[3])===1,toel:String(r[4]||"").trim()});
+  }
+  return out;}
+function parseKern(rows){
+  const out={},meta={};
+  for(const r of rows.slice(1)){
+    const cat=String(r[0]||"").trim(), post=String(r[1]||"").trim(), w=nm(r[2]);
+    if(!post||isNaN(w))continue;
+    const key=post.toLowerCase();
+    out[key]=w; meta[key]={cat,post,peil:String(r[3]||"").trim(),bron:String(r[4]||"").trim(),toel:String(r[5]||"").trim()};
+  }
+  return {v:out,meta,rows:rows.slice(1)};
+}
+function dmy(s){const m=/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(String(s||"").trim());
+  return m?new Date(+m[3],+m[2]-1,+m[1]):null;}
+function parseVerpl(rows){
+  return rows.slice(1).map(r=>({wie:String(r[0]||"").trim(),bedrag:nm(r[1])||0,verval:String(r[2]||"").trim(),
+    d:dmy(r[2]),type:String(r[3]||"").trim(),status:String(r[4]||"").trim(),toel:String(r[5]||"").trim()}))
+    .filter(x=>x.wie&&x.bedrag);
+}
+function parseDoelen(rows){
+  return rows.slice(1).map(r=>({n:String(r[0]||"").trim(),s:nm(r[1]),c:nm(r[2]),t:nm(r[3]),
+    u:String(r[4]||"").trim(),toel:String(r[5]||"").trim()})).filter(d=>d.n&&!isNaN(d.c)&&!isNaN(d.t));}
+
+/* ══ RENDER ══ */
+let DATA={},PROBS=[];
+function banners(){
+  let h="";
+  const leeg=!(DATA.pipe||[]).length&&!(DATA.nac||[]).length&&!(DATA.fin||[]).length&&!(DATA.doel||[]).length&&!Object.keys((DATA.kern||{v:{}}).v).length;
+  if(leeg&&PROBS.length) h+=`<div class="banner err"><b>Geen enkele sheet kon geladen worden</b>Controleer of de vier Sheets in de Drive-map ACTUALS gedeeld staan als “iedereen met de link – lezer”. Zonder die instelling kan deze pagina de cijfers niet ophalen.</div>`;
+  if(PROBS.length) h+=`<div class="banner err"><b>Kon niet alles laden</b>${PROBS.map(p=>`${esc(p)}`).join("<br>")}</div>`;
+  /* peildatums uit de Kern-sheet: waarschuw op wat ouder is dan 10 dagen */
+  const KM=(DATA.kern||{meta:{}}).meta||{};
+  const oud=[];
+  for(const key in KM){const d=dmy(KM[key].peil); if(!d)continue;
+    const dg=Math.round((Date.now()-d.getTime())/864e5);
+    if(dg>10) oud.push({post:KM[key].post,peil:KM[key].peil,dg});}
+  if(oud.length){
+    oud.sort((a,b)=>b.dg-a.dg);
+    h+=`<div class="banner"><b>${oud.length} cijfer${oud.length>1?"s":""} in de Kern-sheet ${oud.length>1?"zijn":"is"} ouder dan 10 dagen</b>
+      Oudste: ${esc(oud[0].post)} met peildatum ${esc(oud[0].peil)} (${oud[0].dg} dagen). Werk de Kern-sheet bij,
+      of lees de vul-instructies in de Claude-omgeving CF - Finance. Alles op deze pagina rekent met wat er in de sheets staat.</div>`;
+  }
+  $("#banners").innerHTML=h;}
+
+function renderAnalyse(){
+  const K=(DATA.kern||{v:{},meta:{},rows:[]}), k=K.v, V=DATA.verpl||[], N=DATA.nac||[], P=DATA.pipe||[];
+  const g=(...names)=>{for(const n of names){const x=k[n.toLowerCase()];if(x!==undefined)return x}return NaN};
+
+  const cash   = g("cash op bank (2 kbc-rekeningen)","cash op bank");
+  const liq    = g("liquide middelen totaal");
+  const vast   = g("vaste maandlast");
+  const kaart  = g("kredietkaartschuld");
+  const ar     = g("te ontvangen totaal");
+  const ap     = g("te betalen totaal");
+  const btw    = g("openstaand q1 + q2","btw openstaand");
+  const doelm  = (g("doelmarge")||30)/100;
+  const buffer = g("streefbuffer jaareinde")||56000;
+
+  const buckets=["Nog niet vervallen","1-30 dagen over","31-60 dagen over","61-90 dagen over","Meer dan 90 dagen over"];
+  const arB=buckets.map(b=>k[b.toLowerCase()]), apB=buckets.map(b=>k[b.toLowerCase()]);
+  const kernRows=K.rows||[];
+  const bucketOf=(cat,b)=>{const r=kernRows.find(x=>String(x[0]).trim().toLowerCase()===cat&&String(x[1]).trim().toLowerCase()===b.toLowerCase());
+    return r?nm(r[2]):NaN};
+  const AR=buckets.map(b=>bucketOf("vorderingen",b)), AP=buckets.map(b=>bucketOf("schulden",b));
+
+  /* --- hero --- */
+  const peil=(K.meta[("cash op bank (2 kbc-rekeningen)")]||{}).peil||"";
+  const pd=dmy(peil), dagen=pd?Math.round((Date.now()-pd.getTime())/864e5):null;
+  const dekking = (cash>0&&vast>0)? Math.round(cash/(vast/30)) : null;
+  $("#anaHero").innerHTML=`<div class="hero">
+    <div><div class="eyebrow">Cash op bank${peil?" — peildatum "+esc(peil):""}</div>
+      <div class="heronum">${isNaN(cash)?"—":eur(cash)}</div>
+      ${dekking!==null?`<div style="font-size:13px;margin-top:6px;color:var(--${dekking<30?"critical":"text-secondary"})">dekt ${dekking} dagen vaste kosten (${eur(vast)}/maand)</div>`:""}</div>
+    <div class="heroside">
+      <div><div class="k">Netto werkkapitaal</div><div class="v">${eur((isNaN(liq)?(cash||0):liq)+(ar||0)-(ap||0)-(btw||0))}</div></div>
+      <div><div class="k">Te ontvangen</div><div class="v">${eur(ar)}</div></div>
+      <div><div class="k">Te betalen + btw</div><div class="v">${eur((ap||0)+(btw||0))}</div></div>
+    </div></div>
+    ${dagen!==null&&dagen>10?`<div class="banner" style="margin-top:14px"><b>De Kern-sheet is ${dagen} dagen oud</b>
+      Peildatum ${esc(peil)}. De cijfers hierboven zijn dus niet de stand van vandaag. Werk de Kern-sheet bij,
+      of lees de laatste diepteanalyse in de Claude-omgeving CF - Finance.</div>`:""}`;
+
+  /* --- KPI's --- */
+  const tv=N.reduce((a,b)=>a+b.v,0), tk=N.reduce((a,b)=>a+b.kost,0);
+  const marge=tv?(tv-tk)/tv:NaN;
+  const openV=V.filter(x=>!/betaald/i.test(x.status));
+  const dit=openV.filter(x=>x.d&&x.d.getFullYear()===new Date().getFullYear()&&!/natura/i.test(x.type))
+                 .reduce((a,b)=>a+b.bedrag,0);
+  const nogTeFact=P.filter(x=>/bevestigd|productie/i.test(x.status)).reduce((a,b)=>a+b.open,0);
+  const breakeven=(marge>0&&vast>0)?vast/marge:NaN;
+  tiles($("#anaKpi"),[
+    {lab:"Blended projectmarge",val:isNaN(marge)?"—":pct(marge*100),dl:`doel ${(doelm*100).toFixed(0)} % · ${N.length} projecten`,col:marge<doelm?"critical":"good"},
+    {lab:"Break-evenomzet per maand",val:isNaN(breakeven)?"—":eur(breakeven),dl:`bij deze marge, voor ${eur(vast)} vaste kosten`},
+    {lab:"Nog te factureren",val:eur(nogTeFact),dl:"op bevestigd werk"},
+    {lab:"Verplichtingen dit jaar",val:eur(dit),dl:"R/C-aflossingen in geld",col:dit>0?"warning":"good"}]);
+
+  /* --- brug --- */
+  const steps=[{label:"Cash op bank",v:cash||0,type:"start"}];
+  if(!isNaN(liq)&&!isNaN(cash)&&liq>cash) steps.push({label:"Overige rekeningen",v:liq-cash,type:"pos"});
+  steps.push({label:"Te ontvangen van klanten",v:ar||0,type:"pos"});
+  steps.push({label:"Te betalen aan leveranciers",v:-(ap||0),type:"neg"});
+  steps.push({label:"BTW openstaand",v:-(btw||0),type:"neg"});
+  steps.push({label:"Netto werkkapitaal",v:0,type:"total"});
+  if(!isNaN(kaart)&&kaart) steps.push({label:"Kredietkaartschuld",v:-kaart,type:"neg"});
+  steps.push({label:"Netto cash",v:0,type:"total"});
+  if(dit) steps.push({label:"R/C-verplichtingen dit jaar",v:-dit,type:"neg"});
+  steps.push({label:"Vrij na verplichtingen",v:0,type:"total"});
+  bridge($("#cBrug"),steps);
+  let run=0; const brows=steps.map(st=>{
+    if(st.type==="start"){run=st.v;return [st.label,"—",eur(run)];}
+    if(st.type==="total")return [`<b>${st.label}</b>`,"—",`<b>${eur(run)}</b>`];
+    run+=st.v; return [st.label,eur(st.v),eur(run)];});
+  const netto=run;
+  table($("#tBrug"),[{t:"Stap"},{t:"Mutatie",n:1},{t:"Stand",n:1}],brows);
+
+  /* --- ouderdom --- */
+  const aged=buckets.map((b,i)=>({label:b.replace("Meer dan 90 dagen over","> 90 dgn").replace(" dagen over"," dgn"),ar:AR[i]||0,ap:AP[i]||0}));
+  if(aged.some(x=>x.ar||x.ap)){
+    grouped($("#cAge"),aged,[{key:"ar",name:"Te ontvangen",color:"var(--s1)"},{key:"ap",name:"Te betalen",color:"var(--s2)"}]);
+    table($("#tAge"),[{t:"Ouderdom"},{t:"Te ontvangen",n:1},{t:"Te betalen",n:1},{t:"Netto",n:1}],
+      aged.map(x=>[x.label,eur(x.ar),eur(x.ap),eur(x.ar-x.ap)]),
+      ["Totaal",eur(aged.reduce((a,b)=>a+b.ar,0)),eur(aged.reduce((a,b)=>a+b.ap,0)),eur(aged.reduce((a,b)=>a+b.ar-b.ap,0))]);
+  } else empty($("#cAge"),"Geen ouderdomsgegevens in de Kern-sheet.");
+
+  /* --- scenario's --- */
+  const scen=[{label:`@ ${(doelm*100).toFixed(0)} % doelmarge`,m:doelm},
+              {label:`@ ${isNaN(marge)?"?":(marge*100).toFixed(1)} % gerealiseerd`,m:isNaN(marge)?0:marge},
+              {label:"@ 0 % alles op kost",m:0}];
+  const sv=scen.map(x=>({label:x.label,value:Math.round(netto+nogTeFact*x.m)}));
+  scenChart($("#cScen"),sv,buffer);
+  table($("#tScen"),[{t:"Scenario"},{t:`Marge op ${eur(nogTeFact)}`,n:1},{t:"Verwacht jaareinde",n:1},{t:"Δ vs streefbuffer",n:1}],
+    scen.map((x,i)=>[x.label,eur(nogTeFact*x.m),eur(sv[i].value),eur(sv[i].value-buffer)]));
+
+  /* --- diagnose, live afgeleid --- */
+  const D2=[];
+  if(!isNaN(marge)&&marge<doelm){
+    const mis=tk/(1-doelm)-tv;
+    D2.push(["critical",`Marge ${pct(marge*100)} tegenover doel ${(doelm*100).toFixed(0)} %`,
+      `Over ${N.length} projecten is er <b>${eur(mis)}</b> te weinig aangerekend t.o.v. kost gedeeld door ${(1-doelm).toFixed(2).replace(".",",")}. Break-even vraagt <b>${eur(breakeven)}</b> omzet per maand in plaats van ${eur(vast/doelm)}.`]);
+  }
+  const fl=N.reduce((a,b)=>a+b.fl,0), el=N.reduce((a,b)=>a+b.el,0);
+  if(fl+el>0&&fl/(fl+el)>0.5) D2.push(["serious","Freelance domineert de arbeidskost",
+    `<b>${dec1(fl/(fl+el)*100)} %</b> van de arbeid is freelance (${eur(fl)} tegenover ${eur(el)} eigen loon). Die uren worden aan marktprijs ingekocht, niet aan de interne kostprijs waarop de calculaties gebouwd zijn.`]);
+  const zwaar=AR[4]||0;
+  if(ar>0&&zwaar/ar>0.4) D2.push(["critical","Vorderingen concentreren in de oudste bucket",
+    `<b>${dec1(zwaar/ar*100)} %</b> van alles wat je moet ontvangen staat meer dan 90 dagen open (${eur(zwaar)}). Zolang dat niet binnen is, financier je je klanten.`]);
+  const apVerv=(AP[1]||0)+(AP[2]||0)+(AP[3]||0)+(AP[4]||0);
+  if(apVerv>cash) D2.push(["serious","Vervallen schulden groter dan de kaspositie",
+    `${eur(apVerv)} aan leveranciersfacturen is vervallen tegenover ${eur(cash)} op de bank.`]);
+  if(sv[1] && sv[1].value<buffer) D2.push(["warning","Jaareinde onder de streefbuffer",
+    `Op de gerealiseerde marge kom je uit op ${eur(sv[1].value)}, dat is <b>${eur(buffer-sv[1].value)}</b> onder de buffer van ${eur(buffer)}. Op de doelmarge zou het ${eur(sv[0].value)} zijn — datzelfde orderboek.`]);
+  const buiten=g("uren buiten de nacalculatie");
+  if(!isNaN(buiten)&&buiten>0) D2.push(["warning","Eigen uren buiten de nacalculatie",
+    `<b>${eur(buiten)}</b> aan eigen uren zit niet in de projectnacalculatie. Zolang dat niet verklaard is, is de marge hierboven te optimistisch.`]);
+  if(!D2.length) D2.push(["good","Geen afwijkingen gevonden","Alle gecontroleerde verhoudingen zitten binnen de norm."]);
+  $("#anaDiag").innerHTML=D2.map(([sev,t,x])=>`<div class="diag"><div class="dh">${badge(sev,LBL[sev])}<b>${esc(t)}</b></div>${x}</div>`).join("");
+
+  /* --- verplichtingen --- */
+  table($("#tVerpl"),[{t:"Tegenpartij"},{t:"Bedrag",n:1},{t:"Vervaldatum"},{t:"Type"},{t:"Status"},{t:"Toelichting"}],
+    V.map(x=>[esc(x.wie),eur(x.bedrag),esc(x.verval),esc(x.type),
+      /betaald/i.test(x.status)?`<span style="color:var(--good)">${esc(x.status)}</span>`:esc(x.status),
+      `<span style="color:var(--text-muted)">${esc(x.toel)}</span>`]),
+    ["Totaal open",eur(openV.reduce((a,b)=>a+b.bedrag,0)),"","","",""]);
+}
+
+function render(){
+  const P=DATA.pipe||[],N=DATA.nac||[],F=DATA.fin||[],G=DATA.doel||[];
+  banners(); renderAnalyse();
+
+  /* ---- Overzicht ---- */
+  const byS={};P.forEach(r=>{const k=r.status;(byS[k]=byS[k]||{label:k,contract:0,open:0});byS[k].contract+=r.contract;byS[k].open+=r.open});
+  const stat=Object.values(byS).sort((a,b)=>b.contract-a.contract);
+  const conf=stat.filter(s=>/bevestigd|productie/i.test(s.label)).reduce((a,b)=>a+b.contract,0);
+  const offu=stat.filter(s=>/offerte/i.test(s.label)).reduce((a,b)=>a+b.contract,0);
+  const innen=stat.filter(s=>/innen|geleverd/i.test(s.label)).reduce((a,b)=>a+b.contract,0);
+  const tv=N.reduce((a,b)=>a+b.v,0),tk=N.reduce((a,b)=>a+b.kost,0);
+  const kpi=F.filter(r=>/^KPI$/i.test(r.cat));
+  tiles($("#kpis"),[
+    {lab:"Bevestigd orderboek",val:eur(conf),dl:stat.filter(s=>/bevestigd|productie/i.test(s.label)).map(s=>s.label).join(" + ")||"—",col:"good"},
+    {lab:"Offertes uit",val:eur(offu),dl:"nog geen beslissing"},
+    {lab:"Geleverd — te innen",val:eur(innen),dl:"gefactureerd, nog niet betaald",col:"critical"},
+    {lab:"Blended projectmarge",val:tv?pct((tv-tk)/tv*100):"—",dl:`doel 30 % · ${N.length} projecten`,col:(tv&&(tv-tk)/tv<DOELMARGE)?"critical":"good"}]);
+  grouped($("#cStat"),stat,[{key:"contract",name:"Contractwaarde",color:"var(--s1)"},{key:"open",name:"Nog te factureren",color:"var(--s2)"}]);
+  table($("#tStat"),[{t:"Status"},{t:"Contractwaarde",n:1},{t:"Nog te factureren",n:1},{t:"Al gefactureerd",n:1}],
+    stat.map(s=>[esc(s.label),eur(s.contract),eur(s.open),eur(s.contract-s.open)]),
+    ["Totaal",eur(stat.reduce((a,b)=>a+b.contract,0)),eur(stat.reduce((a,b)=>a+b.open,0)),eur(stat.reduce((a,b)=>a+b.contract-b.open,0))]);
+
+  const mg=N.filter(d=>!isNaN(d.mp)).sort((a,b)=>a.mp-b.mp);
+  diverging($("#cMg"),mg.map(d=>({label:d.p,value:d.mp-30,
+    extra:[["Verkoop",eur(d.v)],["Kost",eur(d.kost)],["Marge",eur(d.marge)],["Marge %",pct(d.mp)]]})));
+  table($("#tMg"),[{t:"Project"},{t:"Marge %",n:1},{t:"Δ vs 30 %",n:1}],mg.map(d=>[esc(d.p),pct(d.mp),pp(d.mp-30)]));
+
+  /* ---- Pipeline ---- */
+  tiles($("#pipeKpi"),[
+    {lab:"Totale pipeline",val:eur(P.reduce((a,b)=>a+b.contract,0)),dl:`${P.length} projecten`},
+    {lab:"Bevestigd",val:eur(conf),dl:"contractwaarde",col:"good"},
+    {lab:"Nog te factureren",val:eur(P.reduce((a,b)=>a+b.open,0)),dl:"over alle statussen"},
+    {lab:"Verloren",val:eur(stat.filter(s=>/verloren/i.test(s.label)).reduce((a,b)=>a+b.contract,0)),dl:"dit jaar"}]);
+  const ps=[...P].sort((a,b)=>b.contract-a.contract);
+  hbars($("#cPipeAll"),ps.map(d=>({label:(d.project||"").slice(0,30),value:d.contract,
+    extra:[["Status",d.status],["Nog te factureren",eur(d.open)],["Klant",d.klant]]})),{labelW:200});
+  table($("#tPipeAll"),[{t:"Project"},{t:"Klant"},{t:"Status"},{t:"Contractwaarde",n:1},{t:"Nog te factureren",n:1},{t:"% gefact.",n:1},{t:"% ontv.",n:1},{t:"Opmerking"}],
+    ps.map(d=>[esc(d.project),esc(d.klant),esc(d.status),eur(d.contract),eur(d.open),
+      isNaN(d.gefact)?"—":d.gefact+" %",isNaN(d.ontv)?"—":d.ontv+" %",esc(d.opm)]),
+    ["Totaal","","",eur(ps.reduce((a,b)=>a+b.contract,0)),eur(ps.reduce((a,b)=>a+b.open,0)),"","",""]);
+
+  /* ---- Nacalculatie ---- */
+  const onder=N.filter(d=>d.onder<0).reduce((a,b)=>a+b.onder,0);
+  tiles($("#nacKpi"),[
+    {lab:"Blended marge",val:tv?pct((tv-tk)/tv*100):"—",dl:`€ ${Math.round(tv-tk).toLocaleString("nl-BE")} op ${eur(tv)}`,col:(tv&&(tv-tk)/tv<DOELMARGE)?"critical":"good"},
+    {lab:"Projecten onder doel",val:`${N.filter(d=>d.mp<30).length} / ${N.length}`,dl:`${N.filter(d=>d.mp<0).length} onder nul`,col:"critical"},
+    {lab:"Cumulatieve onderprijzing",val:eur(onder),dl:"som van de negatieve afwijkingen",col:"critical"}]);
+  const dd=[...N].sort((a,b)=>Math.abs(b.onder)-Math.abs(a.onder)).slice(0,10);
+  dumbbell($("#cOnd"),dd.map(d=>({label:(d.p||"").slice(0,28),a:d.v,b:d.jp})));
+  table($("#tOnd"),[{t:"Project"},{t:"Gefactureerd",n:1},{t:"Juiste prijs @30 %",n:1},{t:"Verschil",n:1}],
+    [...N].sort((a,b)=>a.onder-b.onder).map(d=>[esc(d.p),eur(d.v),eur(d.jp),eur(d.onder)]));
+  const T={fl:N.reduce((a,b)=>a+b.fl,0),mat:N.reduce((a,b)=>a+b.mat,0),el:N.reduce((a,b)=>a+b.el,0),oh:N.reduce((a,b)=>a+b.oh,0)};
+  const segs=[{name:"Freelance",value:T.fl,color:"var(--s1)"},{name:"Materiaal",value:T.mat,color:"var(--s2)"},
+              {name:"Eigen loon",value:T.el,color:"var(--s3)"},{name:"Overhead",value:T.oh,color:"var(--s4)"}];
+  stackedOne($("#cMix"),segs);
+  table($("#tMix"),[{t:"Kostenpost"},{t:"Bedrag",n:1},{t:"% van kost",n:1}],
+    segs.map(g=>[g.name,eur(g.value),dec1(g.value/tk*100)+" %"]),["Totale kost",eur(tk),"100 %"]);
+  table($("#tNac"),[{t:"Project"},{t:"Status"},{t:"Verkoop",n:1},{t:"Materiaal",n:1},{t:"Freelance",n:1},{t:"Eigen loon",n:1},{t:"Overhead",n:1},{t:"Kost",n:1},{t:"Marge",n:1},{t:"Marge %",n:1},{t:"Onderprijzing",n:1}],
+    [...N].sort((a,b)=>b.v-a.v).map(d=>[esc(d.p),esc(d.st),eur(d.v),eur(d.mat),eur(d.fl),eur(d.el),eur(d.oh),eur(d.kost),eur(d.marge),isNaN(d.mp)?"—":pct(d.mp),eur(d.onder)]),
+    ["Totaal","",eur(tv),eur(T.mat),eur(T.fl),eur(T.el),eur(T.oh),eur(tk),eur(tv-tk),tv?pct((tv-tk)/tv*100):"—",eur(N.reduce((a,b)=>a+b.onder,0))]);
+
+  /* ---- Financieel ---- */
+  const cats=[...new Set(F.map(r=>r.cat))];
+  $("#finBody").innerHTML=`<div class="grid g2">${cats.map((c,i)=>`<div class="card">
+    <div><h3>${esc(c)}</h3></div><div class="tw on" id="fin${i}"></div></div>`).join("")}</div>`;
+  cats.forEach((c,i)=>table($("#fin"+i),[{t:"Post"},{t:"Waarde",n:1},{t:"Toelichting"}],
+    F.filter(r=>r.cat===c).map(r=>[r.sub?`<b>${esc(r.post)}</b>`:esc(r.post),
+      r.sub?`<b>${eur(r.w)}</b>`:eur(r.w),`<span style="color:var(--text-muted)">${esc(r.toel)}</span>`])));
+
+  /* ---- Doelen ---- */
+  $("#meters").innerHTML=G.map(g=>{
+    const down=g.s>g.t, span=down?(g.s-g.t):(g.t-g.s), done=down?(g.s-g.c):(g.c-g.s);
+    let p=span===0?1:done/span; p=Math.max(0,Math.min(1,p));
+    const sev=p>=.98?"good":p>=.7?"warning":p>=.35?"serious":"critical";
+    const f=g.u==="%"?(v=>dec1(v)+" %"):eur;
+    return `<div class="meter"><div class="mhead"><span class="mname">${esc(g.n)}</span>
+      <span class="mval">${f(g.c)} <span style="color:var(--text-muted)">van ${f(g.t)}</span></span></div>
+      <div class="track" role="img" aria-label="${esc(g.n)}: ${(p*100).toFixed(0)} procent van het doel">
+        <div class="fill" style="width:${(p*100).toFixed(1)}%;background:var(--${sev})"></div></div>
+      <div class="mfoot"><span>${esc(g.toel)}</span>${badge(sev,LBL[sev]+" · "+(p*100).toFixed(0)+" %")}</div></div>`}).join("");
+}
+
+async function load(){
+  PROBS=[]; $("#stamp").textContent="laden…"; document.querySelectorAll(".chart,.tw").forEach(e=>e.classList.add("skel"));
+  const jobs=[["pipeline","pipe",parsePipeline],["nacalc","nac",parseNacalc],["financieel","fin",parseFin],
+              ["doelen","doel",parseDoelen],["kern","kern",parseKern],["verpl","verpl",parseVerpl]];
+  await Promise.all(jobs.map(async ([key,slot,fn])=>{
+    try{ DATA[slot]=fn(await fetchSheet(SHEETS[key])); }
+    catch(e){ DATA[slot]=DATA[slot]||[]; PROBS.push(`Sheet “${key}”: ${e.message}`); }
+  }));
+  document.querySelectorAll(".chart,.tw").forEach(e=>e.classList.remove("skel"));
+  const d=new Date();
+  $("#stamp").textContent="geladen "+d.toLocaleString("nl-BE",{day:"2-digit",month:"2-digit",year:"numeric",hour:"2-digit",minute:"2-digit"});
+  render();
+}
+
+/* ══ UI ══ */
+function open_(){ $("#gate").style.display="none"; $("#app").style.display="block"; load(); }
+$("#go").addEventListener("click",()=>{
+  if($("#pw").value===PASSWORD){ try{sessionStorage.setItem("cfa","1")}catch(e){} open_(); }
+  else { $("#gerr").textContent="Onjuist wachtwoord."; $("#pw").value=""; $("#pw").focus(); }});
+$("#pw").addEventListener("keydown",e=>{if(e.key==="Enter")$("#go").click()});
+try{ if(sessionStorage.getItem("cfa")==="1") open_(); else $("#pw").focus(); }catch(e){ $("#pw").focus(); }
+$("#refresh").addEventListener("click",load);
+$("#thm").addEventListener("click",e=>{
+  const light=document.documentElement.getAttribute("data-theme")!=="light";
+  document.documentElement.setAttribute("data-theme",light?"light":"dark");
+  e.currentTarget.setAttribute("aria-pressed",light);
+  e.currentTarget.textContent=light?"Donker thema":"Licht thema"; render();});
+document.addEventListener("click",e=>{
+  const t=e.target.closest("nav.tabs button");
+  if(t){document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected",b===t));
+    document.querySelectorAll('section[role="tabpanel"]').forEach(p=>p.classList.toggle("on",p.id===t.dataset.p));
+    render(); return;}
+  const b=e.target.closest("button.tbl");
+  if(b){const el=$("#"+b.dataset.t),on=el.classList.toggle("on");
+    b.textContent=on?"Grafiek":"Tabel";b.setAttribute("aria-pressed",on);}});
+let rt; addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{if($("#app").style.display==="block")render()},160)});
+</script>
+</body>
+</html>
