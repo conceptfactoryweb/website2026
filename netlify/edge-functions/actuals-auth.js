@@ -1,5 +1,9 @@
 // HTTP Basic Auth voor /actuals — vertrouwelijke cijfers.
 // Logins in Netlify env var ACTUALS_CREDS: komma- of newline-gescheiden "user:pass".
+export const config = {
+  path: ["/actuals", "/actuals.html", "/actuals-rapport", "/actuals-rapport/*"]
+};
+
 function readEnv(name){
   try { if (typeof Netlify !== "undefined" && Netlify.env) return Netlify.env.get(name) || ""; } catch(_){}
   try { if (typeof Deno !== "undefined" && Deno.env) return Deno.env.get(name) || ""; } catch(_){}
