@@ -1,10 +1,10 @@
 import { getStore } from '@netlify/blobs';
+function pad(n){ return (n<10?'0':'')+n; }
 const DAYS = [['2026-09-22',10,18],['2026-09-23',10,18],['2026-09-24',10,16]];
 const DAYLABEL = {'2026-09-22':'Tuesday 22 September','2026-09-23':'Wednesday 23 September','2026-09-24':'Thursday 24 September'};
 const ALLOWED = new Set();
-for (const [d,s,e] of DAYS) { for (let h=s; h<e; h++) ALLOWED.add(d+'_'+h); }
-function pad(n){ return (n<10?'0':'')+n; }
-function pretty(slot){ const p=slot.split('_'); const h=parseInt(p[1],10); return (DAYLABEL[p[0]]||p[0])+' · '+pad(h)+':00–'+pad(h+1)+':00 (London)'; }
+for (const [d,s,e] of DAYS) { for (let h=s; h<e; h++) { for (const m of [0,30]) ALLOWED.add(d+'_'+pad(h)+pad(m)); } }
+function pretty(slot){ const p=String(slot).split('_'); const t=p[1]||''; let hh,mm,span; if(t.length>=4){hh=parseInt(t.slice(0,2),10);mm=parseInt(t.slice(2,4),10);span=30;} else {hh=parseInt(t,10);mm=0;span=60;} const em=mm+span, eh=hh+Math.floor(em/60), e2=em%60; return (DAYLABEL[p[0]]||p[0])+' · '+pad(hh)+':'+pad(mm)+'–'+pad(eh)+':'+pad(e2)+' (London)'; }
 function json(o,s){ return new Response(JSON.stringify(o),{status:s||200,headers:{'content-type':'application/json'}}); }
 export default async (req) => {
   if (req.method !== 'POST') return json({ok:false,error:'method'},405);

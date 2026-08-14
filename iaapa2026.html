@@ -96,27 +96,28 @@ main{max-width:980px;margin:0 auto;padding:0 24px}
 
 <script>
 var DAYS=[{d:'2026-09-22',label:'Tuesday 22 September',s:10,e:18},{d:'2026-09-23',label:'Wednesday 23 September',s:10,e:18},{d:'2026-09-24',label:'Thursday 24 September',s:10,e:16}];
-function two(n){return (n<10?'0':'')+n;}
-function hhmm(h){return two(h)+':00';}
-function slotId(d,h){return d+'_'+h;}
-function prettySlot(id){var p=id.split('_');var day=DAYS.find(function(x){return x.d===p[0];});var h=parseInt(p[1],10);return (day?day.label:p[0])+' · '+hhmm(h)+'–'+hhmm(h+1)+' (London time)';}
+var STEP=30;
+function pad(n){return (n<10?'0':'')+n;}
+function slotId(d,h,m){return d+'_'+pad(h)+pad(m);}
+function rangeLabel(h,m){var em=m+STEP;var eh=h+Math.floor(em/60);var e2=em%60;return pad(h)+':'+pad(m)+'–'+pad(eh)+':'+pad(e2);}
+function prettySlot(id){var p=id.split('_');var day=DAYS.find(function(x){return x.d===p[0];});var t=p[1];var h=parseInt(t.slice(0,2),10);var m=parseInt(t.slice(2,4),10);return (day?day.label:p[0])+' · '+rangeLabel(h,m)+' (London time)';}
 var taken=new Set(),selected=null;
 var grid=document.getElementById('ia-grid'),statusEl=document.getElementById('ia-status'),form=document.getElementById('ia-form'),done=document.getElementById('ia-done');
 function render(){
   grid.innerHTML='';
   DAYS.forEach(function(day){
     var col=document.createElement('div');col.className='ia-day';
-    var h=document.createElement('h3');h.textContent=day.label;col.appendChild(h);
+    var hh=document.createElement('h3');hh.textContent=day.label;col.appendChild(hh);
     var wrap=document.createElement('div');wrap.className='ia-slots';
     for(var hr=day.s;hr<day.e;hr++){
-      (function(hr){
-        var id=slotId(day.d,hr);
-        var b=document.createElement('button');b.type='button';b.className='ia-slot';b.textContent=hhmm(hr)+'–'+hhmm(hr+1);
+      [0,30].forEach(function(m){
+        var id=slotId(day.d,hr,m);
+        var b=document.createElement('button');b.type='button';b.className='ia-slot';b.textContent=rangeLabel(hr,m);
         if(taken.has(id)){b.classList.add('taken');b.disabled=true;}
         else{b.addEventListener('click',function(){select(id);});}
         if(selected===id)b.classList.add('sel');
         wrap.appendChild(b);
-      })(hr);
+      });
     }
     col.appendChild(wrap);grid.appendChild(col);
   });

@@ -1,11 +1,8 @@
 import { getStore } from '@netlify/blobs';
 const PASSWORD = 'concept2026';
-const DAYS = [['2026-09-22',10,18],['2026-09-23',10,18],['2026-09-24',10,16]];
 const DAYLABEL = {'2026-09-22':'Tuesday 22 September','2026-09-23':'Wednesday 23 September','2026-09-24':'Thursday 24 September'};
-const ALLOWED = [];
-for (const [d,s,e] of DAYS) { for (let h=s; h<e; h++) ALLOWED.push(d+'_'+h); }
 function pad(n){ return (n<10?'0':'')+n; }
-function pretty(slot){ const p=String(slot).split('_'); const h=parseInt(p[1],10); return (DAYLABEL[p[0]]||p[0])+' · '+pad(h)+':00–'+pad(h+1)+':00'; }
+function pretty(slot){ const p=String(slot).split('_'); const t=p[1]||''; let hh,mm,span; if(t.length>=4){hh=parseInt(t.slice(0,2),10);mm=parseInt(t.slice(2,4),10);span=30;} else {hh=parseInt(t,10);mm=0;span=60;} const em=mm+span, eh=hh+Math.floor(em/60), e2=em%60; return (DAYLABEL[p[0]]||p[0])+' · '+pad(hh)+':'+pad(mm)+'–'+pad(eh)+':'+pad(e2); }
 function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 export default async (req) => {
   const auth = req.headers.get('authorization') || '';
@@ -16,8 +13,9 @@ export default async (req) => {
   const store = getStore('iaapa2026');
   const del = url.searchParams.get('del');
   if (del) { await store.delete(del); return new Response('', { status:302, headers:{ location:'/iaapa-bookings' } }); }
-  const res = await Promise.all(ALLOWED.map(async k => { const v = await store.get(k); if(!v) return null; try { return JSON.parse(v); } catch(e){ return {slot:k}; } }));
-  const rows = res.filter(Boolean);
+  const { blobs } = await store.list();
+  const res = await Promise.all(blobs.map(async b => { let o; try { o = JSON.parse(await store.get(b.key)); } catch(e){ o={slot:b.key}; } return o; }));
+  const rows = res.filter(Boolean).sort((a,b)=> a.slot>b.slot?1:(a.slot<b.slot?-1:0));
   let h = '<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><title>IAAPA bookings</title>';
   h += '<style>body{font-family:Arial,Helvetica,sans-serif;background:#0d0e12;color:#e8e8ea;max-width:960px;margin:0 auto;padding:28px}h1{font-family:Oswald,sans-serif;font-size:22px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.14);vertical-align:top}th{color:#9a9a9e}a.del{color:#e6007e;text-decoration:none}small{color:#9a9a9e}</style>';
   h += '<h1>IAAPA 2026 &mdash; bookings ('+rows.length+')</h1>';
