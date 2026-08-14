@@ -143,7 +143,7 @@ form.addEventListener('submit',function(e){
   })
   .catch(function(){btn.disabled=false;btn.textContent='Confirm booking';alert('Something went wrong. Please try again, or email info@conceptfactory.be.');});
 });
-fetch('/.netlify/functions/slots').then(function(r){return r.json();}).then(function(j){taken=new Set(j.taken||[]);statusEl.style.display='none';render();}).catch(function(){statusEl.textContent='Could not load live availability — you can still book and we\'ll confirm by email.';render();});
+fetch('/.netlify/functions/slots?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){taken=new Set(j.taken||[]);statusEl.style.display='none';render();}).catch(function(){statusEl.textContent='Could not load live availability — you can still book and we\'ll confirm by email.';render();});
 </script>
 </body>
 </html>
