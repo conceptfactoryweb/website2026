@@ -1,4 +1,5 @@
 import { getStore } from '@netlify/blobs';
+import { sendBookingConfirmation } from '../lib/mail.mjs';
 function pad(n){ return (n<10?'0':'')+n; }
 const DAYS = [['2026-09-22',10,18],['2026-09-23',10,18],['2026-09-24',10,16]];
 const DAYLABEL = {'2026-09-22':'Tuesday 22 September','2026-09-23':'Wednesday 23 September','2026-09-24':'Thursday 24 September'};
@@ -20,5 +21,9 @@ export default async (req) => {
     const body = new URLSearchParams({'form-name':'iaapa',when,slot,name,company:data.company||'',email,phone:data.phone||'',message:data.message||''});
     await fetch('https://conceptfactory.be/',{method:'POST',headers:{'content-type':'application/x-www-form-urlencoded'},body:body.toString()});
   } catch(e){}
+  // Confirmation mail + calendar invite. Never let a mail problem fail the booking.
+  try {
+    await sendBookingConfirmation({slot,when,name,company:data.company||'',email,phone:data.phone||'',message:data.message||''});
+  } catch(e){ console.error('confirmation mail failed for '+slot+':', e && e.message ? e.message : e); }
   return json({ok:true});
 };
