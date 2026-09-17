@@ -75,7 +75,7 @@
 
 <!-- HERO -->
 <header class="phero phero--img" style="min-height:78vh;">
-  <div class="phero__bg"><img id="cHero" src="assets/photos/muizenval-room.jpg" alt="" /></div>
+  <div class="phero__bg"><img id="cHero" src="assets/photos/muizenval/muizenval-room.jpg" alt="" /></div>
   <div class="wrap phero__in">
     <a href="work.html" style="display:inline-flex;align-items:center;gap:8px;font-family:var(--font-display);text-transform:uppercase;font-size:12px;letter-spacing:0.12em;color:var(--ink-2);margin-bottom:18px;"><svg class="icon" style="width:15px;height:15px;transform:rotate(180deg);"><use href="#i-arrow-right"/></svg> All work</a>
     <span class="eyebrow" id="cEyebrow">Case study</span>
@@ -90,10 +90,10 @@
 </section>
 
 <!-- STEPS -->
-<section class="sec-pad-sm"><div class="wrap" id="cSteps"></div></section>
+<section class="sec-pad-sm" id="secSteps"><div class="wrap" id="cSteps"></div></section>
 
 <!-- REVEAL -->
-<section class="sec-pad-sm" style="padding-top:0;"><div class="wrap">
+<section class="sec-pad-sm" id="secReveal" style="padding-top:0;"><div class="wrap">
   <div class="reveal reveal-up">
     <img class="reveal__fin" id="cRevealFin" src="" alt="Finished" />
     <span class="reveal__fl">The result</span>
@@ -103,10 +103,10 @@
 </div></section>
 
 <!-- STATS -->
-<section class="panel sec-pad-sm"><div class="wrap"><div class="statbar reveal-up" id="cStats"></div></div></section>
+<section class="panel sec-pad-sm" id="secStats"><div class="wrap"><div class="statbar reveal-up" id="cStats"></div></div></section>
 
 <!-- GALLERY -->
-<section class="sec-pad"><div class="wrap-wide">
+<section class="sec-pad" id="secGallery"><div class="wrap-wide">
   <div class="sec-head reveal-up"><div><span class="sec-num">(05)</span><h2 class="dsp">Gallery</h2></div></div>
   <div class="gal reveal-up" id="cGallery"></div>
 </div></section>
@@ -145,56 +145,568 @@
 <script>
 (function(){
   var P = 'assets/photos/';
+  /* BUILD:projects */
   var PROJECTS = {
-    muizenval: { title:'De Muizenval', script:'De Muizenval', l2:'A full stage world', disc:'Theatre decor', client:'Deep Bridge', year:'2025', loc:'Antwerp',
-      hero:'muizenval-room.jpg', intro:'A complete Gothic stage environment for Deep Bridge — designed, engineered and built in-house, from the first blueprint to the final reveal under the lights.',
-      steps:[['Challenge','A whole world, on a deadline','A believable Gothic interior, rich enough for the back row, light enough to move, ready for a hard opening night.','muizenval-blue.jpg'],['Concept','From mood to blueprint','The director\u2019s mood translated into a spatial concept, then into technical drawings the workshop could build to the millimetre.','muizenval-alcove.jpg'],['Production','Built in the atelier','Every panel, moulding and piece of furniture machined, sculpted and scenic-painted by hand.','atelier-build.jpg'],['Result','Curtain up','Installed on site for opening night \u2014 a single, coherent world the cast could live in.','muizenval-room.jpg']],
-      reveal:'muizenval-alcove.jpg', gallery:['muizenval-room.jpg','muizenval-alcove.jpg','muizenval-blue.jpg','escape-study.jpg','atelier-build.jpg'],
-      stats:[['7 wks','Concept to install'],['40+','Built elements'],['100%','Made in-house'],['1','Standing ovation']] },
-
-    aspe: { title:'Aspe \u2014 Club Paparazzi', script:'Aspe', l2:'Club Paparazzi', disc:'Immersive TV set', client:'Studio 100', year:'2025', loc:'Belgium',
-      hero:'aspe_sfeer.jpg', intro:'A full immersive nightclub set for the Aspe murder-mystery production \u2014 lighting, decor and atmosphere built and dressed for camera and a live audience.',
-      steps:[['Challenge','A nightclub, for camera','A believable club that reads on screen and surrounds a live studio audience \u2014 built fast for a tight broadcast schedule.','aspe_club.jpg'],['Concept','Light as material','Concept Factory designed the space around its lighting \u2014 lasers, practicals and LED woven into the build.','aspe-stage.jpg'],['Production','Built &amp; dressed','Stage, bar and seating fabricated in-house, then dressed and lit on location.','atelier-cnc.jpg'],['Result','Action','A complete club world, delivered on schedule and ready to shoot.','aspe_sfeer.jpg']],
-      reveal:'aspe_sfeer.jpg', gallery:['aspe_sfeer.jpg','aspe_club.jpg','aspe-stage.jpg','atelier-cnc.jpg'],
-      stats:[['TV','Broadcast set'],['1','Live audience'],['100%','In-house'],['2025','Aired']] },
-
-    madrat: { title:'Plopsa \u2014 Mad Rat', script:'Mad Rat', l2:'Halloween at Plopsa', disc:'Theme park theming', client:'Plopsa', year:'2024', loc:'Plopsaland',
-      hero:'madrat-2.jpg', intro:'A high-impact Halloween walkthrough for Plopsa \u2014 scenic build, character spaces and atmospheric theming engineered to thrill thousands of guests a night.',
-      steps:[['Challenge','Scare, safely, at scale','An immersive, durable horror environment that handles huge throughput and a hard seasonal deadline.','madrat-1.jpg'],['Concept','A world with a story','Concept Factory built distinct themed spaces \u2014 each a set for the live characters that haunt them.','madrat-3.jpg'],['Production','Weatherproof &amp; tough','Scenic build engineered for crowds and the elements, finished to read in low light.','pirate-bay.jpg'],['Result','Sold-out nights','A repeatable seasonal attraction that draws guests back year after year.','madrat-2.jpg']],
-      reveal:'madrat-1.jpg', gallery:['madrat-2.jpg','madrat-1.jpg','madrat-3.jpg','pirate-bay.jpg'],
-      stats:[['1000s','Guests / night'],['Seasonal','Walkthrough'],['Plopsa','Client'],['2024','Halloween']] },
-
-    rmh: { title:'Rose\u2019s Mystery House', script:'Rose\u2019s', l2:'Mystery House', disc:'Themed experience', client:'act2gether', year:'2025', loc:'Bucharest, RO',
-      hero:'rmh-sign.jpg', intro:'A fully themed experience venue in Bucharest \u2014 complete interior design, theming and on-site construction: a gothic bar, walk-through attractions and immersive escape rooms.',
-      steps:[['Challenge','A whole venue, abroad','Design and build an entire themed venue cross-border \u2014 bar, attractions and escape rooms \u2014 to a single dark narrative.','escape-study.jpg'],['Concept','One world, many rooms','Concept Factory set the gothic visual language and carried it through every space and prop.','escape-plasma.jpg'],['Production','Built &amp; installed on site','Fabricated in Herentals, shipped and installed in Bucharest with the local team.','escape-lockers.jpg'],['Result','Doors open','An immersive venue guests step into \u2014 every detail crafted to be believed.','rmh-sign.jpg']],
-      reveal:'escape-study.jpg', gallery:['rmh-sign.jpg','escape-study.jpg','escape-plasma.jpg','escape-soup.jpg','escape-lockers.jpg'],
-      stats:[['act2gether','Client'],['Bucharest','Location'],['2025','Delivered'],['3+','Attractions']] },
-
-    alice: { title:'Alice in Wonderland', script:'Alice', l2:'in Wonderland', disc:'Theatre decor', client:'Deep Bridge', year:'2026', loc:'Antwerp',
-      hero:'alice.jpg', intro:'A large-scale, colour-rich stage world for Deep Bridge\u2019s Alice in Wonderland \u2014 a fantastical set built to support a full cast and a touring run.',
-      steps:[['Challenge','Down the rabbit hole','A bold, surreal world that transforms across scenes and survives a tour.','annie-stage.jpg'],['Concept','Storybook, in 3D','Concept Factory translated illustration into buildable, movable scenic pieces.','muizenval-alcove.jpg'],['Production','Built to tour','Lightweight, durable construction and vivid scenic paint, made in-house.','atelier-build.jpg'],['Result','Showtime','A complete Wonderland the cast performs inside, night after night.','alice.jpg']],
-      reveal:'alice.jpg', gallery:['alice.jpg','annie-stage.jpg','muizenval-alcove.jpg','atelier-build.jpg'],
-      stats:[['Deep Bridge','Client'],['Touring','Production'],['2026','Premiere'],['100%','In-house']] },
-
-    annie: { title:'Annie', script:'Annie', l2:'The musical', disc:'Scenic fabrication', client:'Deep Bridge', year:'2025', loc:'Antwerp',
-      hero:'annie-stage.jpg', intro:'A grand musical set for Annie \u2014 a sweeping staircase, period interiors and scenic detail engineered to move between scenes and read from every seat.',
-      steps:[['Challenge','Grand, but mobile','A statement staircase and interiors that transform quickly and tour safely.','annie1.jpg'],['Concept','Period, perfected','Concept Factory drew and detailed each piece for an authentic 1930s look.','muizenval-room.jpg'],['Production','Sculpted &amp; painted','Built, sculpted and scenic-painted in the atelier, aged by hand.','atelier-build.jpg'],['Result','Encore','A coherent period world that anchors the whole production.','annie-stage.jpg']],
-      reveal:'annie-stage.jpg', gallery:['annie-stage.jpg','annie1.jpg','muizenval-room.jpg','atelier-build.jpg'],
-      stats:[['Deep Bridge','Client'],['Musical','Production'],['2025','Staged'],['100%','In-house']] },
-
-    duck: { title:'Duck Fishing', script:'Duck', l2:'Fishing', disc:'Theme park theming', client:'Plopsa', year:'2025', loc:'Plopsaland',
-      hero:'duck-fishing.jpg', intro:'A bright, durable themed game attraction \u2014 playful scenic build engineered for daily family crowds and easy operation.',
-      steps:[['Challenge','Fun that lasts','A cheerful themed environment that survives constant use and weather.','sprookjes.jpg'],['Concept','Playful &amp; bold','A clean, colourful theming language designed for families.','pirate-bay.jpg'],['Production','Tough finishes','Hardwearing build and finishes, made in-house.','atelier-build.jpg'],['Result','Open for play','A reliable attraction that runs all season.','duck-fishing.jpg']],
-      reveal:'duck-fishing.jpg', gallery:['duck-fishing.jpg','sprookjes.jpg','pirate-bay.jpg','atelier-build.jpg'],
-      stats:[['Plopsa','Client'],['Family','Attraction'],['2025','Open'],['100%','In-house']] },
-
-    event: { title:'Ik Leef Voor Jou', script:'Ik Leef', l2:'Voor Jou', disc:'Event production', client:'Production', year:'2025', loc:'Belgium',
-      hero:'event-show.jpg', intro:'A live show production \u2014 stage decor and scenic elements built and installed for a one-off event under full production lighting.',
-      steps:[['Challenge','One night, one shot','Decor that lands on time, performs under lights and strikes clean.','event-wide.jpg'],['Concept','Built for the moment','Concept Factory designed scenic elements that read big from the crowd.','ikleefvoorjou.jpg'],['Production','Fast &amp; precise','Fabricated in-house, installed and dressed on site.','stand-retail.jpg'],['Result','Lights up','A show-ready stage world, delivered for the night.','event-show.jpg']],
-      reveal:'event-show.jpg', gallery:['event-show.jpg','event-wide.jpg','ikleefvoorjou.jpg','stand-retail.jpg'],
-      stats:[['Live','Event'],['1 night','Run'],['2025','Staged'],['100%','In-house']] }
+    "durbuy": {
+      "title": "Durbuy Adventure Valley",
+      "script": "Adventure",
+      "l2": "Valley",
+      "disc": "Theme park theming",
+      "client": "Adventure Valley",
+      "year": "2026",
+      "loc": "Durbuy, BE",
+      "hero": "durbuy/nest-tower.jpg",
+      "intro": "A themed outdoor zone at Adventure Valley in Durbuy — Wildwood and Wild Nest. One visual language, carved and built by hand, carried through every gate, sign, sculpture and building in the park.",
+      "steps": [
+        [
+          "Challenge",
+          "A forest, not a building",
+          "The work is spread across a whole outdoor zone. Every element stands in the weather, gets touched by thousands of visitors a day, and has to look like it grew where it stands.",
+          "durbuy/forest-path.jpg"
+        ],
+        [
+          "Concept",
+          "One language, every gate",
+          "Concept Factory set a single visual language for the zone: carved lettering, weathered timber, colour taken from the forest. Every gate and marker speaks it.",
+          "durbuy/welcome-arch.jpg"
+        ],
+        [
+          "Production",
+          "Carved, not printed",
+          "Signs, arches and sculptures are cut, carved and painted by hand in the atelier. Nothing here is a printed panel screwed to a post.",
+          "durbuy/wildnest-sign.jpg"
+        ],
+        [
+          "Result",
+          "Basecamp open",
+          "A zone that reads as one world from the entrance arch to the last marker on the trail.",
+          "durbuy/basecamp-building.jpg"
+        ]
+      ],
+      "reveal": "durbuy/nest-tower.jpg",
+      "gallery": [
+        "durbuy/nest-tower.jpg",
+        "durbuy/totem-sculpture.jpg",
+        "durbuy/bird-bench.jpg",
+        "durbuy/target-board.jpg",
+        "durbuy/fence-path.jpg"
+      ],
+      "stats": []
+    },
+    "rmh": {
+      "title": "Rose's Mystery House",
+      "script": "Rose's",
+      "l2": "Mystery House",
+      "disc": "Themed venue",
+      "client": "act2gether",
+      "year": "2026",
+      "loc": "Bucharest, RO",
+      "hero": "rmh/facade-interior.jpg",
+      "intro": "A complete themed venue in the centre of Bucharest — a gothic house built inside a building, a botanical bar around it, characters and walk-through spaces. Designed in Herentals, built on site.",
+      "steps": [
+        [
+          "Challenge",
+          "An empty shell, abroad",
+          "A bare commercial space in Bucharest had to become a finished themed venue, drawn in Belgium and built on location with a local crew.",
+          "rmh/empty-shell.jpg"
+        ],
+        [
+          "Concept",
+          "A house inside a building",
+          "Rather than dressing the walls, Concept Factory built a full gothic facade indoors, with lit windows and a cobbled street in front of it. Guests walk up to a house that is not there.",
+          "rmh/facade-interior.jpg"
+        ],
+        [
+          "Production",
+          "Characters, played and built",
+          "The venue is dressed and then inhabited: figures, props and costumes made in-house, worn by performers who belong to the set.",
+          "rmh/actor-bride.jpg"
+        ],
+        [
+          "Result",
+          "Doors open",
+          "A world guests step into straight off the street.",
+          "rmh/facade-night.jpg"
+        ]
+      ],
+      "reveal": "rmh/botanical-room.jpg",
+      "gallery": [
+        "rmh/facade-interior.jpg",
+        "rmh/botanical-corridor.jpg",
+        "rmh/actor-bar.jpg",
+        "rmh/brick-bar.jpg",
+        "rmh/apothecary-shelf.jpg"
+      ],
+      "stats": []
+    },
+    "zegeenseuh": {
+      "title": "Zeg Eens Euh",
+      "script": "Zeg Eens",
+      "l2": "Euh",
+      "disc": "TV set build",
+      "client": "Dedsit",
+      "year": "2026",
+      "loc": "Belgium",
+      "hero": "zegeenseuh/set-audience.jpg",
+      "intro": "A studio set for the Play4 programme Zeg Eens Euh — a wall of lit panels, a curved desk and an audience floor, built in the atelier and installed in the studio.",
+      "steps": [
+        [
+          "Challenge",
+          "A set that reads on camera",
+          "Shapes and colour strong enough to hold up under studio light and from every camera position, delivered on a broadcast schedule.",
+          "zegeenseuh/studio-panels.jpg"
+        ],
+        [
+          "Concept",
+          "Colour as structure",
+          "A wall of individually lit panels gives the studio depth and lets lighting change the mood between rounds.",
+          "zegeenseuh/panel-detail.jpg"
+        ],
+        [
+          "Production",
+          "Curved, ribbed, lit",
+          "The desk is a curved ribbed shell with integrated light, machined and assembled in-house.",
+          "zegeenseuh/desk-front.jpg"
+        ],
+        [
+          "Result",
+          "On air",
+          "A complete studio world with the audience in it, handed over ready to shoot.",
+          "zegeenseuh/set-audience.jpg"
+        ]
+      ],
+      "reveal": "zegeenseuh/set-floorlogo.jpg",
+      "gallery": [
+        "zegeenseuh/set-audience.jpg",
+        "zegeenseuh/set-floorlogo.jpg",
+        "zegeenseuh/desk-floorlogo.jpg",
+        "zegeenseuh/desk-buttons.jpg",
+        "zegeenseuh/monitor-logo.jpg"
+      ],
+      "stats": []
+    },
+    "durbuy-escape": {
+      "title": "Durbuy — Escape Rooms",
+      "script": "Escape",
+      "l2": "Rooms at Durbuy",
+      "disc": "Escape room design & build",
+      "client": "Adventure Valley",
+      "year": "2026",
+      "loc": "Durbuy, BE",
+      "hero": "durbuy-escape/red-alert-bunker.jpg",
+      "intro": "Escape rooms at Adventure Valley, each one its own world: an emergency bunker on a countdown, a collapsed mine, a collector’s study and a room where the walls hold the clues.",
+      "steps": [
+        [
+          "Challenge",
+          "Four worlds, one building",
+          "Rooms that share walls and services but have to feel like different places the moment the door closes.",
+          "durbuy-escape/mine-entrance.jpg"
+        ],
+        [
+          "Concept",
+          "A room per story",
+          "Each room gets its own period, palette and light. Nothing is shared between them except the corridor.",
+          "durbuy-escape/study-room.jpg"
+        ],
+        [
+          "Production",
+          "Story in every surface",
+          "The plot is carried by the build: days counted in tally marks on the wall, ration tins on a shelf, paperwork aged by hand.",
+          "durbuy-escape/tally-marks.jpg"
+        ],
+        [
+          "Result",
+          "Sixty minutes",
+          "Rooms that hold up under a torch beam and a group in a hurry.",
+          "durbuy-escape/red-alert-bunker.jpg"
+        ]
+      ],
+      "reveal": "durbuy-escape/clue-room.jpg",
+      "gallery": [
+        "durbuy-escape/red-alert-bunker.jpg",
+        "durbuy-escape/portrait-room.jpg",
+        "durbuy-escape/clue-room.jpg",
+        "durbuy-escape/mine-supplies.jpg",
+        "durbuy-escape/study-detail.jpg"
+      ],
+      "stats": []
+    },
+    "rmh-escape": {
+      "title": "Rose's Mystery House — Escape Rooms",
+      "script": "Rose's",
+      "l2": "Escape Rooms",
+      "disc": "Escape room design & build",
+      "client": "act2gether",
+      "year": "2026",
+      "loc": "Bucharest, RO",
+      "hero": "rmh-escape/parlour-room.jpg",
+      "intro": "The escape rooms inside Rose’s Mystery House — a gothic run of spaces from a panelled parlour to a crypt, a library with a hidden passage and a corridor of stone.",
+      "steps": [
+        [
+          "Challenge",
+          "Gothic, but playable",
+          "Dark, dense rooms that still have to be safe, navigable and reset in minutes between groups.",
+          "rmh-escape/lantern-corridor.jpg"
+        ],
+        [
+          "Concept",
+          "Carved, not printed",
+          "Rock, tombstones and walls sculpted in relief, so every surface holds up when a torch is held against it.",
+          "rmh-escape/crypt-niche.jpg"
+        ],
+        [
+          "Production",
+          "Props with a past",
+          "Cabinets, clocks, maps and paperwork aged by hand until nothing in the room looks bought.",
+          "rmh-escape/library-shelves.jpg"
+        ],
+        [
+          "Result",
+          "Locked in",
+          "Rooms a character can walk into, with a story that runs across the whole venue.",
+          "rmh-escape/actor-crypt.jpg"
+        ]
+      ],
+      "reveal": "rmh-escape/tomb-carving.jpg",
+      "gallery": [
+        "rmh-escape/parlour-room.jpg",
+        "rmh-escape/actor-crypt.jpg",
+        "rmh-escape/library-shelves.jpg",
+        "rmh-escape/crypt-niche.jpg",
+        "rmh-escape/route-map.jpg"
+      ],
+      "stats": []
+    },
+    "slagharen": {
+      "title": "Slagharen Parade",
+      "script": "Slagharen",
+      "l2": "Parade",
+      "disc": "Parade floats & theming",
+      "client": "Slagharen",
+      "year": "2025",
+      "loc": "Slagharen, NL",
+      "hero": "slagharen/truck-street.jpg",
+      "intro": "A western parade for Slagharen — a convoy of weathered timber and rusted metal that has to look a century old and drive through the park every day of the season.",
+      "steps": [
+        [
+          "Challenge",
+          "Decor that drives",
+          "Floats that read as antique but are road-safe, light enough to tow and stable with performers on board.",
+          "slagharen/cargo-prop.jpg"
+        ],
+        [
+          "Concept",
+          "A convoy with a story",
+          "Each float is its own scene — a loaded cargo wagon, a delivery truck, a stand — reading together as one caravan.",
+          "slagharen/float-detail.jpg"
+        ],
+        [
+          "Production",
+          "New wood, old years",
+          "Timber, metal and paint aged by hand, with a finish built to survive a full outdoor season.",
+          "slagharen/parade-wide.jpg"
+        ],
+        [
+          "Result",
+          "Rolling daily",
+          "A parade that runs through the park every day it is open.",
+          "slagharen/truck-street.jpg"
+        ]
+      ],
+      "reveal": "slagharen/parade-truck.jpg",
+      "gallery": [
+        "slagharen/truck-street.jpg",
+        "slagharen/parade-truck.jpg",
+        "slagharen/parade-wide.jpg",
+        "slagharen/cargo-prop.jpg",
+        "slagharen/parade-characters.jpg"
+      ],
+      "stats": []
+    },
+    "muizenval": {
+      "title": "De Muizenval",
+      "script": "De Muizenval",
+      "l2": "A full stage world",
+      "disc": "Theatre decor",
+      "client": "Deep Bridge",
+      "year": "2025",
+      "loc": "Antwerp",
+      "hero": "muizenval/muizenval-room.jpg",
+      "intro": "A complete Gothic stage environment for Deep Bridge — designed, engineered and built in-house, from the first blueprint to the final reveal under the lights.",
+      "steps": [
+        [
+          "Challenge",
+          "A whole world, on a deadline",
+          "A believable Gothic interior, rich enough for the back row, light enough to move, ready for a hard opening night.",
+          "muizenval/muizenval-blue.jpg"
+        ],
+        [
+          "Concept",
+          "From mood to blueprint",
+          "The director's mood translated into a spatial concept, then into technical drawings the workshop could build to the millimetre.",
+          "muizenval/muizenval-alcove.jpg"
+        ],
+        [
+          "Result",
+          "Curtain up",
+          "Installed on site for opening night — a single, coherent world the cast could live in.",
+          "muizenval/muizenval-room.jpg"
+        ]
+      ],
+      "reveal": "muizenval/muizenval-alcove.jpg",
+      "gallery": [
+        "muizenval/muizenval-room.jpg",
+        "muizenval/muizenval-alcove.jpg",
+        "muizenval/muizenval-blue.jpg",
+        "muizenval/muizenval.jpg",
+        "muizenval/muizenval2.jpg"
+      ],
+      "stats": []
+    },
+    "aspe": {
+      "title": "Aspe — Club Paparazzi",
+      "script": "Aspe",
+      "l2": "Club Paparazzi",
+      "disc": "Immersive TV set",
+      "client": "",
+      "year": "2025",
+      "loc": "Belgium",
+      "hero": "aspe/aspe_sfeer.jpg",
+      "intro": "A full immersive nightclub set for the Aspe murder-mystery production — lighting, decor and atmosphere built and dressed for camera and a live audience.",
+      "steps": [
+        [
+          "Challenge",
+          "A nightclub, for camera",
+          "A believable club that reads on screen and surrounds a live studio audience — built fast for a tight broadcast schedule.",
+          "aspe/aspe_club.jpg"
+        ],
+        [
+          "Concept",
+          "Light as material",
+          "Concept Factory designed the space around its lighting — lasers, practicals and LED woven into the build.",
+          "aspe/aspe-stage.jpg"
+        ],
+        [
+          "Result",
+          "Action",
+          "A complete club world, delivered on schedule and ready to shoot.",
+          "aspe/aspe_sfeer.jpg"
+        ]
+      ],
+      "reveal": "aspe/aspe_sfeer.jpg",
+      "gallery": [
+        "aspe/aspe_sfeer.jpg",
+        "aspe/aspe_club.jpg",
+        "aspe/aspe-stage.jpg"
+      ],
+      "stats": []
+    },
+    "madrat": {
+      "title": "Plopsa — Mad Rat",
+      "script": "Mad Rat",
+      "l2": "Halloween at Plopsa",
+      "disc": "Theme park theming",
+      "client": "Plopsa",
+      "year": "2024",
+      "loc": "Plopsaland",
+      "hero": "madrat/madrat-2.jpg",
+      "intro": "A Halloween walkthrough for Plopsa — scenic build, character spaces and atmospheric theming engineered for high throughput and a hard seasonal deadline.",
+      "steps": [
+        [
+          "Challenge",
+          "Scare, safely, at scale",
+          "An immersive, durable horror environment that handles crowds and weather, delivered for a fixed opening date.",
+          "madrat/madrat-1.jpg"
+        ],
+        [
+          "Concept",
+          "A world with a story",
+          "Distinct themed spaces, each one a set for the live characters that haunt it.",
+          "madrat/madrat-3.jpg"
+        ],
+        [
+          "Result",
+          "Open for the season",
+          "A seasonal attraction that comes back year after year.",
+          "madrat/madrat-2.jpg"
+        ]
+      ],
+      "reveal": "madrat/madrat-1.jpg",
+      "gallery": [
+        "madrat/madrat-2.jpg",
+        "madrat/madrat-1.jpg",
+        "madrat/madrat-3.jpg"
+      ],
+      "stats": []
+    },
+    "annie": {
+      "title": "Annie",
+      "script": "Annie",
+      "l2": "The musical",
+      "disc": "Scenic fabrication",
+      "client": "Deep Bridge",
+      "year": "2025",
+      "loc": "Antwerp",
+      "hero": "annie/annie-stage.jpg",
+      "intro": "A grand musical set for Annie — a sweeping staircase, period interiors and scenic detail engineered to move between scenes and read from every seat.",
+      "steps": [
+        [
+          "Challenge",
+          "Grand, but mobile",
+          "A statement staircase and interiors that transform quickly and travel safely.",
+          "annie/annie1.jpg"
+        ],
+        [
+          "Result",
+          "Encore",
+          "A coherent period world that anchors the whole production.",
+          "annie/annie-stage.jpg"
+        ]
+      ],
+      "reveal": "annie/annie-stage.jpg",
+      "gallery": [
+        "annie/annie-stage.jpg",
+        "annie/annie1.jpg",
+        "annie/annie2.jpg"
+      ],
+      "stats": []
+    },
+    "alice": {
+      "title": "Alice in Wonderland",
+      "script": "Alice",
+      "l2": "in Wonderland",
+      "disc": "Theatre decor",
+      "client": "Deep Bridge",
+      "year": "2026",
+      "loc": "Antwerp",
+      "hero": "alice/alice-01.jpg",
+      "intro": "Een volledige theaterwereld voor Deep Bridge: gebouwde decorstukken op ware grootte, van een kattenkop van meters hoog tot speelkaarten, paddenstoelen en de troon van de Hartenkoningin. Alles moet werken onder theaterlicht, snel wisselen tussen scenes en een volledige speelreeks doorstaan.",
+      "steps": [],
+      "reveal": "alice/alice-04.jpg",
+      "gallery": [
+        "alice/alice-02.jpg",
+        "alice/alice-03.jpg"
+      ],
+      "stats": []
+    },
+    "event": {
+      "title": "Ik Leef Voor Jou",
+      "script": "Ik Leef",
+      "l2": "Voor Jou",
+      "disc": "Event production",
+      "client": "",
+      "year": "2025",
+      "loc": "Belgium",
+      "hero": "event/stage-scene.jpg",
+      "intro": "Stage decor for Ik Leef Voor Jou — a set of moving panels and a red floor, built and installed for a production that plays under full theatre lighting.",
+      "steps": [
+        [
+          "Concept",
+          "Panels that frame the scene",
+          "Textured panels catch the light and break the stage into rooms, so a single set can carry a whole evening.",
+          "event/stage-scene.jpg"
+        ],
+        [
+          "Result",
+          "Lights up",
+          "A stage world that reads from the back row and strikes clean at the end of the run.",
+          "event/stage-solo.jpg"
+        ]
+      ],
+      "reveal": "event/stage-scene.jpg",
+      "gallery": [
+        "event/stage-scene.jpg",
+        "event/stage-solo.jpg"
+      ],
+      "stats": []
+    },
+    "historalia": {
+      "title": "Napoleon",
+      "script": "Napoleon",
+      "l2": "Historalia",
+      "disc": "Large-scale open-air scenography",
+      "client": "Historalia",
+      "year": "2026",
+      "loc": "Belgium",
+      "hero": "historalia/cannons-castle.jpg",
+      "intro": "An open-air stage world for Historalia’s Napoleon — a monumental scenography built in a castle park, playing to a full house every night of the run.",
+      "steps": [
+        [
+          "Challenge",
+          "A theatre with no walls",
+          "The stage is a castle park. Everything has to be built on site, survive weeks of open air, and still read from the back row of a temporary grandstand.",
+          "historalia/tent-build-1.jpg"
+        ],
+        [
+          "Concept",
+          "Scale as the story",
+          "Cannon wheels, giant laurel leaves and rearing horses set the scale before a single word is spoken. The castle itself stays in the frame as part of the decor.",
+          "historalia/tribunal-night.jpg"
+        ],
+        [
+          "Production",
+          "Structure first",
+          "The covered stage structure goes up first, then the scenery is built into it — a full construction site before it becomes a theatre.",
+          "historalia/tent-build-2.jpg"
+        ],
+        [
+          "Result",
+          "Full house",
+          "A set that carries a cast of over a hundred and holds an audience from dusk into the dark.",
+          "historalia/full-cast.jpg"
+        ]
+      ],
+      "reveal": "historalia/cannons-castle.jpg",
+      "gallery": [
+        "historalia/cannons-castle.jpg",
+        "historalia/tribunal-night.jpg",
+        "historalia/full-cast.jpg",
+        "historalia/tent-build-1.jpg",
+        "historalia/tent-build-2.jpg"
+      ],
+      "stats": []
+    },
+    "sprookjes": {
+      "title": "Sprookjeswandeling",
+      "script": "Sprookjes",
+      "l2": "wandeling",
+      "disc": "Walkthrough experience",
+      "client": "Deep Bridge",
+      "year": "2025",
+      "loc": "Boom",
+      "hero": "sprookjes/sprookjes-04.jpg",
+      "intro": "Een sprookjeswandeling door het bos: een reeks decorscenes die alleen in het donker werken. Concept Factory bouwde de sets, de huisjes en de props zo dat ze bij avondlicht en kunstlicht blijven kloppen, en dat ze een volledig seizoen buiten overeind blijven staan.",
+      "steps": [],
+      "reveal": "sprookjes/sprookjes-08.jpg",
+      "gallery": [
+        "sprookjes/sprookjes-01.jpg",
+        "sprookjes/sprookjes-02.jpg",
+        "sprookjes/sprookjes-03.jpg",
+        "sprookjes/sprookjes-05.jpg",
+        "sprookjes/sprookjes-06.jpg",
+        "sprookjes/sprookjes-07.jpg",
+        "sprookjes/sprookjes-09.jpg"
+      ],
+      "stats": []
+    },
+    "stand": {
+      "title": "Exhibition stand",
+      "script": "Exhibition",
+      "l2": "stand",
+      "disc": "Brand & retail build",
+      "client": "",
+      "year": "2025",
+      "loc": "",
+      "hero": "stand/stand-01.jpg",
+      "intro": "Een beursstand als merkomgeving: maatwerk meubilair, verlichte productwanden en een afwerkingsniveau dat van dichtbij bekeken wordt. Gebouwd in het atelier, getest, gedemonteerd en op locatie opnieuw opgebouwd.",
+      "steps": [],
+      "reveal": "stand/stand-01.jpg",
+      "gallery": [],
+      "stats": []
+    }
   };
-  var ORDER = ['muizenval','aspe','madrat','rmh','alice','annie','duck','event'];
+  var ORDER = ["durbuy","rmh","zegeenseuh","durbuy-escape","rmh-escape","slagharen","muizenval","aspe","madrat","annie","alice","event","historalia","sprookjes","stand"];
+  /* /BUILD:projects */
 
   function qp(){ var m = location.search.match(/[?&]p=([\w-]+)/); return m ? m[1] : 'muizenval'; }
   var slug = qp(); if (!PROJECTS[slug]) slug = 'muizenval';
@@ -210,7 +722,7 @@
 
   document.getElementById('cMeta').innerHTML =
     metaCell(d.client,'Client') + metaCell(d.year,'Year') + metaCell(d.disc,'Discipline') + metaCell(d.loc,'Location');
-  function metaCell(v,k){ return '<div class="stat"><div class="v" style="font-size:clamp(20px,2.2vw,30px);">'+v+'</div><div class="k">'+k+'</div></div>'; }
+  function metaCell(v,k){ if (!v) return ''; return '<div class="stat"><div class="v" style="font-size:clamp(20px,2.2vw,30px);">'+v+'</div><div class="k">'+k+'</div></div>'; }
 
   document.getElementById('cSteps').innerHTML = d.steps.map(function(s,i){
     var flip = i % 2 === 1 ? ' flip' : '';
@@ -234,10 +746,17 @@
   var others = ORDER.filter(function(s){ return s!==slug; }).slice(0,3);
   document.getElementById('cNext').innerHTML = others.map(function(s){
     var p = PROJECTS[s];
-    return '<a class="tile" style="aspect-ratio:3/2.2;" href="case.html?p='+s+'"><img src="'+P+p.hero+'" alt="'+p.title+'" /><div class="tile__scrim"></div>'+
+    return '<a class="tile" style="aspect-ratio:3/2.2;" href="/case?p='+s+'"><img src="'+P+p.hero+'" alt="'+p.title+'" /><div class="tile__scrim"></div>'+
       '<div class="tile__meta"><div class="tile__disc">'+p.disc+'</div><div class="tile__title">'+p.title+'</div>'+
       '<span class="tile__arrow">View case <svg class="icon"><use href="#i-arrow-up-right"/></svg></span></div></a>';
   }).join('');
+
+  // secties zonder inhoud verbergen in plaats van vullen met beeld van een ander project
+  function hide(id, empty){ var el = document.getElementById(id); if (el && empty) el.style.display = "none"; }
+  hide("secSteps", !d.steps.length);
+  hide("secReveal", !d.reveal);
+  hide("secStats", !d.stats.length);
+  hide("secGallery", (d.gallery||[]).length < 2);
 
   // reveal injected sections (own observer; fallback shows them regardless)
   var io2 = new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io2.unobserve(e.target); } }); }, { threshold: 0.06 });
