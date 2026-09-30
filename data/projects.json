@@ -391,30 +391,30 @@
       "title": "Aspe — Club Paparazzi",
       "script": "Aspe",
       "l2": "Club Paparazzi",
-      "disc": "Immersive TV set",
-      "cat": "television",
-      "client": "",
+      "disc": "Theatre decor",
+      "cat": "theatre",
+      "client": "Backstage Producties",
       "year": "2025",
       "loc": "Belgium",
       "hero": "aspe/aspe_sfeer.jpg",
-      "intro": "A full immersive nightclub set for the Aspe murder-mystery production — lighting, decor and atmosphere built and dressed for camera and a live audience.",
+      "intro": "A nightclub built for the stage. For the theatre production Aspe, Concept Factory built a complete club interior that has to read from the back row under theatre lighting, and hold up for the length of a run.",
       "steps": [
         [
           "Challenge",
-          "A nightclub, for camera",
-          "A believable club that reads on screen and surrounds a live studio audience — built fast for a tight broadcast schedule.",
+          "A club that reads from row 20",
+          "On stage a nightclub has to be legible at distance and under theatre light, and it has to be built so a crew can set it up and strike it without damage.",
           "aspe/aspe_club.jpg"
         ],
         [
           "Concept",
           "Light as material",
-          "Concept Factory designed the space around its lighting — lasers, practicals and LED woven into the build.",
+          "The space was designed around its lighting. Lasers, practicals and LED are part of the build rather than something aimed at it afterwards.",
           "aspe/aspe-stage.jpg"
         ],
         [
           "Result",
-          "Action",
-          "A complete club world, delivered on schedule and ready to shoot.",
+          "Curtain up",
+          "A complete club world on stage, delivered for the production schedule.",
           "aspe/aspe_sfeer.jpg"
         ]
       ],
@@ -426,9 +426,10 @@
       ],
       "stats": [],
       "needs": [
-        "Klant ontbreekt nog. Er stond Studio 100, dat leek niet te kloppen. Drive noemt het 2025/06 Aspe - Moord in de nachtclub",
-        "Beeld bevestigd door Björn: dit is het juiste project",
-        "Opbouw- of atelierbeeld zou de case sterker maken"
+        "Opdrachtgever bevestigd door Björn: Backstage Producties, theaterdecor (stond eerder als TV-set)",
+        "Speelperiode, zaal en aantal voorstellingen: INPUT NODIG",
+        "Opbouw- of atelierbeeld zou de case sterker maken",
+        "Volledige productietitel bevestigen. Drive noemt het 2025/06 Aspe - Moord in de nachtclub"
       ]
     },
     {
@@ -483,7 +484,7 @@
       "title": "Annie",
       "script": "Annie",
       "l2": "The musical",
-      "disc": "Scenic fabrication",
+      "disc": "Theatre decor",
       "cat": "theatre",
       "client": "Backstage Producties",
       "year": "2025",
