@@ -129,7 +129,7 @@
       "client": "Dedsit",
       "year": "2026",
       "loc": "Belgium",
-      "hero": "zegeenseuh/set-audience.jpg",
+      "hero": "zegeenseuh/zegeenseuh-panel-01.jpg",
       "intro": "A studio set for the Play4 programme Zeg Eens Euh — a wall of lit panels, a curved desk and an audience floor, built in the atelier and installed in the studio.",
       "steps": [
         [
@@ -159,6 +159,7 @@
       ],
       "reveal": "zegeenseuh/set-floorlogo.jpg",
       "gallery": [
+        "zegeenseuh/zegeenseuh-panel-02.jpg",
         "zegeenseuh/set-audience.jpg",
         "zegeenseuh/set-floorlogo.jpg",
         "zegeenseuh/desk-floorlogo.jpg",
@@ -168,8 +169,7 @@
       "stats": [],
       "needs": [
         "Dedsit bevestigd als klant, Play4 is de zender",
-        "Mag de set publiek getoond worden?",
-        "studio-blue.jpg staat klaar maar niet in de galerij"
+        "Mag de set publiek getoond worden?"
       ]
     },
     {
@@ -210,7 +210,7 @@
       "disc": "TV set dressing",
       "cat": "television",
       "client": "All3Media",
-      "year": "2026",
+      "year": "2022",
       "loc": "Belgium",
       "hero": "dontscream/dontscream-01.jpg",
       "intro": "A horror format for Streamz. Concept Factory built and dressed the locations the show plays out in: a church full of shrouded figures, a night forest hung with crosses, a walled graveyard with open coffins. Every set has to read as frightening on camera and stay safe for the people walking through it in the dark.",
@@ -224,9 +224,9 @@
       "stats": [],
       "needs": [
         "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
-        "Aantal locaties en afleveringen bevestigen",
         "De huidige beelden zijn telefoonfotos van de set. Professioneel beeld zou deze case veel sterker maken",
-        "Streamz key art staat op uitdrukkelijke vraag van Björn in de galerij. Dat is promotiemateriaal van de zender"
+        "Streamz key art staat op uitdrukkelijke vraag van Björn in de galerij. Dat is promotiemateriaal van de zender",
+        "Aantal locaties en afleveringen bevestigen"
       ]
     },
     {
