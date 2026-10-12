@@ -173,6 +173,62 @@
       ]
     },
     {
+      "slug": "housewives",
+      "status": "live",
+      "featured": false,
+      "title": "The Real Housewives of Antwerp — Reunion",
+      "script": "Real Housewives",
+      "l2": "The Reunion",
+      "disc": "TV set dressing",
+      "cat": "television",
+      "client": "Banijay",
+      "year": "2026",
+      "loc": "Antwerp",
+      "hero": "housewives/housewives-01.jpg",
+      "intro": "The reunion episode of The Real Housewives of Antwerp. Concept Factory dressed the set in the register of the season itself: plush, gold and blush, feather floor lamps and low lounge seating, built so eight women and a host can sit facing each other and every camera position still finds a composed frame.",
+      "steps": [],
+      "reveal": "housewives/housewives-05.jpg",
+      "gallery": [
+        "housewives/housewives-02.jpg",
+        "housewives/housewives-03.jpg",
+        "housewives/housewives-04.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
+        "Opbouw- en atelierbeeld ontbreekt",
+        "Opnamedatum en zender bevestigen"
+      ]
+    },
+    {
+      "slug": "dontscream",
+      "status": "live",
+      "featured": false,
+      "title": "Don't Scream",
+      "script": "Don't",
+      "l2": "Scream",
+      "disc": "TV set dressing",
+      "cat": "television",
+      "client": "All3Media",
+      "year": "2026",
+      "loc": "Belgium",
+      "hero": "dontscream/dontscream-01.jpg",
+      "intro": "A horror format for Streamz. Concept Factory built and dressed the locations the show plays out in: a church full of shrouded figures, a night forest hung with crosses, a walled graveyard with open coffins. Every set has to read as frightening on camera and stay safe for the people walking through it in the dark.",
+      "steps": [],
+      "reveal": "dontscream/dontscream-02.jpg",
+      "gallery": [
+        "dontscream/dontscream-02.jpg",
+        "dontscream/dontscream-03.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
+        "Aantal locaties en afleveringen bevestigen",
+        "De huidige beelden zijn telefoonfotos van de set. Professioneel beeld zou deze case veel sterker maken",
+        "Streamz key art niet gebruikt: dat is promotiemateriaal van de zender, geen beeld van het werk van Concept Factory"
+      ]
+    },
+    {
       "slug": "durbuy-escape",
       "status": "live",
       "title": "Durbuy — Escape Rooms",
