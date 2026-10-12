@@ -258,6 +258,36 @@
       ]
     },
     {
+      "slug": "jamesmusical",
+      "status": "live",
+      "featured": false,
+      "title": "James — De Musical",
+      "script": "James",
+      "l2": "De Musical",
+      "disc": "TV set build",
+      "cat": "television",
+      "client": "",
+      "year": "",
+      "loc": "Belgium",
+      "hero": "jamesmusical/jamesmusical-01.jpg",
+      "intro": "A show built around one running joke: a musical about James. Concept Factory delivered both halves of it — the talk set with its red velvet and arcs of bulb lights where the conversation happens, and the stage scenes it cuts to: a teenage bedroom with an outsized gilded frame over the bed, and a rooftop at night with lit windows and a moon behind it.",
+      "steps": [],
+      "reveal": "jamesmusical/jamesmusical-02.jpg",
+      "gallery": [
+        "jamesmusical/jamesmusical-03.jpg",
+        "jamesmusical/jamesmusical-04.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Opdrachtgever en jaar ontbreken allebei. INPUT NODIG",
+        "De bestandsnamen in de Drive-map noemen Play4, maar dat is niet bevestigd",
+        "Beeld 01 is een praatdecor, de andere drie zijn toneelscenes. Bevestigen dat dit een en hetzelfde project is",
+        "SHG_G&L-83.jpg staat in de Drive-map maar is 7,5 MB en komt niet door de koppeling. Mogelijk het sterkste beeld",
+        "Twee bestanden in die map zijn persfotos van nieuwssites en zijn bewust niet gebruikt",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw"
+      ]
+    },
+    {
       "slug": "jamesco",
       "status": "live",
       "featured": false,
