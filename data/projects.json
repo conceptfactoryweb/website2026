@@ -229,6 +229,34 @@
       ]
     },
     {
+      "slug": "lukalloo",
+      "status": "live",
+      "featured": false,
+      "title": "Luk Alloo",
+      "script": "Luk Alloo",
+      "l2": "The talk set",
+      "disc": "TV set build",
+      "cat": "television",
+      "client": "VTM GO",
+      "year": "",
+      "loc": "Belgium",
+      "hero": "lukalloo/lukalloo-01.jpg",
+      "intro": "A talk set built out of an archive. Wall after wall of old cabinets filled with bundled papers, film canisters, a projector, lamps and plants, laid over layered carpets, so that wherever a camera points there is something to look at and the conversation always sits in a room with a history.",
+      "steps": [],
+      "reveal": "lukalloo/lukalloo-04.jpg",
+      "gallery": [
+        "lukalloo/lukalloo-02.jpg",
+        "lukalloo/lukalloo-03.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Jaar ontbreekt: Björn zegt enkele jaren geleden. INPUT NODIG",
+        "Productiehuis bevestigen. Nu staat VTM GO als opdrachtgever, dat is het platform",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
+        "Volledige programmatitel bevestigen"
+      ]
+    },
+    {
       "slug": "durbuy-escape",
       "status": "live",
       "title": "Durbuy — Escape Rooms",
