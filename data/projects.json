@@ -378,7 +378,8 @@
       "reveal": "temptation/temptation-02.jpg",
       "gallery": [
         "temptation/temptation-02.jpg",
-        "temptation/temptation-03.jpg"
+        "temptation/temptation-03.jpg",
+        "temptation/temptation-04.jpg"
       ],
       "stats": [],
       "needs": [
@@ -544,6 +545,36 @@
         "Aantal wagens bevestigen",
         "Op parade-characters.jpg staan mascottekostuums. Zijn die van Concept Factory? Zo niet, vervangen",
         "De map CF Slagharen Parade bevat nog 40+ beelden van dezelfde shoot die nog niet bekeken zijn"
+      ]
+    },
+    {
+      "slug": "western",
+      "status": "live",
+      "featured": false,
+      "title": "Slagharen — Western Circus Show",
+      "script": "Western",
+      "l2": "Circus Show",
+      "disc": "Themed venue build",
+      "cat": "theme-parks",
+      "client": "Slagharen",
+      "year": "2025",
+      "loc": "Slagharen",
+      "hero": "western/western-01.jpg",
+      "intro": "A western circus venue inside a tent. Concept Factory clad the whole interior in rough timber palisade, hung red drape and weathered canvas swags over it, and dressed the room with barrels, crates, wagon wheels and a bar built from a cart, so a temporary structure reads as a frontier saloon from the moment visitors walk in.",
+      "steps": [],
+      "reveal": "western/western-04.jpg",
+      "gallery": [
+        "western/western-02.jpg",
+        "western/western-03.jpg",
+        "western/western-05.jpg",
+        "western/western-06.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Björn noemde deze map Slagharen Halloween, maar op het bord staat WESTERN CIRCUS SHOW met Randy en Rosie. Is dit de halloweenshow of een aparte productie?",
+        "Jaar staat op 2025 op basis van de opnamedatums van de fotos. Bevestigen",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw",
+        "Een beeld met publiek zou sterker zijn"
       ]
     },
     {
