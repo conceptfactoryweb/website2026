@@ -341,11 +341,11 @@
       "l2": "TV set",
       "disc": "TV set build",
       "cat": "television",
-      "client": "",
-      "year": "",
+      "client": "Banijay",
+      "year": "2025",
       "loc": "Belgium",
       "hero": "hacked/hacked-01.jpg",
-      "intro": "A hacker's den as a studio set. Concept Factory built a workspace that reads as lived-in and slightly illegal: a floor-to-ceiling mural of a rat at a terminal, LED strips run along every edge, server racks and old monitors on the shelves, and a geometric neon rig overhead that lights the whole room in blue and green.",
+      "intro": "A basecamp for hackers. Concept Factory built a workspace that reads as lived-in and slightly illegal: a floor-to-ceiling mural of a rat at a terminal, LED strips run along every edge, server racks and old monitors on the shelves, and a geometric neon rig overhead that lights the whole room in blue and green.",
       "steps": [],
       "reveal": "hacked/hacked-04.jpg",
       "gallery": [
@@ -355,10 +355,9 @@
       ],
       "stats": [],
       "needs": [
-        "Opdrachtgever en jaar ontbreken. INPUT NODIG",
-        "Zender bevestigen",
-        "Op geen van de beelden staan mensen. Een beeld met presentator of gasten zou sterker zijn",
-        "Case nog uit te werken"
+        "Op geen van de beelden staan mensen. Een beeld met presentator of deelnemers zou sterker zijn",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw",
+        "Opbouw- en atelierbeeld ontbreekt"
       ]
     },
     {
@@ -370,8 +369,8 @@
       "l2": "The Reunion",
       "disc": "TV set dressing",
       "cat": "television",
-      "client": "",
-      "year": "",
+      "client": "Banijay",
+      "year": "2026",
       "loc": "Belgium",
       "hero": "temptation/temptation-01.jpg",
       "intro": "The reunion of Temptation Island, dressed inside a brick loft. Terracotta lounge seating in a loose circle on a pale rug, planting against the black steel and brick, and a lighting rig overhead that keeps the warmth in the room while every seat stays on camera.",
@@ -383,9 +382,8 @@
       ],
       "stats": [],
       "needs": [
-        "Opdrachtgever en jaar ontbreken. INPUT NODIG",
         "Op geen van de beelden staan mensen. Een beeld met presentator of deelnemers zou sterker zijn",
-        "Case nog uit te werken"
+        "Case nog uit te werken: uitdaging, oplossing en opbouw"
       ]
     },
     {
@@ -905,6 +903,64 @@
         "Exacte locatie en opdrachtgever bevestigen (Drive: 2025/04 Sprookjeswandeling Deepbridge, bestandsnaam EWEBoom)",
         "Aantal scenes en lengte van het parcours: INPUT NODIG",
         "Productiefotos uit het atelier ontbreken nog"
+      ]
+    },
+    {
+      "slug": "qbeach",
+      "status": "live",
+      "featured": false,
+      "title": "Q Beach House",
+      "script": "Q Beach",
+      "l2": "House",
+      "disc": "Themed build",
+      "cat": "events",
+      "client": "Qmusic",
+      "year": "2025",
+      "loc": "Belgian coast",
+      "hero": "qbeach/qbeach-01.jpg",
+      "intro": "Theming for the new Q Beach House. A radio station's summer home on the coast, built in white boarding with red bands and lit edges, planting along the terrace and shade sails over the tables, so the whole thing reads as one place rather than a stage with a bar next to it.",
+      "steps": [],
+      "reveal": "qbeach/qbeach-05.jpg",
+      "gallery": [
+        "qbeach/qbeach-02.jpg",
+        "qbeach/qbeach-03.jpg",
+        "qbeach/qbeach-04.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Opdrachtgever bevestigen: Qmusic rechtstreeks of via een tussenpartij",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw",
+        "Op geen van de beelden staan mensen. Een beeld met publiek zou sterker zijn",
+        "Opbouwbeeld ontbreekt"
+      ]
+    },
+    {
+      "slug": "roxxi",
+      "status": "live",
+      "featured": false,
+      "title": "Roxxi",
+      "script": "Roxxi",
+      "l2": "Festival stage",
+      "disc": "Festival scenery",
+      "cat": "events",
+      "client": "Roxxi",
+      "year": "2025",
+      "loc": "Belgium",
+      "hero": "roxxi/roxxi-01.jpg",
+      "intro": "Monumental columns for the Roxxi festival stage. Built at a scale that holds its own against the lighting rig and a full crowd, and finished so they read as stone from the back of the field and still take smoke, strobes and a day of weather.",
+      "steps": [],
+      "reveal": "roxxi/roxxi-02.jpg",
+      "gallery": [
+        "roxxi/roxxi-03.jpg",
+        "roxxi/roxxi-04.jpg",
+        "roxxi/roxxi-05.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Exacte naam en editie van het festival bevestigen",
+        "Hoogte en aantal zuilen: INPUT NODIG",
+        "Materiaal en opbouwtijd zouden deze case sterk maken",
+        "Atelierbeeld van de zuilen in aanbouw ontbreekt"
       ]
     },
     {
