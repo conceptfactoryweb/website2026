@@ -201,166 +201,6 @@
       ]
     },
     {
-      "slug": "dontscream",
-      "status": "live",
-      "featured": false,
-      "title": "Don't Scream",
-      "script": "Don't",
-      "l2": "Scream",
-      "disc": "TV set dressing",
-      "cat": "television",
-      "client": "All3Media",
-      "year": "2022",
-      "loc": "Belgium",
-      "hero": "dontscream/dontscream-01.jpg",
-      "intro": "A horror format for Streamz. Concept Factory built and dressed the locations the show plays out in: a church full of shrouded figures, a night forest hung with crosses, a walled graveyard with open coffins. Every set has to read as frightening on camera and stay safe for the people walking through it in the dark.",
-      "steps": [],
-      "reveal": "dontscream/dontscream-02.jpg",
-      "gallery": [
-        "dontscream/dontscream-02.jpg",
-        "dontscream/dontscream-03.jpg",
-        "dontscream/dontscream-04.jpg"
-      ],
-      "stats": [],
-      "needs": [
-        "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
-        "De huidige beelden zijn telefoonfotos van de set. Professioneel beeld zou deze case veel sterker maken",
-        "Streamz key art staat op uitdrukkelijke vraag van Björn in de galerij. Dat is promotiemateriaal van de zender",
-        "Aantal locaties en afleveringen bevestigen"
-      ]
-    },
-    {
-      "slug": "lukalloo",
-      "status": "live",
-      "featured": false,
-      "title": "Luk Alloo",
-      "script": "Luk Alloo",
-      "l2": "The talk set",
-      "disc": "TV set build",
-      "cat": "television",
-      "client": "VTM GO",
-      "year": "2023",
-      "loc": "Belgium",
-      "hero": "lukalloo/lukalloo-05.jpg",
-      "intro": "A talk set built out of an archive. Wall after wall of old cabinets filled with bundled papers, film canisters, a projector, lamps and plants, laid over layered carpets, so that wherever a camera points there is something to look at and the conversation always sits in a room with a history.",
-      "steps": [],
-      "reveal": "lukalloo/lukalloo-04.jpg",
-      "gallery": [
-        "lukalloo/lukalloo-01.jpg",
-        "lukalloo/lukalloo-02.jpg",
-        "lukalloo/lukalloo-03.jpg"
-      ],
-      "stats": [],
-      "needs": [
-        "Productiehuis bevestigen. Nu staat VTM GO als opdrachtgever, dat is het platform",
-        "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
-        "Volledige programmatitel bevestigen"
-      ]
-    },
-    {
-      "slug": "jamesmusical",
-      "status": "live",
-      "featured": false,
-      "title": "James — De Musical",
-      "script": "James",
-      "l2": "De Musical",
-      "disc": "TV set build",
-      "cat": "television",
-      "client": "",
-      "year": "",
-      "loc": "Belgium",
-      "hero": "jamesmusical/jamesmusical-01.jpg",
-      "intro": "A show built around one running joke: a musical about James. Concept Factory delivered both halves of it — the talk set with its red velvet and arcs of bulb lights where the conversation happens, and the stage scenes it cuts to: a teenage bedroom with an outsized gilded frame over the bed, and a rooftop at night with lit windows and a moon behind it.",
-      "steps": [],
-      "reveal": "jamesmusical/jamesmusical-02.jpg",
-      "gallery": [
-        "jamesmusical/jamesmusical-03.jpg",
-        "jamesmusical/jamesmusical-04.jpg"
-      ],
-      "stats": [],
-      "needs": [
-        "Opdrachtgever en jaar ontbreken allebei. INPUT NODIG",
-        "De bestandsnamen in de Drive-map noemen Play4, maar dat is niet bevestigd",
-        "Beeld 01 is een praatdecor, de andere drie zijn toneelscenes. Bevestigen dat dit een en hetzelfde project is",
-        "SHG_G&L-83.jpg staat in de Drive-map maar is 7,5 MB en komt niet door de koppeling. Mogelijk het sterkste beeld",
-        "Twee bestanden in die map zijn persfotos van nieuwssites en zijn bewust niet gebruikt",
-        "Case nog uit te werken: uitdaging, oplossing en opbouw"
-      ]
-    },
-    {
-      "slug": "jamesco",
-      "status": "live",
-      "featured": false,
-      "title": "James & Co",
-      "script": "James & Co",
-      "l2": "The piggy bank",
-      "disc": "TV prop build",
-      "cat": "television",
-      "client": "Dedsit",
-      "year": "2025",
-      "loc": "Belgium",
-      "hero": "jamesco/jamesco-varken-01.jpg",
-      "intro": "A giant piggy bank for James & Co on Play4, season 2025. Built big enough to stand shoulder to shoulder with the host on the studio floor, and finished in gold glitter fabric, because a James & Co prop does not do subtle.",
-      "steps": [],
-      "gallery": [],
-      "stats": [],
-      "needs": [
-        "Meer beeld van het spaarvarken: de originelen in Drive (07 TV projecten/05) zijn te groot voor de Drive-koppeling",
-        "Case nog uit te werken: uitdaging, oplossing en opbouw",
-        "Opbouw- en atelierbeeld ontbreekt"
-      ]
-    },
-    {
-      "slug": "madamesoleil",
-      "status": "live",
-      "featured": false,
-      "title": "Madame Soleil",
-      "script": "Madame Soleil",
-      "l2": "The fortune teller's set",
-      "disc": "TV talk set",
-      "cat": "television",
-      "client": "Dedsit",
-      "year": "2025",
-      "loc": "Belgium",
-      "hero": "madamesoleil/madamesoleil-01.jpg",
-      "intro": "A fortune teller's talk set for James & Co on Play4, season 2025. Wood panelling, an arch, candelabras, a crystal ball on a draped table and shelves crowded with props: a small room built so every camera angle lands on something to look at.",
-      "steps": [],
-      "gallery": [],
-      "stats": [],
-      "needs": [
-        "Meer beeld nodig: totaalbeeld, details en opbouw",
-        "Case nog uit te werken: uitdaging, oplossing en opbouw"
-      ]
-    },
-    {
-      "slug": "hacked",
-      "status": "live",
-      "featured": false,
-      "title": "Hacked",
-      "script": "Hacked",
-      "l2": "TV set",
-      "disc": "TV set build",
-      "cat": "television",
-      "client": "Banijay",
-      "year": "2025",
-      "loc": "Belgium",
-      "hero": "hacked/hacked-01.jpg",
-      "intro": "A basecamp for hackers. Concept Factory built a workspace that reads as lived-in and slightly illegal: a floor-to-ceiling mural of a rat at a terminal, LED strips run along every edge, server racks and old monitors on the shelves, and a geometric neon rig overhead that lights the whole room in blue and green.",
-      "steps": [],
-      "reveal": "hacked/hacked-04.jpg",
-      "gallery": [
-        "hacked/hacked-02.jpg",
-        "hacked/hacked-03.jpg",
-        "hacked/hacked-05.jpg"
-      ],
-      "stats": [],
-      "needs": [
-        "Op geen van de beelden staan mensen. Een beeld met presentator of deelnemers zou sterker zijn",
-        "Case nog uit te werken: uitdaging, oplossing en opbouw",
-        "Opbouw- en atelierbeeld ontbreekt"
-      ]
-    },
-    {
       "slug": "temptation",
       "status": "live",
       "featured": false,
@@ -491,6 +331,159 @@
       "needs": [
         "Aantal kamers en hun namen bevestigen",
         "mantel-clock.jpg en tomb-carving.jpg staan klaar maar niet in de galerij"
+      ]
+    },
+    {
+      "slug": "alice",
+      "status": "live",
+      "title": "Alice in Wonderland",
+      "script": "Alice",
+      "l2": "in Wonderland",
+      "disc": "Theatre decor",
+      "cat": "theatre",
+      "client": "Deep Bridge",
+      "year": "2026",
+      "loc": "Antwerp",
+      "hero": "alice/alice-01.jpg",
+      "intro": "Een volledige theaterwereld voor Deep Bridge: gebouwde decorstukken op ware grootte, van een kattenkop van meters hoog tot speelkaarten, paddenstoelen en de troon van de Hartenkoningin. Alles moet werken onder theaterlicht, snel wisselen tussen scenes en een volledige speelreeks doorstaan.",
+      "steps": [],
+      "reveal": "alice/alice-04.jpg",
+      "gallery": [
+        "alice/alice-02.jpg",
+        "alice/alice-03.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Drive 2025/16 bevat 46 fotos, hiervan zijn er 4 gekozen. De rest nog doornemen",
+        "Speelperiode en aantal voorstellingen: INPUT NODIG",
+        "Atelier- en opbouwbeeld ontbreekt nog"
+      ]
+    },
+    {
+      "slug": "historalia",
+      "status": "live",
+      "title": "Napoleon",
+      "script": "Napoleon",
+      "l2": "Historalia",
+      "disc": "Large-scale open-air scenography",
+      "cat": "theatre",
+      "client": "Historalia",
+      "year": "2026",
+      "loc": "Belgium",
+      "hero": "historalia/cannons-castle.jpg",
+      "intro": "An open-air stage world for Historalia’s Napoleon — a monumental scenography built in a castle park, playing to a full house every night of the run.",
+      "steps": [
+        [
+          "Challenge",
+          "A theatre with no walls",
+          "The stage is a castle park. Everything has to be built on site, survive weeks of open air, and still read from the back row of a temporary grandstand.",
+          "historalia/tent-build-1.jpg"
+        ],
+        [
+          "Concept",
+          "Scale as the story",
+          "Cannon wheels, giant laurel leaves and rearing horses set the scale before a single word is spoken. The castle itself stays in the frame as part of the decor.",
+          "historalia/tribunal-night.jpg"
+        ],
+        [
+          "Production",
+          "Structure first",
+          "The covered stage structure goes up first, then the scenery is built into it — a full construction site before it becomes a theatre.",
+          "historalia/tent-build-2.jpg"
+        ],
+        [
+          "Result",
+          "Full house",
+          "A set that carries a cast of over a hundred and holds an audience from dusk into the dark.",
+          "historalia/full-cast.jpg"
+        ]
+      ],
+      "reveal": "historalia/cannons-castle.jpg",
+      "gallery": [
+        "historalia/cannons-castle.jpg",
+        "historalia/tribunal-night.jpg",
+        "historalia/full-cast.jpg",
+        "historalia/tent-build-1.jpg",
+        "historalia/tent-build-2.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Beeld aangeleverd door Björn, niet uit de Drive-map",
+        "Speeldata en aantal voorstellingen bevestigen",
+        "Opbouwbeeld toont de tentstructuur; atelierbeeld van het decor zelf ontbreekt nog"
+      ]
+    },
+    {
+      "slug": "jamesco",
+      "status": "live",
+      "featured": false,
+      "title": "James & Co",
+      "script": "James & Co",
+      "l2": "The piggy bank",
+      "disc": "TV prop build",
+      "cat": "television",
+      "client": "Dedsit",
+      "year": "2025",
+      "loc": "Belgium",
+      "hero": "jamesco/jamesco-varken-01.jpg",
+      "intro": "A giant piggy bank for James & Co on Play4, season 2025. Built big enough to stand shoulder to shoulder with the host on the studio floor, and finished in gold glitter fabric, because a James & Co prop does not do subtle.",
+      "steps": [],
+      "gallery": [],
+      "stats": [],
+      "needs": [
+        "Meer beeld van het spaarvarken: de originelen in Drive (07 TV projecten/05) zijn te groot voor de Drive-koppeling",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw",
+        "Opbouw- en atelierbeeld ontbreekt"
+      ]
+    },
+    {
+      "slug": "madamesoleil",
+      "status": "live",
+      "featured": false,
+      "title": "Madame Soleil",
+      "script": "Madame Soleil",
+      "l2": "The fortune teller's set",
+      "disc": "TV talk set",
+      "cat": "television",
+      "client": "Dedsit",
+      "year": "2025",
+      "loc": "Belgium",
+      "hero": "madamesoleil/madamesoleil-01.jpg",
+      "intro": "A fortune teller's talk set for James & Co on Play4, season 2025. Wood panelling, an arch, candelabras, a crystal ball on a draped table and shelves crowded with props: a small room built so every camera angle lands on something to look at.",
+      "steps": [],
+      "gallery": [],
+      "stats": [],
+      "needs": [
+        "Meer beeld nodig: totaalbeeld, details en opbouw",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw"
+      ]
+    },
+    {
+      "slug": "hacked",
+      "status": "live",
+      "featured": false,
+      "title": "Hacked",
+      "script": "Hacked",
+      "l2": "TV set",
+      "disc": "TV set build",
+      "cat": "television",
+      "client": "Banijay",
+      "year": "2025",
+      "loc": "Belgium",
+      "hero": "hacked/hacked-01.jpg",
+      "intro": "A basecamp for hackers. Concept Factory built a workspace that reads as lived-in and slightly illegal: a floor-to-ceiling mural of a rat at a terminal, LED strips run along every edge, server racks and old monitors on the shelves, and a geometric neon rig overhead that lights the whole room in blue and green.",
+      "steps": [],
+      "reveal": "hacked/hacked-04.jpg",
+      "gallery": [
+        "hacked/hacked-02.jpg",
+        "hacked/hacked-03.jpg",
+        "hacked/hacked-05.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Op geen van de beelden staan mensen. Een beeld met presentator of deelnemers zou sterker zijn",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw",
+        "Opbouw- en atelierbeeld ontbreekt"
       ]
     },
     {
@@ -678,52 +671,6 @@
       ]
     },
     {
-      "slug": "madrat",
-      "status": "live",
-      "title": "Plopsa — Mad Rat",
-      "script": "Mad Rat",
-      "l2": "Halloween at Plopsa",
-      "disc": "Theme park theming",
-      "cat": "theme-parks",
-      "client": "Plopsa",
-      "year": "2024",
-      "loc": "Plopsaland",
-      "hero": "madrat/madrat-2.jpg",
-      "intro": "A Halloween walkthrough for Plopsa — scenic build, character spaces and atmospheric theming engineered for high throughput and a hard seasonal deadline.",
-      "steps": [
-        [
-          "Challenge",
-          "Scare, safely, at scale",
-          "An immersive, durable horror environment that handles crowds and weather, delivered for a fixed opening date.",
-          "madrat/madrat-1.jpg"
-        ],
-        [
-          "Concept",
-          "A world with a story",
-          "Distinct themed spaces, each one a set for the live characters that haunt it.",
-          "madrat/madrat-3.jpg"
-        ],
-        [
-          "Result",
-          "Open for the season",
-          "A seasonal attraction that comes back year after year.",
-          "madrat/madrat-2.jpg"
-        ]
-      ],
-      "reveal": "madrat/madrat-1.jpg",
-      "gallery": [
-        "madrat/madrat-2.jpg",
-        "madrat/madrat-1.jpg",
-        "madrat/madrat-3.jpg"
-      ],
-      "stats": [],
-      "needs": [
-        "Bezoekersaantal per avond stond op de site maar is niet bevestigd",
-        "Beeld bevestigd door Björn",
-        "Decor- of atelierbeeld zou de case sterker maken, nu zijn het drie personagefotos"
-      ]
-    },
-    {
       "slug": "annie",
       "status": "live",
       "title": "Annie",
@@ -786,32 +733,6 @@
       ]
     },
     {
-      "slug": "alice",
-      "status": "live",
-      "title": "Alice in Wonderland",
-      "script": "Alice",
-      "l2": "in Wonderland",
-      "disc": "Theatre decor",
-      "cat": "theatre",
-      "client": "Deep Bridge",
-      "year": "2026",
-      "loc": "Antwerp",
-      "hero": "alice/alice-01.jpg",
-      "intro": "Een volledige theaterwereld voor Deep Bridge: gebouwde decorstukken op ware grootte, van een kattenkop van meters hoog tot speelkaarten, paddenstoelen en de troon van de Hartenkoningin. Alles moet werken onder theaterlicht, snel wisselen tussen scenes en een volledige speelreeks doorstaan.",
-      "steps": [],
-      "reveal": "alice/alice-04.jpg",
-      "gallery": [
-        "alice/alice-02.jpg",
-        "alice/alice-03.jpg"
-      ],
-      "stats": [],
-      "needs": [
-        "Drive 2025/16 bevat 46 fotos, hiervan zijn er 4 gekozen. De rest nog doornemen",
-        "Speelperiode en aantal voorstellingen: INPUT NODIG",
-        "Atelier- en opbouwbeeld ontbreekt nog"
-      ]
-    },
-    {
       "slug": "event",
       "status": "live",
       "title": "Ik Leef Voor Jou",
@@ -849,60 +770,6 @@
         "IKLEEFVOORJOU-3.jpg op Drive is 7 MB en haalt de Drive-koppeling neer. Verkleinde versie nodig",
         "Klant ontbreekt nog",
         "Bevestigd door Björn: dit is een theaterdecor, stond eerder onder Events"
-      ]
-    },
-    {
-      "slug": "historalia",
-      "status": "live",
-      "title": "Napoleon",
-      "script": "Napoleon",
-      "l2": "Historalia",
-      "disc": "Large-scale open-air scenography",
-      "cat": "theatre",
-      "client": "Historalia",
-      "year": "2026",
-      "loc": "Belgium",
-      "hero": "historalia/cannons-castle.jpg",
-      "intro": "An open-air stage world for Historalia’s Napoleon — a monumental scenography built in a castle park, playing to a full house every night of the run.",
-      "steps": [
-        [
-          "Challenge",
-          "A theatre with no walls",
-          "The stage is a castle park. Everything has to be built on site, survive weeks of open air, and still read from the back row of a temporary grandstand.",
-          "historalia/tent-build-1.jpg"
-        ],
-        [
-          "Concept",
-          "Scale as the story",
-          "Cannon wheels, giant laurel leaves and rearing horses set the scale before a single word is spoken. The castle itself stays in the frame as part of the decor.",
-          "historalia/tribunal-night.jpg"
-        ],
-        [
-          "Production",
-          "Structure first",
-          "The covered stage structure goes up first, then the scenery is built into it — a full construction site before it becomes a theatre.",
-          "historalia/tent-build-2.jpg"
-        ],
-        [
-          "Result",
-          "Full house",
-          "A set that carries a cast of over a hundred and holds an audience from dusk into the dark.",
-          "historalia/full-cast.jpg"
-        ]
-      ],
-      "reveal": "historalia/cannons-castle.jpg",
-      "gallery": [
-        "historalia/cannons-castle.jpg",
-        "historalia/tribunal-night.jpg",
-        "historalia/full-cast.jpg",
-        "historalia/tent-build-1.jpg",
-        "historalia/tent-build-2.jpg"
-      ],
-      "stats": [],
-      "needs": [
-        "Beeld aangeleverd door Björn, niet uit de Drive-map",
-        "Speeldata en aantal voorstellingen bevestigen",
-        "Opbouwbeeld toont de tentstructuur; atelierbeeld van het decor zelf ontbreekt nog"
       ]
     },
     {
@@ -1015,6 +882,139 @@
         "Beurs bevestigen. De Drive-map heet Artisan Kortrijk",
         "Professionele fotos van deze stand staan in Drive 2025/11 maar zijn 22 tot 47 MB en komen niet door de koppeling",
         "De merken Jura en bamix staan op het beeld omdat Bodart ze verkoopt. Akkoord om te tonen?"
+      ]
+    },
+    {
+      "slug": "madrat",
+      "status": "live",
+      "title": "Plopsa — Mad Rat",
+      "script": "Mad Rat",
+      "l2": "Halloween at Plopsa",
+      "disc": "Theme park theming",
+      "cat": "theme-parks",
+      "client": "Plopsa",
+      "year": "2024",
+      "loc": "Plopsaland",
+      "hero": "madrat/madrat-2.jpg",
+      "intro": "A Halloween walkthrough for Plopsa — scenic build, character spaces and atmospheric theming engineered for high throughput and a hard seasonal deadline.",
+      "steps": [
+        [
+          "Challenge",
+          "Scare, safely, at scale",
+          "An immersive, durable horror environment that handles crowds and weather, delivered for a fixed opening date.",
+          "madrat/madrat-1.jpg"
+        ],
+        [
+          "Concept",
+          "A world with a story",
+          "Distinct themed spaces, each one a set for the live characters that haunt it.",
+          "madrat/madrat-3.jpg"
+        ],
+        [
+          "Result",
+          "Open for the season",
+          "A seasonal attraction that comes back year after year.",
+          "madrat/madrat-2.jpg"
+        ]
+      ],
+      "reveal": "madrat/madrat-1.jpg",
+      "gallery": [
+        "madrat/madrat-2.jpg",
+        "madrat/madrat-1.jpg",
+        "madrat/madrat-3.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Bezoekersaantal per avond stond op de site maar is niet bevestigd",
+        "Beeld bevestigd door Björn",
+        "Decor- of atelierbeeld zou de case sterker maken, nu zijn het drie personagefotos"
+      ]
+    },
+    {
+      "slug": "lukalloo",
+      "status": "live",
+      "featured": false,
+      "title": "Luk Alloo",
+      "script": "Luk Alloo",
+      "l2": "The talk set",
+      "disc": "TV set build",
+      "cat": "television",
+      "client": "VTM GO",
+      "year": "2023",
+      "loc": "Belgium",
+      "hero": "lukalloo/lukalloo-05.jpg",
+      "intro": "A talk set built out of an archive. Wall after wall of old cabinets filled with bundled papers, film canisters, a projector, lamps and plants, laid over layered carpets, so that wherever a camera points there is something to look at and the conversation always sits in a room with a history.",
+      "steps": [],
+      "reveal": "lukalloo/lukalloo-04.jpg",
+      "gallery": [
+        "lukalloo/lukalloo-01.jpg",
+        "lukalloo/lukalloo-02.jpg",
+        "lukalloo/lukalloo-03.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Productiehuis bevestigen. Nu staat VTM GO als opdrachtgever, dat is het platform",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
+        "Volledige programmatitel bevestigen"
+      ]
+    },
+    {
+      "slug": "dontscream",
+      "status": "live",
+      "featured": false,
+      "title": "Don't Scream",
+      "script": "Don't",
+      "l2": "Scream",
+      "disc": "TV set dressing",
+      "cat": "television",
+      "client": "All3Media",
+      "year": "2022",
+      "loc": "Belgium",
+      "hero": "dontscream/dontscream-01.jpg",
+      "intro": "A horror format for Streamz. Concept Factory built and dressed the locations the show plays out in: a church full of shrouded figures, a night forest hung with crosses, a walled graveyard with open coffins. Every set has to read as frightening on camera and stay safe for the people walking through it in the dark.",
+      "steps": [],
+      "reveal": "dontscream/dontscream-02.jpg",
+      "gallery": [
+        "dontscream/dontscream-02.jpg",
+        "dontscream/dontscream-03.jpg",
+        "dontscream/dontscream-04.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
+        "De huidige beelden zijn telefoonfotos van de set. Professioneel beeld zou deze case veel sterker maken",
+        "Streamz key art staat op uitdrukkelijke vraag van Björn in de galerij. Dat is promotiemateriaal van de zender",
+        "Aantal locaties en afleveringen bevestigen"
+      ]
+    },
+    {
+      "slug": "jamesmusical",
+      "status": "live",
+      "featured": false,
+      "title": "James — De Musical",
+      "script": "James",
+      "l2": "De Musical",
+      "disc": "TV set build",
+      "cat": "television",
+      "client": "",
+      "year": "",
+      "loc": "Belgium",
+      "hero": "jamesmusical/jamesmusical-01.jpg",
+      "intro": "A show built around one running joke: a musical about James. Concept Factory delivered both halves of it — the talk set with its red velvet and arcs of bulb lights where the conversation happens, and the stage scenes it cuts to: a teenage bedroom with an outsized gilded frame over the bed, and a rooftop at night with lit windows and a moon behind it.",
+      "steps": [],
+      "reveal": "jamesmusical/jamesmusical-02.jpg",
+      "gallery": [
+        "jamesmusical/jamesmusical-03.jpg",
+        "jamesmusical/jamesmusical-04.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Opdrachtgever en jaar ontbreken allebei. INPUT NODIG",
+        "De bestandsnamen in de Drive-map noemen Play4, maar dat is niet bevestigd",
+        "Beeld 01 is een praatdecor, de andere drie zijn toneelscenes. Bevestigen dat dit een en hetzelfde project is",
+        "SHG_G&L-83.jpg staat in de Drive-map maar is 7,5 MB en komt niet door de koppeling. Mogelijk het sterkste beeld",
+        "Twee bestanden in die map zijn persfotos van nieuwssites en zijn bewust niet gebruikt",
+        "Case nog uit te werken: uitdaging, oplossing en opbouw"
       ]
     }
   ]
