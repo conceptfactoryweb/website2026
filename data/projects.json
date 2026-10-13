@@ -333,6 +333,62 @@
       ]
     },
     {
+      "slug": "hacked",
+      "status": "live",
+      "featured": false,
+      "title": "Hacked",
+      "script": "Hacked",
+      "l2": "TV set",
+      "disc": "TV set build",
+      "cat": "television",
+      "client": "",
+      "year": "",
+      "loc": "Belgium",
+      "hero": "hacked/hacked-01.jpg",
+      "intro": "A hacker's den as a studio set. Concept Factory built a workspace that reads as lived-in and slightly illegal: a floor-to-ceiling mural of a rat at a terminal, LED strips run along every edge, server racks and old monitors on the shelves, and a geometric neon rig overhead that lights the whole room in blue and green.",
+      "steps": [],
+      "reveal": "hacked/hacked-04.jpg",
+      "gallery": [
+        "hacked/hacked-02.jpg",
+        "hacked/hacked-03.jpg",
+        "hacked/hacked-05.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Opdrachtgever en jaar ontbreken. INPUT NODIG",
+        "Zender bevestigen",
+        "Op geen van de beelden staan mensen. Een beeld met presentator of gasten zou sterker zijn",
+        "Case nog uit te werken"
+      ]
+    },
+    {
+      "slug": "temptation",
+      "status": "live",
+      "featured": false,
+      "title": "Temptation Island — Reunion",
+      "script": "Temptation",
+      "l2": "The Reunion",
+      "disc": "TV set dressing",
+      "cat": "television",
+      "client": "",
+      "year": "",
+      "loc": "Belgium",
+      "hero": "temptation/temptation-01.jpg",
+      "intro": "The reunion of Temptation Island, dressed inside a brick loft. Terracotta lounge seating in a loose circle on a pale rug, planting against the black steel and brick, and a lighting rig overhead that keeps the warmth in the room while every seat stays on camera.",
+      "steps": [],
+      "reveal": "temptation/temptation-02.jpg",
+      "gallery": [
+        "temptation/temptation-02.jpg",
+        "temptation/temptation-03.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Opdrachtgever en jaar ontbreken. INPUT NODIG",
+        "Op geen van de beelden staan mensen. Een beeld met presentator of deelnemers zou sterker zijn",
+        "Case nog uit te werken"
+      ]
+    },
+    {
       "slug": "durbuy-escape",
       "status": "live",
       "title": "Durbuy — Escape Rooms",
@@ -854,24 +910,24 @@
     {
       "slug": "stand",
       "status": "live",
-      "title": "Exhibition stand",
-      "script": "Exhibition",
-      "l2": "stand",
+      "title": "Bodart — Exhibition stand",
+      "script": "Bodart",
+      "l2": "Exhibition stand",
       "disc": "Brand & retail build",
       "cat": "brands",
-      "client": "",
+      "client": "Bodart",
       "year": "2025",
-      "loc": "",
+      "loc": "Kortrijk",
       "hero": "stand/stand-01.jpg",
-      "intro": "Een beursstand als merkomgeving: maatwerk meubilair, verlichte productwanden en een afwerkingsniveau dat van dichtbij bekeken wordt. Gebouwd in het atelier, getest, gedemonteerd en op locatie opnieuw opgebouwd.",
+      "intro": "A trade fair stand for Bodart. Custom cabinetry, lit product walls and a finish that holds up when visitors stand right next to it. Built in the workshop, tested, taken apart and put back up on site.",
       "steps": [],
       "reveal": "",
       "gallery": [],
       "stats": [],
       "needs": [
-        "Opdrachtgever, beurs en jaar bevestigen",
-        "Merken Jura en bamix zijn zichtbaar op het beeld: akkoord om te tonen?",
-        "Meer beeld van deze stand nodig (opbouw, detail, totaal)"
+        "Beurs bevestigen. De Drive-map heet Artisan Kortrijk",
+        "Professionele fotos van deze stand staan in Drive 2025/11 maar zijn 22 tot 47 MB en komen niet door de koppeling",
+        "De merken Jura en bamix staan op het beeld omdat Bodart ze verkoopt. Akkoord om te tonen?"
       ]
     }
   ]
