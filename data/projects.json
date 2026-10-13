@@ -527,6 +527,115 @@
       ]
     },
     {
+      "slug": "roodkapje",
+      "status": "live",
+      "title": "Roodkapje",
+      "script": "Roodkapje",
+      "l2": "A forest you can walk into",
+      "disc": "Theatre decor",
+      "cat": "theatre",
+      "client": "Deep Bridge",
+      "year": "2026",
+      "loc": "INPUT NODIG",
+      "hero": "roodkapje/roodkapje-01.jpg",
+      "intro": "Een volledige sprookjeswereld als theaterdecor: bomen van meters hoog, het huisje van oma en een bos dat moest werken voor een grote cast en een volledige speelreeks.",
+      "steps": [
+        [
+          "Challenge",
+          "Een bos op een speelvlak",
+          "Bomen van drie tot vijf meter hoog moeten op een scene blijven staan, veilig zijn met een grote cast eromheen en toch verplaatsbaar blijven tussen scenes.",
+          "roodkapje/roodkapje-05.jpg"
+        ],
+        [
+          "Concept",
+          "Van sprookje naar bouwpakket",
+          "Het bos opgedeeld in losse elementen: dennenboom, grote en kleine eik, een holle boom en het huisje van oma in meerdere wanden, elk apart opgebouwd en gecombineerd tot wisselende beelden.",
+          "roodkapje/roodkapje-03.jpg"
+        ],
+        [
+          "Production",
+          "EPS, robot en multiplex",
+          "Boomstammen in EPS gefreesd met de robot, met een stalen kern en een verzwaarde voet. Het huisje van oma uit multiplex met CNC-gefreesde deuren en raamwerk, op wielen zodat het in en uit beeld kan.",
+          ""
+        ],
+        [
+          "Result",
+          "Een wereld die blijft staan",
+          "Een decor waarin de hele cast kan spelen en dat van scene naar scene mee verandert.",
+          "roodkapje/roodkapje-04.jpg"
+        ]
+      ],
+      "reveal": "roodkapje/roodkapje-02.jpg",
+      "gallery": [
+        "roodkapje/roodkapje-01.jpg",
+        "roodkapje/roodkapje-02.jpg",
+        "roodkapje/roodkapje-03.jpg",
+        "roodkapje/roodkapje-04.jpg",
+        "roodkapje/roodkapje-05.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "De technische beschrijving komt uit de interne bouwlijst. Bevestigen dat het zo gebouwd is",
+        "Exacte hoogte van de bomen en aantal decorelementen: INPUT NODIG",
+        "Atelierbeeld van de robot en het frezen van de bomen zou deze case heel sterk maken",
+        "Speelperiode en aantal voorstellingen: INPUT NODIG"
+      ]
+    },
+    {
+      "slug": "mammamia",
+      "status": "live",
+      "title": "Mamma Mia",
+      "script": "Mamma Mia",
+      "l2": "A Greek taverna on a full stage",
+      "disc": "Theatre decor",
+      "cat": "theatre",
+      "client": "Deep Bridge",
+      "year": "2026",
+      "loc": "INPUT NODIG",
+      "hero": "mammamia/mammamia-01.jpg",
+      "intro": "Een Grieks eiland in een theaterzaal: witgekalkte muren, een taverne, bougainville en een portaalstructuur die het hele speelvlak omkadert en meedraait met de show.",
+      "steps": [
+        [
+          "Challenge",
+          "Van taverne naar discovloer",
+          "Dezelfde scene moet overdag een slaperig Grieks dorp zijn en een paar minuten later een volle show. Het decor moest die omslag aankunnen zonder lange wissels.",
+          "mammamia/mammamia-03.jpg"
+        ],
+        [
+          "Concept",
+          "Een portaal als omkadering",
+          "Een grote portaalstructuur rond het speelvlak die licht en projectie draagt, met daarvoor de bouwelementen van de taverne.",
+          "mammamia/mammamia-02.jpg"
+        ],
+        [
+          "Production",
+          "Gebouwd en afgewerkt",
+          "Muren, trappen, terras en gevelelementen op maat gemaakt en geschilderd tot de typische Griekse textuur, inclusief aankleding.",
+          ""
+        ],
+        [
+          "Result",
+          "Een eiland voor een volledige speelreeks",
+          "Een decor dat van intieme scene tot volledige finale meegaat.",
+          "mammamia/mammamia-04.jpg"
+        ]
+      ],
+      "reveal": "mammamia/mammamia-02.jpg",
+      "gallery": [
+        "mammamia/mammamia-01.jpg",
+        "mammamia/mammamia-02.jpg",
+        "mammamia/mammamia-03.jpg",
+        "mammamia/mammamia-04.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Wat heeft Concept Factory precies gedaan: volledig decor of specifieke elementen? INPUT NODIG",
+        "Speelperiode, zalen en aantal voorstellingen: INPUT NODIG",
+        "Atelier- en opbouwbeeld ontbreekt nog",
+        "De beschrijving van de portaalstructuur is gebaseerd op de beelden. Bevestigen"
+      ]
+    },
+    {
       "slug": "jamesco",
       "status": "live",
       "featured": false,
@@ -1050,6 +1159,115 @@
         "Locatie van de voorstelling",
         "Wie bouwde het decor (CF deed ontwerp + ondersteuning) — correcte omschrijving",
         "Atelier- of opbouwfoto's"
+      ]
+    },
+    {
+      "slug": "stilte",
+      "status": "live",
+      "title": "Stilte Aub",
+      "script": "Stilte Aub",
+      "l2": "A striped house with a secret",
+      "disc": "Theatre decor",
+      "cat": "theatre",
+      "client": "Backstage Producties",
+      "year": "2025",
+      "loc": "INPUT NODIG",
+      "hero": "stilte/stilte-01.jpg",
+      "intro": "Een theaterkomedie vraagt een decor dat meespeelt. Voor Stilte Aub bouwde Concept Factory een volledig huisinterieur met trap, deuren en een gevelwand: roze strepen, bloemenbehang en een chesterfield, allemaal op maat gemaakt in het atelier.",
+      "steps": [
+        [
+          "Challenge",
+          "Deuren die het ritme bepalen",
+          "In een komedie is elke deur een lachmoment. Het decor moest meerdere op- en afgangen geven, op verschillende niveaus, en dat voorstelling na voorstelling foutloos blijven doen.",
+          "stilte/stilte-03.jpg"
+        ],
+        [
+          "Concept",
+          "Hard contrast als stijl",
+          "Gestreept behang tegen bloemenpatroon, blauw tegen roze, gecombineerd met echt ogende lambrisering en sierlijst. Een decor dat van bij de eerste blik duidelijk maakt welk soort avond dit wordt.",
+          "stilte/stilte-02.jpg"
+        ],
+        [
+          "Production",
+          "Gebouwd in het atelier",
+          "Wanden, trappartij, schouw en gevel op maat gemaakt en afgewerkt, inclusief de volledige aankleding.",
+          ""
+        ],
+        [
+          "Result",
+          "Speelklaar en op tournee",
+          "Opgebouwd in de zaal, gedemonteerd en weer opgebouwd. Een decor dat tegen een volledige speelreeks kan.",
+          "stilte/stilte-01.jpg"
+        ]
+      ],
+      "reveal": "stilte/stilte-02.jpg",
+      "gallery": [
+        "stilte/stilte-01.jpg",
+        "stilte/stilte-02.jpg",
+        "stilte/stilte-03.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Speelperiode, zalen en aantal voorstellingen: INPUT NODIG",
+        "Atelier- en opbouwbeeld ontbreekt. In de Drive staat wel een decorfilm (DecorA-Z) die hiervoor bruikbaar kan zijn",
+        "Van deze fotoreeks komen momenteel maar 3 beelden door de Drive-koppeling, de rest is te groot",
+        "Jaar 2025 op basis van de fotodatum en de projectadministratie. Bevestigen"
+      ]
+    },
+    {
+      "slug": "gjzomershow",
+      "status": "live",
+      "title": "Gert & James Zomershow",
+      "script": "Gert & James Zomershow",
+      "l2": "Neon, arches and LED",
+      "disc": "Show decor",
+      "cat": "theatre",
+      "client": "Studio 100",
+      "year": "2025",
+      "loc": "INPUT NODIG",
+      "hero": "gjzomershow/gjzomershow-01.jpg",
+      "intro": "Een showdecor dat volledig op licht draait: neonlettering, LED-boogstructuren en verlichte kolommen die het podium van intieme praatmoment naar volledige showfinale brengen.",
+      "steps": [
+        [
+          "Challenge",
+          "Een decor dat zelf licht geeft",
+          "In een show met live band, dans en praatmomenten moet het decor de sfeer dragen. Dat betekent bouwen rond licht in plaats van licht toevoegen aan een gebouwd decor.",
+          "gjzomershow/gjzomershow-03.jpg"
+        ],
+        [
+          "Concept",
+          "Bogen en neon",
+          "Een reeks boogvormen in oplopende maat, met neonlettering als centraal beeld en verlichte kolommen aan de zijkanten voor de rustigere scenes.",
+          "gjzomershow/gjzomershow-02.jpg"
+        ],
+        [
+          "Production",
+          "Gebouwd in het atelier",
+          "De vormen op maat gemaakt, inclusief robotwerk, en opgebouwd zodat ze de verlichting dragen en tegelijk strak blijven ogen van op afstand.",
+          ""
+        ],
+        [
+          "Result",
+          "Van solo tot finale",
+          "Eenzelfde decor dat werkt voor een man alleen op scene en voor de volledige cast met band.",
+          "gjzomershow/gjzomershow-05.jpg"
+        ]
+      ],
+      "reveal": "gjzomershow/gjzomershow-02.jpg",
+      "gallery": [
+        "gjzomershow/gjzomershow-01.jpg",
+        "gjzomershow/gjzomershow-02.jpg",
+        "gjzomershow/gjzomershow-03.jpg",
+        "gjzomershow/gjzomershow-04.jpg",
+        "gjzomershow/gjzomershow-05.jpg"
+      ],
+      "stats": [],
+      "needs": [
+        "Wat heeft Concept Factory precies geleverd in dit decor? INPUT NODIG",
+        "Welke elementen zijn van Concept Factory en welke van de lichtfirma? Belangrijk voor de beschrijving",
+        "Afmetingen van de boogstructuren: INPUT NODIG",
+        "Atelier- en opbouwbeeld ontbreekt nog",
+        "Speelperiode en aantal voorstellingen: INPUT NODIG"
       ]
     },
     {
