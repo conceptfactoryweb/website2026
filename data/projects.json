@@ -1272,12 +1272,12 @@
       "year": "2025",
       "loc": "",
       "hero": "stilte/stilte-01.jpg",
-      "intro": "A farce set inside a theatre, so the set had to be a theatre as well. The front is a house: brick, pink stripes, floral wallpaper, a staircase and a balcony. Turn it around and the audience is looking at the back of that same house, bare timber framing, a JARDIN sign and the backstage of the play within the play.",
+      "intro": "A farce set inside a theatre, so the set had to be a theatre as well. The front is a house: brick, pink stripes, floral wallpaper, a staircase and a balcony. Turn it around and the audience is looking at the back of that same house, bare timber framing, a JARDIN sign and the backstage of the play within the play. The whole thing is turned by hand.",
       "steps": [
         [
           "Challenge",
           "One set that works from both sides",
-          "The script plays the same scene twice, once from the front and once from behind. That means a finished face and a reverse that is just as deliberate, because the back of the set ends up in full view.",
+          "The script plays the same scene twice, once from the front and once from behind. That means a finished face and a reverse that is just as deliberate, because the back of the set ends up in full view. And it all has to turn by hand, so weight and balance are part of the design from the first drawing.",
           "stilte/stilte-03.jpg"
         ],
         [
@@ -1294,8 +1294,8 @@
         ],
         [
           "Result",
-          "Turned around in front of a full house",
-          "Built up in the venue, turned, struck and built up again. A set that takes a full touring run.",
+          "Turned by hand",
+          "No turntable, no machinery. A two-storey house with a staircase and a balcony, built light enough and balanced well enough for the crew to swing it around themselves. Built up in the venue, turned, struck and built up again, night after night.",
           "stilte/stilte-01.jpg"
         ]
       ],
@@ -1312,7 +1312,6 @@
       "needs": [
         "Speelperiode, zalen en aantal voorstellingen: INPUT NODIG",
         "Atelier- en opbouwbeeld ontbreekt. In de Drive staat wel een decorfilm (StilteAUB_ConceptFactory_DecorA-Z_DEF.mp4) die hiervoor bruikbaar kan zijn",
-        "Hoe werd het decor gedraaid: op een draaischijf of met de hand? Dat is het sterkste technische detail van deze case en ontbreekt nog",
         "Jaar 2025 op basis van de fotodatum en de projectadministratie. Bevestigen",
         "Locatie van de voorstelling: INPUT NODIG"
       ],
