@@ -165,8 +165,14 @@
   document.getElementById('cL2').textContent = d.l2;
   document.getElementById('cIntro').textContent = d.intro;
 
-  document.getElementById('cMeta').innerHTML =
+  var metaEl = document.getElementById('cMeta');
+  metaEl.innerHTML =
     metaCell(d.client,'Client') + metaCell(d.year,'Year') + metaCell(d.disc,'Discipline') + metaCell(d.loc,'Location');
+  // geen lege kolom tonen wanneer een veld ontbreekt
+  var nMeta = metaEl.children.length;
+  if (nMeta && nMeta < 4 && window.matchMedia('(min-width: 861px)').matches) {
+    metaEl.style.gridTemplateColumns = 'repeat(' + nMeta + ', 1fr)';
+  }
   function metaCell(v,k){ if (!v) return ''; return '<div class="stat"><div class="v" style="font-size:clamp(20px,2.2vw,30px);">'+v+'</div><div class="k">'+k+'</div></div>'; }
 
   document.getElementById('cSteps').innerHTML = d.steps.map(function(s,i){
