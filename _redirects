@@ -1,0 +1,62 @@
+# Gegenereerd door scripts/build.mjs
+/case  p=durbuy  /durbuy-adventure-valley  301!
+/case  p=rmh  /roses-mystery-house  301!
+/case  p=zegeenseuh  /zeg-eens-euh  301!
+/case  p=housewives  /the-real-housewives-of-antwerp-reunion  301!
+/case  p=temptation  /temptation-island-reunion  301!
+/case  p=durbuy-escape  /durbuy-escape-rooms  301!
+/case  p=rmh-escape  /roses-mystery-house-escape-rooms  301!
+/case  p=alice  /alice-in-wonderland  301!
+/case  p=historalia  /napoleon  301!
+/case  p=dubbelepot  /dubbele-pot  301!
+/case  p=gebuur  /mijne-gebuur-heeft-het-zuur  301!
+/case  p=roodkapje  /roodkapje  301!
+/case  p=mammamia  /mamma-mia  301!
+/case  p=jamesco  /james-co  301!
+/case  p=madamesoleil  /madame-soleil  301!
+/case  p=hacked  /hacked  301!
+/case  p=slagharen  /slagharen-parade  301!
+/case  p=western  /slagharen-western-circus-show  301!
+/case  p=muizenval  /de-muizenval  301!
+/case  p=aspe  /aspe-club-paparazzi  301!
+/case  p=annie  /annie  301!
+/case  p=event  /ik-leef-voor-jou  301!
+/case  p=sprookjes  /sprookjeswandeling  301!
+/case  p=qbeach  /q-beach-house  301!
+/case  p=roxxi  /roxxi  301!
+/case  p=stand  /bodart-exhibition-stand  301!
+/case  p=lijn3  /lijn-3  301!
+/case  p=stilte  /stilte-aub  301!
+/case  p=gjzomershow  /gert-james-zomershow  301!
+/case  p=madrat  /plopsa-mad-rat  301!
+/case  p=lukalloo  /luk-alloo  301!
+/case  p=dontscream  /dont-scream  301!
+/case  p=jamesmusical  /james-de-musical  301!
+/case  /work  301!
+/durbuyadventurevalley  /durbuy-adventure-valley  301!
+/rosesmysteryhouse  /roses-mystery-house  301!
+/zegeenseuh  /zeg-eens-euh  301!
+/therealhousewivesofantwerpreunion  /the-real-housewives-of-antwerp-reunion  301!
+/temptationislandreunion  /temptation-island-reunion  301!
+/durbuyescaperooms  /durbuy-escape-rooms  301!
+/rosesmysteryhouseescaperooms  /roses-mystery-house-escape-rooms  301!
+/aliceinwonderland  /alice-in-wonderland  301!
+/dubbelepot  /dubbele-pot  301!
+/mijnegebuurheefthetzuur  /mijne-gebuur-heeft-het-zuur  301!
+/mammamia  /mamma-mia  301!
+/jamesco  /james-co  301!
+/madamesoleil  /madame-soleil  301!
+/slagharenparade  /slagharen-parade  301!
+/slagharenwesterncircusshow  /slagharen-western-circus-show  301!
+/demuizenval  /de-muizenval  301!
+/aspeclubpaparazzi  /aspe-club-paparazzi  301!
+/ikleefvoorjou  /ik-leef-voor-jou  301!
+/qbeachhouse  /q-beach-house  301!
+/bodartexhibitionstand  /bodart-exhibition-stand  301!
+/lijn3  /lijn-3  301!
+/stilteaub  /stilte-aub  301!
+/gertjameszomershow  /gert-james-zomershow  301!
+/plopsamadrat  /plopsa-mad-rat  301!
+/lukalloo  /luk-alloo  301!
+/dontscream  /dont-scream  301!
+/jamesdemusical  /james-de-musical  301!

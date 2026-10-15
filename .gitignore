@@ -1,2 +1,9 @@
 node_modules/
 .DS_Store
+.fuse_hidden*
+assets/photos/_replaced/
+deploy-*.zip
+_oldpages/
+Claude outputs/
+FOTOS-AANLEVEREN.md
+_to_delete/

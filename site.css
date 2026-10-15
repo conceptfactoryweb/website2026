@@ -172,8 +172,8 @@ svg[aria-hidden] { display: none; }
 
 /* ---------- section frame ---------- */
 section { position: relative; }
-.sec-pad { padding: clamp(76px, 10vw, 150px) 0; }
-.sec-pad-sm { padding: clamp(56px, 7vw, 96px) 0; }
+.sec-pad { padding: clamp(64px, 7.5vw, 112px) 0; }
+.sec-pad-sm { padding: clamp(48px, 5.5vw, 76px) 0; }
 .sec-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 40px; margin-bottom: 60px; flex-wrap: wrap; }
 .sec-head h2 { margin: 16px 0 0; font-size: clamp(38px, 5.2vw, 74px); max-width: 20ch; }
 .sec-num { font-family: var(--font-display); font-weight: 700; font-size: 14px; color: var(--cf-magenta); letter-spacing: 0.1em; }
