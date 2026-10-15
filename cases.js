@@ -1,7 +1,7 @@
 /* Gegenereerd door scripts/build.mjs. Niet met de hand aanpassen. */
 var PROJECTS = {
   "durbuy": {
-    "url": "durbuyadventurevalley",
+    "url": "durbuy-adventure-valley",
     "title": "Durbuy Adventure Valley",
     "script": "Adventure",
     "l2": "Valley",
@@ -48,7 +48,7 @@ var PROJECTS = {
     "stats": []
   },
   "rmh": {
-    "url": "rosesmysteryhouse",
+    "url": "roses-mystery-house",
     "title": "Rose's Mystery House",
     "script": "Rose's",
     "l2": "Mystery House",
@@ -95,7 +95,7 @@ var PROJECTS = {
     "stats": []
   },
   "zegeenseuh": {
-    "url": "zegeenseuh",
+    "url": "zeg-eens-euh",
     "title": "Zeg Eens Euh",
     "script": "Zeg Eens",
     "l2": "Euh",
@@ -143,7 +143,7 @@ var PROJECTS = {
     "stats": []
   },
   "housewives": {
-    "url": "therealhousewivesofantwerpreunion",
+    "url": "the-real-housewives-of-antwerp-reunion",
     "title": "The Real Housewives of Antwerp — Reunion",
     "script": "Real Housewives",
     "l2": "The Reunion",
@@ -163,7 +163,7 @@ var PROJECTS = {
     "stats": []
   },
   "temptation": {
-    "url": "temptationislandreunion",
+    "url": "temptation-island-reunion",
     "title": "Temptation Island — Reunion",
     "script": "Temptation",
     "l2": "The Reunion",
@@ -183,7 +183,7 @@ var PROJECTS = {
     "stats": []
   },
   "durbuy-escape": {
-    "url": "durbuyescaperooms",
+    "url": "durbuy-escape-rooms",
     "title": "Durbuy — Escape Rooms",
     "script": "Escape",
     "l2": "Rooms at Durbuy",
@@ -230,7 +230,7 @@ var PROJECTS = {
     "stats": []
   },
   "rmh-escape": {
-    "url": "rosesmysteryhouseescaperooms",
+    "url": "roses-mystery-house-escape-rooms",
     "title": "Rose's Mystery House — Escape Rooms",
     "script": "Rose's",
     "l2": "Escape Rooms",
@@ -277,7 +277,7 @@ var PROJECTS = {
     "stats": []
   },
   "alice": {
-    "url": "aliceinwonderland",
+    "url": "alice-in-wonderland",
     "title": "Alice in Wonderland",
     "script": "Alice",
     "l2": "in Wonderland",
@@ -286,7 +286,7 @@ var PROJECTS = {
     "year": "2026",
     "loc": "Antwerp",
     "hero": "alice/alice-01.jpg",
-    "intro": "Een volledige theaterwereld voor Deep Bridge: gebouwde decorstukken op ware grootte, van een kattenkop van meters hoog tot speelkaarten, paddenstoelen en de troon van de Hartenkoningin. Alles moet werken onder theaterlicht, snel wisselen tussen scenes en een volledige speelreeks doorstaan.",
+    "intro": "A full stage world for Deep Bridge: set pieces built at true scale, from a cat's head several metres high to playing cards, mushrooms and the Queen of Hearts' throne. Everything has to hold up under stage light, change fast between scenes and survive a full run.",
     "steps": [],
     "reveal": "alice/alice-04.jpg",
     "gallery": [
@@ -343,39 +343,39 @@ var PROJECTS = {
     "stats": []
   },
   "dubbelepot": {
-    "url": "dubbelepot",
+    "url": "dubbele-pot",
     "title": "Dubbele Pot",
     "script": "Dubbele Pot",
     "l2": "A village cafe, built to be played in",
     "disc": "Theatre decor",
     "client": "Backstage Producties",
     "year": "2026",
-    "loc": "INPUT NODIG",
+    "loc": "",
     "hero": "dubbelepot/dubbelepot-01.jpg",
-    "intro": "Een volledig cafe-interieur als theaterdecor voor de komedie Dubbele Pot: toog, receptiebalie, trap naar boven en een eethoek, allemaal gebouwd in het atelier en opgebouwd op de scene.",
+    "intro": "A complete cafe interior as a stage set for the comedy Dubbele Pot: a bar, a reception desk, a staircase and a dining corner, all built in the atelier and assembled on stage.",
     "steps": [
       [
         "Challenge",
-        "Een huiskamer die van ver moet werken",
-        "Een cafe met pension moet herkenbaar en gezellig ogen tot op de laatste rij, en tegelijk licht genoeg blijven om mee op tournee te gaan.",
+        "A living room that reads from the back row",
+        "A village cafe with rooms upstairs has to look lived-in and warm all the way to the last row, and still stay light enough to tour.",
         "dubbelepot/dubbelepot-02.jpg"
       ],
       [
         "Concept",
-        "Kleur als karakter",
-        "Rood, groen en oker tegen elkaar gezet, met sierlijst, lambrisering en een gelegd parketpatroon. De kleur doet het werk dat decor op afstand moet doen.",
+        "Colour doing the work",
+        "Red, green and ochre set against each other, with mouldings, wainscoting and a laid parquet pattern. On a stage, colour is what carries a set across distance.",
         "dubbelepot/dubbelepot-03.jpg"
       ],
       [
         "Production",
-        "Gebouwd in het atelier",
-        "Wanden, lijstwerk, toog en trap op maat gemaakt, geschilderd en afgewerkt, inclusief de aankleding tot en met de bel op de balie.",
+        "Built in the atelier",
+        "Walls, mouldings, the bar and the staircase made to measure, painted and finished, down to the dressing and the bell on the desk.",
         "dubbelepot/dubbelepot-06.jpg"
       ],
       [
         "Result",
-        "Speelklaar",
-        "Een decor met deuren, hoeken en niveaus waar de cast echt in kan spelen.",
+        "Ready to play",
+        "A set with doors, corners and levels the cast can actually live in.",
         "dubbelepot/dubbelepot-05.jpg"
       ]
     ],
@@ -391,39 +391,39 @@ var PROJECTS = {
     "stats": []
   },
   "gebuur": {
-    "url": "mijnegebuurheefthetzuur",
+    "url": "mijne-gebuur-heeft-het-zuur",
     "title": "Mijne gebuur heeft het zuur",
     "script": "Mijne gebuur heeft het zuur",
     "l2": "Two apartments, one cross-section",
     "disc": "Theatre decor",
     "client": "Go4Show",
     "year": "2026",
-    "loc": "INPUT NODIG",
+    "loc": "",
     "hero": "gebuur/gebuur-01.jpg",
-    "intro": "Een theaterkomedie waarin twee buren elkaar het leven zuur maken, en dus een decor dat beide appartementen tegelijk toont: twee bouwlagen, twee interieurs en een doorsnede waarin het publiek alles ziet wat de personages voor elkaar verbergen.",
+    "intro": "A comedy about two neighbours making each other's lives miserable, so the set shows both flats at once: two storeys, two interiors and a cross-section in which the audience sees everything the characters hide from each other.",
     "steps": [
       [
         "Challenge",
-        "Twee woningen op een scene",
-        "Het stuk speelt zich in twee appartementen af. Het decor moest die allebei tegelijk tonen, boven en onder, zonder dat het publiek zicht verliest.",
+        "Two homes on one stage",
+        "The play runs in two flats. The set had to show both at the same time, upstairs and downstairs, without the audience losing sight of either.",
         "gebuur/gebuur-05.jpg"
       ],
       [
         "Concept",
-        "Een doorsnede als speelvlak",
-        "Een opengewerkte gevel met twee verdiepingen, elk met een eigen interieur, kleur en sfeer. Wie boven staat speelt mee met wie beneden zit.",
+        "A cross-section as a playing surface",
+        "An opened-up facade over two floors, each with its own interior, colour and mood. Whoever is upstairs plays against whoever is sitting downstairs.",
         "gebuur/gebuur-03.jpg"
       ],
       [
         "Production",
-        "Gebouwd in het atelier",
-        "Draagstructuur, trap en vloeren op sterkte gebouwd, wanden en interieur afgewerkt tot en met het behang en de schilderijtjes.",
+        "Built in the atelier",
+        "Load-bearing structure, stairs and floors built to take the weight, walls and interiors finished down to the wallpaper and the pictures on it.",
         "gebuur/gebuur-06.jpg"
       ],
       [
         "Result",
-        "Alles in beeld",
-        "Een decor waarin elke scene zichtbaar blijft en het publiek de twee huishoudens naast elkaar kan volgen.",
+        "Everything in frame",
+        "A set where every scene stays visible and the audience can follow both households side by side.",
         "gebuur/gebuur-04.jpg"
       ]
     ],
@@ -446,26 +446,26 @@ var PROJECTS = {
     "disc": "Theatre decor",
     "client": "Deep Bridge",
     "year": "2026",
-    "loc": "INPUT NODIG",
+    "loc": "",
     "hero": "roodkapje/roodkapje-01.jpg",
-    "intro": "Een volledige sprookjeswereld als theaterdecor: bomen van meters hoog, het huisje van oma en een bos dat moest werken voor een grote cast en een volledige speelreeks.",
+    "intro": "A full fairy-tale world as a stage set: trees several metres high, grandmother's house and a forest that had to work for a large cast and a full run.",
     "steps": [
       [
         "Challenge",
-        "Een bos op een speelvlak",
-        "Bomen van drie tot vijf meter hoog moeten op een scene blijven staan, veilig zijn met een grote cast eromheen en toch verplaatsbaar blijven tussen scenes.",
+        "A forest on a playing surface",
+        "Trees of three to five metres have to stand up on a stage, stay safe with a large cast around them and still move between scenes.",
         "roodkapje/roodkapje-05.jpg"
       ],
       [
         "Concept",
-        "Van sprookje naar bouwpakket",
-        "Het bos opgedeeld in losse elementen: dennenboom, grote en kleine eik, een holle boom en het huisje van oma in meerdere wanden, elk apart opgebouwd en gecombineerd tot wisselende beelden.",
+        "From fairy tale to kit of parts",
+        "The forest split into separate elements: a pine, a large and a small oak, a hollow tree and grandmother's house in several wall sections, each built on its own and combined into changing stage pictures.",
         "roodkapje/roodkapje-03.jpg"
       ],
       [
         "Result",
-        "Een wereld die blijft staan",
-        "Een decor waarin de hele cast kan spelen en dat van scene naar scene mee verandert.",
+        "A world that stays standing",
+        "A set the whole cast can play in, changing from scene to scene.",
         "roodkapje/roodkapje-04.jpg"
       ]
     ],
@@ -480,33 +480,33 @@ var PROJECTS = {
     "stats": []
   },
   "mammamia": {
-    "url": "mammamia",
+    "url": "mamma-mia",
     "title": "Mamma Mia",
     "script": "Mamma Mia",
     "l2": "A Greek taverna on a full stage",
     "disc": "Theatre decor",
     "client": "Deep Bridge",
     "year": "2026",
-    "loc": "INPUT NODIG",
+    "loc": "",
     "hero": "mammamia/mammamia-01.jpg",
-    "intro": "Een Grieks eiland in een theaterzaal: witgekalkte muren, een taverne, bougainville en een portaalstructuur die het hele speelvlak omkadert en meedraait met de show.",
+    "intro": "A Greek island inside a theatre: whitewashed walls, a taverna, bougainvillea and a portal structure that frames the whole playing surface and turns with the show.",
     "steps": [
       [
         "Challenge",
-        "Van taverne naar discovloer",
-        "Dezelfde scene moet overdag een slaperig Grieks dorp zijn en een paar minuten later een volle show. Het decor moest die omslag aankunnen zonder lange wissels.",
+        "From taverna to dance floor",
+        "The same stage has to be a sleepy Greek village one minute and a full show the next. The set had to carry that switch without long changeovers.",
         "mammamia/mammamia-03.jpg"
       ],
       [
         "Concept",
-        "Een portaal als omkadering",
-        "Een grote portaalstructuur rond het speelvlak die licht en projectie draagt, met daarvoor de bouwelementen van de taverne.",
+        "A portal as a frame",
+        "A large portal structure around the playing surface, carrying light and projection, with the built taverna elements in front of it.",
         "mammamia/mammamia-02.jpg"
       ],
       [
         "Result",
-        "Een eiland voor een volledige speelreeks",
-        "Een decor dat van intieme scene tot volledige finale meegaat.",
+        "An island for a full run",
+        "A set that carries everything from an intimate scene to the closing number.",
         "mammamia/mammamia-04.jpg"
       ]
     ],
@@ -520,7 +520,7 @@ var PROJECTS = {
     "stats": []
   },
   "jamesco": {
-    "url": "jamesco",
+    "url": "james-co",
     "title": "James & Co",
     "script": "James & Co",
     "l2": "The piggy bank",
@@ -536,7 +536,7 @@ var PROJECTS = {
     "stats": []
   },
   "madamesoleil": {
-    "url": "madamesoleil",
+    "url": "madame-soleil",
     "title": "Madame Soleil",
     "script": "Madame Soleil",
     "l2": "The fortune teller's set",
@@ -572,7 +572,7 @@ var PROJECTS = {
     "stats": []
   },
   "slagharen": {
-    "url": "slagharenparade",
+    "url": "slagharen-parade",
     "title": "Slagharen Parade",
     "script": "Slagharen",
     "l2": "Parade",
@@ -619,7 +619,7 @@ var PROJECTS = {
     "stats": []
   },
   "western": {
-    "url": "slagharenwesterncircusshow",
+    "url": "slagharen-western-circus-show",
     "title": "Slagharen — Western Circus Show",
     "script": "Western",
     "l2": "Circus Show",
@@ -640,7 +640,7 @@ var PROJECTS = {
     "stats": []
   },
   "muizenval": {
-    "url": "demuizenval",
+    "url": "de-muizenval",
     "title": "De Muizenval",
     "script": "De Muizenval",
     "l2": "A full stage world",
@@ -681,7 +681,7 @@ var PROJECTS = {
     "stats": []
   },
   "aspe": {
-    "url": "aspeclubpaparazzi",
+    "url": "aspe-club-paparazzi",
     "title": "Aspe — Club Paparazzi",
     "script": "Aspe",
     "l2": "Club Paparazzi",
@@ -753,7 +753,7 @@ var PROJECTS = {
     "stats": []
   },
   "event": {
-    "url": "ikleefvoorjou",
+    "url": "ik-leef-voor-jou",
     "title": "Ik Leef Voor Jou",
     "script": "Ik Leef",
     "l2": "Voor Jou",
@@ -794,7 +794,7 @@ var PROJECTS = {
     "year": "2025",
     "loc": "Boom",
     "hero": "sprookjes/sprookjes-04.jpg",
-    "intro": "Een sprookjeswandeling door het bos: een reeks decorscenes die alleen in het donker werken. Concept Factory bouwde de sets, de huisjes en de props zo dat ze bij avondlicht en kunstlicht blijven kloppen, en dat ze een volledig seizoen buiten overeind blijven staan.",
+    "intro": "A fairy-tale walk through the forest: a series of built scenes that only work in the dark. Concept Factory built the sets, the houses and the props so that they hold up under evening light and artificial light, and stay standing outdoors for a full season.",
     "steps": [],
     "reveal": "sprookjes/sprookjes-08.jpg",
     "gallery": [
@@ -809,7 +809,7 @@ var PROJECTS = {
     "stats": []
   },
   "qbeach": {
-    "url": "qbeachhouse",
+    "url": "q-beach-house",
     "title": "Q Beach House",
     "script": "Q Beach",
     "l2": "House",
@@ -849,7 +849,7 @@ var PROJECTS = {
     "stats": []
   },
   "stand": {
-    "url": "bodartexhibitionstand",
+    "url": "bodart-exhibition-stand",
     "title": "Bodart — Exhibition stand",
     "script": "Bodart",
     "l2": "Exhibition stand",
@@ -865,14 +865,14 @@ var PROJECTS = {
     "stats": []
   },
   "lijn3": {
-    "url": "lijn3",
+    "url": "lijn-3",
     "title": "Lijn 3",
     "script": "Lijn 3",
     "l2": "A street, rebuilt outdoors",
     "disc": "Scenic design & production support",
     "client": "Lijn 3",
     "year": "2025",
-    "loc": "INPUT NODIG",
+    "loc": "",
     "hero": "lijn3/lijn3-01.jpg",
     "intro": "A large open-air stage set for the production Lijn 3 — Concept Factory took care of the scenic design and supported the build, turning a full street of house fronts into a playable stage.",
     "steps": [
@@ -912,33 +912,39 @@ var PROJECTS = {
     "stats": []
   },
   "stilte": {
-    "url": "stilteaub",
+    "url": "stilte-aub",
     "title": "Stilte Aub",
     "script": "Stilte Aub",
-    "l2": "A striped house with a secret",
+    "l2": "One set, two sides",
     "disc": "Theatre decor",
     "client": "Backstage Producties",
     "year": "2025",
-    "loc": "INPUT NODIG",
+    "loc": "",
     "hero": "stilte/stilte-01.jpg",
-    "intro": "Een theaterkomedie vraagt een decor dat meespeelt. Voor Stilte Aub bouwde Concept Factory een volledig huisinterieur met trap, deuren en een gevelwand: roze strepen, bloemenbehang en een chesterfield, allemaal op maat gemaakt in het atelier.",
+    "intro": "A farce set inside a theatre, so the set had to be a theatre as well. The front is a house: brick, pink stripes, floral wallpaper, a staircase and a balcony. Turn it around and the audience is looking at the back of that same house, bare timber framing, a JARDIN sign and the backstage of the play within the play.",
     "steps": [
       [
         "Challenge",
-        "Deuren die het ritme bepalen",
-        "In een komedie is elke deur een lachmoment. Het decor moest meerdere op- en afgangen geven, op verschillende niveaus, en dat voorstelling na voorstelling foutloos blijven doen.",
+        "One set that works from both sides",
+        "The script plays the same scene twice, once from the front and once from behind. That means a finished face and a reverse that is just as deliberate, because the back of the set ends up in full view.",
         "stilte/stilte-03.jpg"
       ],
       [
         "Concept",
-        "Hard contrast als stijl",
-        "Gestreept behang tegen bloemenpatroon, blauw tegen roze, gecombineerd met echt ogende lambrisering en sierlijst. Een decor dat van bij de eerste blik duidelijk maakt welk soort avond dit wordt.",
+        "The back is a set too",
+        "Front: brick, pink stripes, floral wallpaper and a chesterfield. Back: the raw frame of that exact house, with the markings and signage a real backstage has. Nothing is hidden here, so everything had to be designed.",
         "stilte/stilte-02.jpg"
       ],
       [
+        "Production",
+        "Doors set the rhythm",
+        "In a farce every door is a laugh. The set gives entrances and exits on several levels, and they have to work faultlessly, performance after performance, from both sides.",
+        "stilte/stilte-06.jpg"
+      ],
+      [
         "Result",
-        "Speelklaar en op tournee",
-        "Opgebouwd in de zaal, gedemonteerd en weer opgebouwd. Een decor dat tegen een volledige speelreeks kan.",
+        "Turned around in front of a full house",
+        "Built up in the venue, turned, struck and built up again. A set that takes a full touring run.",
         "stilte/stilte-01.jpg"
       ]
     ],
@@ -946,38 +952,41 @@ var PROJECTS = {
     "gallery": [
       "stilte/stilte-01.jpg",
       "stilte/stilte-02.jpg",
-      "stilte/stilte-03.jpg"
+      "stilte/stilte-03.jpg",
+      "stilte/stilte-04.jpg",
+      "stilte/stilte-05.jpg",
+      "stilte/stilte-06.jpg"
     ],
     "stats": []
   },
   "gjzomershow": {
-    "url": "gertjameszomershow",
+    "url": "gert-james-zomershow",
     "title": "Gert & James Zomershow",
     "script": "Gert & James Zomershow",
     "l2": "Neon, arches and LED",
     "disc": "Show decor",
     "client": "Studio 100",
     "year": "2025",
-    "loc": "INPUT NODIG",
+    "loc": "",
     "hero": "gjzomershow/gjzomershow-01.jpg",
-    "intro": "Een showdecor dat volledig op licht draait: neonlettering, LED-boogstructuren en verlichte kolommen die het podium van intieme praatmoment naar volledige showfinale brengen.",
+    "intro": "A show set that runs entirely on light: neon lettering, LED arch structures and lit columns that carry the stage from an intimate talk to a full finale.",
     "steps": [
       [
         "Challenge",
-        "Een decor dat zelf licht geeft",
-        "In een show met live band, dans en praatmomenten moet het decor de sfeer dragen. Dat betekent bouwen rond licht in plaats van licht toevoegen aan een gebouwd decor.",
+        "A set that gives off its own light",
+        "In a show with a live band, dance and talk sections, the set has to carry the mood. That means building around light instead of adding light to a finished set.",
         "gjzomershow/gjzomershow-03.jpg"
       ],
       [
         "Concept",
-        "Bogen en neon",
-        "Een reeks boogvormen in oplopende maat, met neonlettering als centraal beeld en verlichte kolommen aan de zijkanten voor de rustigere scenes.",
+        "Arches and neon",
+        "A series of arch shapes in increasing size, with neon lettering as the central image and lit columns at the sides for the quieter scenes.",
         "gjzomershow/gjzomershow-02.jpg"
       ],
       [
         "Result",
-        "Van solo tot finale",
-        "Eenzelfde decor dat werkt voor een man alleen op scene en voor de volledige cast met band.",
+        "From solo to finale",
+        "One set that works for one man alone on stage and for the full cast with the band.",
         "gjzomershow/gjzomershow-05.jpg"
       ]
     ],
@@ -992,7 +1001,7 @@ var PROJECTS = {
     "stats": []
   },
   "madrat": {
-    "url": "plopsamadrat",
+    "url": "plopsa-mad-rat",
     "title": "Plopsa — Mad Rat",
     "script": "Mad Rat",
     "l2": "Halloween at Plopsa",
@@ -1031,7 +1040,7 @@ var PROJECTS = {
     "stats": []
   },
   "lukalloo": {
-    "url": "lukalloo",
+    "url": "luk-alloo",
     "title": "Luk Alloo",
     "script": "Luk Alloo",
     "l2": "The talk set",
@@ -1051,7 +1060,7 @@ var PROJECTS = {
     "stats": []
   },
   "dontscream": {
-    "url": "dontscream",
+    "url": "dont-scream",
     "title": "Don't Scream",
     "script": "Don't",
     "l2": "Scream",
@@ -1071,7 +1080,7 @@ var PROJECTS = {
     "stats": []
   },
   "jamesmusical": {
-    "url": "jamesdemusical",
+    "url": "james-de-musical",
     "title": "James — De Musical",
     "script": "James",
     "l2": "De Musical",

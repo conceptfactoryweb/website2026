@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Bouwt de projecttegels en de case-data uit data/projects.json.
 // Gebruik: node scripts/build.mjs   (daarna committen)
-import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync, mkdirSync, renameSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -23,10 +23,14 @@ for (const p of all) {
   seenSlug.add(p.slug);
   if (!p.url) errors.push(`${p.slug}: geen url`);
   else {
-    if (!/^[a-z0-9]+$/.test(p.url)) errors.push(`${p.slug}: url mag alleen kleine letters en cijfers bevatten -> ${p.url}`);
+    if (!/^[a-z0-9]+(-[a-z0-9]+)*$/.test(p.url)) errors.push(`${p.slug}: url mag alleen kleine letters, cijfers en koppeltekens bevatten -> ${p.url}`);
     if (RESERVED.has(p.url)) errors.push(`${p.slug}: url botst met een bestaande pagina -> /${p.url}`);
     if (seenUrl.has(p.url)) errors.push(`dubbele url: /${p.url}`);
     seenUrl.add(p.url);
+    for (const al of p.aliases || []) {
+      if (seenUrl.has(al)) errors.push(`${p.slug}: alias botst met een andere url -> /${al}`);
+      seenUrl.add(al);
+    }
   }
   const photos = [p.hero, p.reveal, ...(p.gallery || []), ...(p.steps || []).map(s => s[3])].filter(Boolean);
   for (const ph of photos) {
@@ -39,6 +43,13 @@ for (const p of all) {
     owner.set(ph, p.slug);
   }
   if (p.status === 'live' && !p.hero) errors.push(`${p.slug}: live zonder hero`);
+  // PLACEHOLDER: INPUT NODIG hoort in needs, nooit in een veld dat op de site komt
+  for (const k of ['title','script','l2','disc','client','year','loc','intro']) {
+    if (/INPUT NODIG|NOG TE BEPALEN/i.test(p[k] || '')) errors.push(`${p.slug}: placeholder in zichtbaar veld "${k}" -> zet hem in needs`);
+  }
+  for (const st of p.steps || []) {
+    if (/INPUT NODIG|NOG TE BEPALEN/i.test([st[0], st[1], st[2]].join(' '))) errors.push(`${p.slug}: placeholder in een case-stap -> zet hem in needs`);
+  }
   const noPhoto = (p.steps || []).filter(s => !s[3]).length;
   if (noPhoto) warns.push(`${p.slug}: ${noPhoto} stap(pen) zonder beeld, wordt niet getoond`);
   for (const n of p.needs || []) warns.push(`${p.slug}: ${n}`);
@@ -148,14 +159,22 @@ for (const p of live) {
 for (const f of readdirSync(root)) {
   if (!f.endsWith('.html') || generated.has(f)) continue;
   const src = readFileSync(join(root, f), 'utf8');
-  if (src.includes(GEN)) { unlinkSync(join(root, f)); console.log('verwijderd: ' + f); }
+  if (!src.includes(GEN)) continue;
+  // op de aangekoppelde map kan node niet verwijderen (FUSE): dan opzij zetten
+  try { unlinkSync(join(root, f)); console.log('verwijderd: ' + f); }
+  catch (e) {
+    mkdirSync(join(root, '_oldpages'), { recursive: true });
+    renameSync(join(root, f), join(root, '_oldpages', f));
+    console.log('opzij gezet: ' + f + ' -> _oldpages/');
+  }
 }
 
 // ---------- oude /case?p= links blijven werken ----------
-writeFileSync(join(root, '_redirects'),
-  '# Gegenereerd door scripts/build.mjs\n' +
-  live.map(p => `/case  p=${p.slug}  /${p.url}  301!`).join('\n') +
-  '\n/case  /work  301!\n');
+const redirectLines = [];
+for (const p of live) redirectLines.push(`/case  p=${p.slug}  /${p.url}  301!`);
+redirectLines.push('/case  /work  301!');
+for (const p of live) for (const al of p.aliases || []) redirectLines.push(`/${al}  /${p.url}  301!`);
+writeFileSync(join(root, '_redirects'), '# Gegenereerd door scripts/build.mjs\n' + redirectLines.join('\n') + '\n');
 
 // ---------- industries ----------
 const INDUSTRY = { 'theme-parks': 'theme-parks', 'theatre': 'theatre', 'tv-film': 'television', 'brands': 'brands', 'events': 'events', 'museums': 'museums' };
