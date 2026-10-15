@@ -201,8 +201,16 @@ for (const [id, cat] of Object.entries(INDUSTRY)) {
 // ---------- sitemap ----------
 const smPath = join(root, 'sitemap.xml');
 let sm = readFileSync(smPath, 'utf8');
-for (const u of new Set([...all.map(p => p.url).filter(Boolean), 'case'])) {
-  sm = sm.replace(new RegExp('<url><loc>https://conceptfactory\\.be/(case[^<]*|' + u + ')</loc>[\\s\\S]*?</url>\\n?', 'g'), '');
+// elke project-url weghalen: de huidige, elke oude alias en de oude /case-vorm.
+// Een url die doorstuurt hoort niet in een sitemap, dus aliassen gaan er altijd uit.
+const stale = new Set(['case']);
+for (const p of all) {
+  if (p.url) stale.add(p.url);
+  for (const al of p.aliases || []) stale.add(al);
+}
+for (const u of stale) {
+  const esc = u.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  sm = sm.replace(new RegExp('<url><loc>https://conceptfactory\\.be/(case[^<]*|' + esc + ')</loc>[\\s\\S]*?</url>\\n?', 'g'), '');
 }
 const today = new Date().toISOString().slice(0, 10);
 const caseUrls = live.map(p => `<url><loc>https://conceptfactory.be/${p.url}</loc><lastmod>${today}</lastmod><priority>0.7</priority></url>`).join('\n');

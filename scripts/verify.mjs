@@ -27,6 +27,12 @@ for (const p of ps.filter(p=>p.status==='live')) {
   if (!p.url) { console.log('GEEN URL', p.slug); bad++; continue; }
   if (!fs.existsSync(p.url + '.html')) { console.log('PAGINA ONTBREEKT', p.slug, '->', p.url + '.html'); bad++; }
 }
+// een url die doorstuurt hoort niet in de sitemap
+const smap = fs.existsSync('sitemap.xml') ? fs.readFileSync('sitemap.xml','utf8') : '';
+for (const p of ps) for (const al of p.aliases || []) {
+  if (smap.includes('conceptfactory.be/' + al + '<')) { console.log('OUDE URL IN SITEMAP', al, '(stuurt door naar /' + p.url + ')'); bad++; }
+}
+if (smap.includes('/case?p=')) { console.log('OUDE /case-link in sitemap'); bad++; }
 const red = fs.existsSync('_redirects') ? fs.readFileSync('_redirects','utf8') : '';
 for (const p of ps.filter(p=>p.status==='live')) {
   if (!red.includes('p=' + p.slug + ' ')) { console.log('GEEN REDIRECT voor oude link', p.slug); bad++; }
