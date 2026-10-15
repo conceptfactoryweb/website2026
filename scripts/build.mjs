@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Bouwt de projecttegels en de case-data uit data/projects.json.
 // Gebruik: node scripts/build.mjs   (daarna committen)
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, unlinkSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -13,10 +13,21 @@ const errors = [], warns = [];
 
 // ---------- validatie ----------
 const seenSlug = new Set();
+const seenUrl = new Set();
+const RESERVED = new Set(['index','work','about','contact','industries','careers','legal','case','cases',
+  'iaapa2026','actuals','actuals-rapport','assets','data','scripts','netlify','mail','tokens',
+  'sitemap','robots','styles','site','favicon','admin','book','slots','api']);
 const owner = new Map(); // foto -> slug
 for (const p of all) {
   if (seenSlug.has(p.slug)) errors.push(`dubbele slug: ${p.slug}`);
   seenSlug.add(p.slug);
+  if (!p.url) errors.push(`${p.slug}: geen url`);
+  else {
+    if (!/^[a-z0-9]+$/.test(p.url)) errors.push(`${p.slug}: url mag alleen kleine letters en cijfers bevatten -> ${p.url}`);
+    if (RESERVED.has(p.url)) errors.push(`${p.slug}: url botst met een bestaande pagina -> /${p.url}`);
+    if (seenUrl.has(p.url)) errors.push(`dubbele url: /${p.url}`);
+    seenUrl.add(p.url);
+  }
   const photos = [p.hero, p.reveal, ...(p.gallery || []), ...(p.steps || []).map(s => s[3])].filter(Boolean);
   for (const ph of photos) {
     if (!existsSync(join(root, 'assets/photos', ph))) errors.push(`${p.slug}: foto bestaat niet -> ${ph}`);
@@ -41,7 +52,7 @@ const arrow = 'View case <svg class="icon"><use href="#i-arrow-up-right"/></svg>
 function tile(p, idx, cls, extraRow) {
   const bits = [p.client, p.year].filter(Boolean).map(esc).join(' · ');
   const row = extraRow && bits ? `<div class="tile__row">${bits}</div>` : '';
-  return `      <a class="${cls}" data-cat="${esc(p.cat)}" href="/case?p=${p.slug}">`
+  return `      <a class="${cls}" data-cat="${esc(p.cat)}" href="/${p.url}">`
     + `<img src="assets/photos/${esc(p.hero)}" alt="${esc(p.title)} — ${esc(p.disc)} by Concept Factory" loading="lazy" />`
     + `<div class="tile__scrim"></div><span class="tile__idx">${String(idx).padStart(3, '0')}</span>`
     + `<div class="tile__meta"><div class="tile__disc">${esc(p.disc)}</div><div class="tile__title">${esc(p.title)}</div>${row}`
@@ -82,10 +93,11 @@ const sp = spans(live.length);
 replaceBlock('work.html', 'work-grid', live.map((p, i) =>
   tile(p, i + 1, `tile ${sp[i]}${sp[i] === 'col8' ? '' : ''} reveal-up`, true)).join('\n'));
 
-// ---------- case: data ----------
+// ---------- case: data in cases.js ----------
 const caseData = {};
 for (const p of live) {
   caseData[p.slug] = {
+    url: p.url,
     title: p.title, script: p.script, l2: p.l2, disc: p.disc, client: p.client, year: p.year, loc: p.loc,
     hero: p.hero, intro: p.intro,
     steps: (p.steps || []).filter(s => s[3]),
@@ -94,9 +106,56 @@ for (const p of live) {
     stats: p.stats || []
   };
 }
-replaceBlock('case.html', 'projects',
-  '  var PROJECTS = ' + JSON.stringify(caseData, null, 2).split('\n').join('\n  ') + ';\n' +
-  '  var ORDER = ' + JSON.stringify(live.map(p => p.slug)) + ';');
+writeFileSync(join(root, 'cases.js'),
+  '/* Gegenereerd door scripts/build.mjs. Niet met de hand aanpassen. */\n' +
+  'var PROJECTS = ' + JSON.stringify(caseData, null, 2) + ';\n' +
+  'var ORDER = ' + JSON.stringify(live.map(p => p.slug)) + ';\n');
+
+// ---------- een echte pagina per project ----------
+const GEN = '<!-- gegenereerd door scripts/build.mjs -->';
+const tpl = readFileSync(join(root, 'case.html'), 'utf8');
+const SITE = 'https://conceptfactory.be';
+
+function metaFor(p) {
+  const bits = [p.client, p.year].filter(Boolean).join(', ');
+  const d = (p.intro || '').replace(/\s+/g, ' ').trim();
+  const desc = (d.length > 155 ? d.slice(0, 152).replace(/[\s,.;:–-]+$/, '') + '...' : d)
+    || `${p.title} — ${p.disc} door Concept Factory${bits ? ' (' + bits + ')' : ''}.`;
+  return { title: `${p.title} — ${p.disc} | Concept Factory`, desc, url: `${SITE}/${p.url}`, img: `${SITE}/assets/photos/${p.hero}` };
+}
+
+const generated = new Set();
+for (const p of live) {
+  const m = metaFor(p);
+  let html = tpl
+    .replace(/<meta name="robots"[^>]*\/><!-- TEMPLATE-ONLY -->\n?/, '')
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(m.title)}</title>`)
+    .replace(/<meta name="description" content="[\s\S]*?" \/>/, `<meta name="description" content="${esc(m.desc)}" />`)
+    .replace(/<link rel="canonical" href="[\s\S]*?" \/>/, `<link rel="canonical" href="${m.url}" />`)
+    .replace(/<meta property="og:title" content="[\s\S]*?" \/>/, `<meta property="og:title" content="${esc(m.title)}" />`)
+    .replace(/<meta property="og:description" content="[\s\S]*?" \/>/, `<meta property="og:description" content="${esc(m.desc)}" />`)
+    .replace(/<meta property="og:url" content="[\s\S]*?" \/>/, `<meta property="og:url" content="${m.url}" />`)
+    .replace(/<meta property="og:image" content="[\s\S]*?" \/>/, `<meta property="og:image" content="${esc(m.img)}" />`)
+    .replace(/<meta name="twitter:title" content="[\s\S]*?" \/>/, `<meta name="twitter:title" content="${esc(m.title)}" />`)
+    .replace(/<meta name="twitter:description" content="[\s\S]*?" \/>/, `<meta name="twitter:description" content="${esc(m.desc)}" />`)
+    .replace(/<meta name="twitter:image" content="[\s\S]*?" \/>/, `<meta name="twitter:image" content="${esc(m.img)}" />`)
+    .replace('<!-- CASEDATA -->', `${GEN}\n<script>window.FORCED_SLUG=${JSON.stringify(p.slug)};</script>`);
+  writeFileSync(join(root, p.url + '.html'), html);
+  generated.add(p.url + '.html');
+}
+
+// oude projectpagina's opruimen die niet meer bestaan
+for (const f of readdirSync(root)) {
+  if (!f.endsWith('.html') || generated.has(f)) continue;
+  const src = readFileSync(join(root, f), 'utf8');
+  if (src.includes(GEN)) { unlinkSync(join(root, f)); console.log('verwijderd: ' + f); }
+}
+
+// ---------- oude /case?p= links blijven werken ----------
+writeFileSync(join(root, '_redirects'),
+  '# Gegenereerd door scripts/build.mjs\n' +
+  live.map(p => `/case  p=${p.slug}  /${p.url}  301!`).join('\n') +
+  '\n/case  /work  301\n');
 
 // ---------- industries ----------
 const INDUSTRY = { 'theme-parks': 'theme-parks', 'theatre': 'theatre', 'tv-film': 'television', 'brands': 'brands', 'events': 'events', 'museums': 'museums' };
@@ -108,7 +167,7 @@ const ATELIER = [
 for (const [id, cat] of Object.entries(INDUSTRY)) {
   const picks = live.filter(p => p.cat === cat).slice(0, 3);
   const cells = picks.map(p =>
-    `        <a class="tile" href="/case?p=${p.slug}"><img src="assets/photos/${esc(p.hero)}" alt="${esc(p.title)}" loading="lazy" /><div class="tile__scrim"></div>`
+    `        <a class="tile" href="/${p.url}"><img src="assets/photos/${esc(p.hero)}" alt="${esc(p.title)}" loading="lazy" /><div class="tile__scrim"></div>`
     + `<div class="tile__meta"><div class="tile__disc">${esc(p.disc)}</div><div class="tile__title">${esc(p.title)}</div></div></a>`);
   // geen verzonnen projecten: aanvullen met atelierbeeld, zonder link en zonder projectnaam
   for (let i = cells.length; i < 3; i++) {
@@ -123,9 +182,11 @@ for (const [id, cat] of Object.entries(INDUSTRY)) {
 // ---------- sitemap ----------
 const smPath = join(root, 'sitemap.xml');
 let sm = readFileSync(smPath, 'utf8');
-sm = sm.replace(/<url><loc>https:\/\/conceptfactory\.be\/case[\s\S]*?<\/url>\n?/g, '');
+for (const u of new Set([...all.map(p => p.url).filter(Boolean), 'case'])) {
+  sm = sm.replace(new RegExp('<url><loc>https://conceptfactory\\.be/(case[^<]*|' + u + ')</loc>[\\s\\S]*?</url>\\n?', 'g'), '');
+}
 const today = new Date().toISOString().slice(0, 10);
-const caseUrls = live.map(p => `<url><loc>https://conceptfactory.be/case?p=${p.slug}</loc><lastmod>${today}</lastmod><priority>0.7</priority></url>`).join('\n');
+const caseUrls = live.map(p => `<url><loc>https://conceptfactory.be/${p.url}</loc><lastmod>${today}</lastmod><priority>0.7</priority></url>`).join('\n');
 sm = sm.replace('</urlset>', caseUrls + '\n</urlset>');
 writeFileSync(smPath, sm);
 

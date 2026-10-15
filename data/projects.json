@@ -61,7 +61,8 @@
         "Schets en houtskelet van het Wild Nest ontbreken, dat is ook de sketch-to-reality spread van de folder",
         "Bevestigen wat Concept Factory exact gebouwd heeft in deze zone",
         "pirate-bay.jpg in _unverified lijkt Halloween bij Adventure Valley. Bevestigen, dan verplaatsen"
-      ]
+      ],
+      "url": "durbuyadventurevalley"
     },
     {
       "slug": "rmh",
@@ -115,7 +116,8 @@
       "needs": [
         "Openingsdatum bevestigen",
         "neon-sign, courtyard, owl-sculpture, gothic-window, ivy-wall, rose-ironwork, roses-detail, figure-rose en bride-figure staan klaar in de map maar niet in de vijf zichtbare galerijplekken"
-      ]
+      ],
+      "url": "rosesmysteryhouse"
     },
     {
       "slug": "zegeenseuh",
@@ -170,7 +172,8 @@
       "needs": [
         "Dedsit bevestigd als klant, Play4 is de zender",
         "Mag de set publiek getoond worden?"
-      ]
+      ],
+      "url": "zegeenseuh"
     },
     {
       "slug": "housewives",
@@ -198,7 +201,8 @@
         "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
         "Opbouw- en atelierbeeld ontbreekt",
         "Opnamedatum en zender bevestigen"
-      ]
+      ],
+      "url": "therealhousewivesofantwerpreunion"
     },
     {
       "slug": "temptation",
@@ -225,7 +229,8 @@
       "needs": [
         "Op geen van de beelden staan mensen. Een beeld met presentator of deelnemers zou sterker zijn",
         "Case nog uit te werken: uitdaging, oplossing en opbouw"
-      ]
+      ],
+      "url": "temptationislandreunion"
     },
     {
       "slug": "durbuy-escape",
@@ -278,7 +283,8 @@
       "needs": [
         "Namen en aantal kamers bevestigen. Red Alert en The Mine zijn bekend",
         "Atelierbeeld van de bouw ontbreekt"
-      ]
+      ],
+      "url": "durbuyescaperooms"
     },
     {
       "slug": "rmh-escape",
@@ -331,7 +337,8 @@
       "needs": [
         "Aantal kamers en hun namen bevestigen",
         "mantel-clock.jpg en tomb-carving.jpg staan klaar maar niet in de galerij"
-      ]
+      ],
+      "url": "rosesmysteryhouseescaperooms"
     },
     {
       "slug": "alice",
@@ -357,7 +364,8 @@
         "Drive 2025/16 bevat 46 fotos, hiervan zijn er 4 gekozen. De rest nog doornemen",
         "Speelperiode en aantal voorstellingen: INPUT NODIG",
         "Atelier- en opbouwbeeld ontbreekt nog"
-      ]
+      ],
+      "url": "aliceinwonderland"
     },
     {
       "slug": "historalia",
@@ -411,7 +419,8 @@
         "Beeld aangeleverd door Björn, niet uit de Drive-map",
         "Speeldata en aantal voorstellingen bevestigen",
         "Opbouwbeeld toont de tentstructuur; atelierbeeld van het decor zelf ontbreekt nog"
-      ]
+      ],
+      "url": "napoleon"
     },
     {
       "slug": "dubbelepot",
@@ -467,7 +476,8 @@
         "Atelier- en opbouwbeeld ontbreekt nog",
         "Jaartal 2026 komt uit de projectadministratie. Bevestigen",
         "Case nog scherper te maken: wat was technisch de uitdaging aan dit decor"
-      ]
+      ],
+      "url": "dubbelepot"
     },
     {
       "slug": "gebuur",
@@ -524,7 +534,8 @@
         "Atelier- en opbouwbeeld ontbreekt nog",
         "Hoogte en afmetingen van de dubbele structuur zouden deze case sterk maken",
         "Fotograaf: maruszak.photo. Naamsvermelding nodig?"
-      ]
+      ],
+      "url": "mijnegebuurheefthetzuur"
     },
     {
       "slug": "roodkapje",
@@ -579,7 +590,8 @@
         "Exacte hoogte van de bomen en aantal decorelementen: INPUT NODIG",
         "Atelierbeeld van de robot en het frezen van de bomen zou deze case heel sterk maken",
         "Speelperiode en aantal voorstellingen: INPUT NODIG"
-      ]
+      ],
+      "url": "roodkapje"
     },
     {
       "slug": "mammamia",
@@ -633,7 +645,8 @@
         "Speelperiode, zalen en aantal voorstellingen: INPUT NODIG",
         "Atelier- en opbouwbeeld ontbreekt nog",
         "De beschrijving van de portaalstructuur is gebaseerd op de beelden. Bevestigen"
-      ]
+      ],
+      "url": "mammamia"
     },
     {
       "slug": "jamesco",
@@ -656,7 +669,8 @@
         "Meer beeld van het spaarvarken: de originelen in Drive (07 TV projecten/05) zijn te groot voor de Drive-koppeling",
         "Case nog uit te werken: uitdaging, oplossing en opbouw",
         "Opbouw- en atelierbeeld ontbreekt"
-      ]
+      ],
+      "url": "jamesco"
     },
     {
       "slug": "madamesoleil",
@@ -678,7 +692,8 @@
       "needs": [
         "Meer beeld nodig: totaalbeeld, details en opbouw",
         "Case nog uit te werken: uitdaging, oplossing en opbouw"
-      ]
+      ],
+      "url": "madamesoleil"
     },
     {
       "slug": "hacked",
@@ -706,7 +721,8 @@
         "Op geen van de beelden staan mensen. Een beeld met presentator of deelnemers zou sterker zijn",
         "Case nog uit te werken: uitdaging, oplossing en opbouw",
         "Opbouw- en atelierbeeld ontbreekt"
-      ]
+      ],
+      "url": "hacked"
     },
     {
       "slug": "slagharen",
@@ -760,7 +776,8 @@
         "Aantal wagens bevestigen",
         "Op parade-characters.jpg staan mascottekostuums. Zijn die van Concept Factory? Zo niet, vervangen",
         "De map CF Slagharen Parade bevat nog 40+ beelden van dezelfde shoot die nog niet bekeken zijn"
-      ]
+      ],
+      "url": "slagharenparade"
     },
     {
       "slug": "western",
@@ -790,7 +807,8 @@
         "Jaar staat op 2025 op basis van de opnamedatums van de fotos. Bevestigen",
         "Case nog uit te werken: uitdaging, oplossing en opbouw",
         "Een beeld met publiek zou sterker zijn"
-      ]
+      ],
+      "url": "slagharenwesterncircusshow"
     },
     {
       "slug": "muizenval",
@@ -843,7 +861,8 @@
       "needs": [
         "Atelierfoto van de bouw van dit decor",
         "Cijfers die kloppen: bouwtijd, aantal elementen, aantal voorstellingen"
-      ]
+      ],
+      "url": "demuizenval"
     },
     {
       "slug": "aspe",
@@ -890,7 +909,8 @@
         "Speelperiode, zaal en aantal voorstellingen: INPUT NODIG",
         "Opbouw- of atelierbeeld zou de case sterker maken",
         "Volledige productietitel bevestigen. Drive noemt het 2025/06 Aspe - Moord in de nachtclub"
-      ]
+      ],
+      "url": "aspeclubpaparazzi"
     },
     {
       "slug": "annie",
@@ -928,7 +948,8 @@
       "stats": [],
       "needs": [
         "Ontwerp- of atelierbeeld voor de stappen Concept en Production"
-      ]
+      ],
+      "url": "annie"
     },
     {
       "slug": "duck",
@@ -952,7 +973,8 @@
       "needs": [
         "duck-fishing.jpg is geen foto maar een geexporteerde pagina uit een presentatie, met bijschrift Duck Fishing / Themed interior en een paginanummer. Niet bruikbaar als projectbeeld",
         "Echte fotos van deze attractie nodig, dan gaat het project meteen live"
-      ]
+      ],
+      "url": "duckfishing"
     },
     {
       "slug": "event",
@@ -992,7 +1014,8 @@
         "IKLEEFVOORJOU-3.jpg op Drive is 7 MB en haalt de Drive-koppeling neer. Verkleinde versie nodig",
         "Klant ontbreekt nog",
         "Bevestigd door Björn: dit is een theaterdecor, stond eerder onder Events"
-      ]
+      ],
+      "url": "ikleefvoorjou"
     },
     {
       "slug": "sprookjes",
@@ -1023,7 +1046,8 @@
         "Exacte locatie en opdrachtgever bevestigen (Drive: 2025/04 Sprookjeswandeling Deepbridge, bestandsnaam EWEBoom)",
         "Aantal scenes en lengte van het parcours: INPUT NODIG",
         "Productiefotos uit het atelier ontbreken nog"
-      ]
+      ],
+      "url": "sprookjeswandeling"
     },
     {
       "slug": "qbeach",
@@ -1052,7 +1076,8 @@
         "Case nog uit te werken: uitdaging, oplossing en opbouw",
         "Op geen van de beelden staan mensen. Een beeld met publiek zou sterker zijn",
         "Opbouwbeeld ontbreekt"
-      ]
+      ],
+      "url": "qbeachhouse"
     },
     {
       "slug": "roxxi",
@@ -1081,7 +1106,8 @@
         "Hoogte en aantal zuilen: INPUT NODIG",
         "Materiaal en opbouwtijd zouden deze case sterk maken",
         "Atelierbeeld van de zuilen in aanbouw ontbreekt"
-      ]
+      ],
+      "url": "roxxi"
     },
     {
       "slug": "stand",
@@ -1104,7 +1130,8 @@
         "Beurs bevestigen. De Drive-map heet Artisan Kortrijk",
         "Professionele fotos van deze stand staan in Drive 2025/11 maar zijn 22 tot 47 MB en komen niet door de koppeling",
         "De merken Jura en bamix staan op het beeld omdat Bodart ze verkoopt. Akkoord om te tonen?"
-      ]
+      ],
+      "url": "bodartexhibitionstand"
     },
     {
       "slug": "lijn3",
@@ -1159,7 +1186,8 @@
         "Locatie van de voorstelling",
         "Wie bouwde het decor (CF deed ontwerp + ondersteuning) — correcte omschrijving",
         "Atelier- of opbouwfoto's"
-      ]
+      ],
+      "url": "lijn3"
     },
     {
       "slug": "stilte",
@@ -1212,7 +1240,8 @@
         "Atelier- en opbouwbeeld ontbreekt. In de Drive staat wel een decorfilm (DecorA-Z) die hiervoor bruikbaar kan zijn",
         "Van deze fotoreeks komen momenteel maar 3 beelden door de Drive-koppeling, de rest is te groot",
         "Jaar 2025 op basis van de fotodatum en de projectadministratie. Bevestigen"
-      ]
+      ],
+      "url": "stilteaub"
     },
     {
       "slug": "gjzomershow",
@@ -1268,7 +1297,8 @@
         "Afmetingen van de boogstructuren: INPUT NODIG",
         "Atelier- en opbouwbeeld ontbreekt nog",
         "Speelperiode en aantal voorstellingen: INPUT NODIG"
-      ]
+      ],
+      "url": "gertjameszomershow"
     },
     {
       "slug": "madrat",
@@ -1314,7 +1344,8 @@
         "Bezoekersaantal per avond stond op de site maar is niet bevestigd",
         "Beeld bevestigd door Björn",
         "Decor- of atelierbeeld zou de case sterker maken, nu zijn het drie personagefotos"
-      ]
+      ],
+      "url": "plopsamadrat"
     },
     {
       "slug": "lukalloo",
@@ -1342,7 +1373,8 @@
         "Productiehuis bevestigen. Nu staat VTM GO als opdrachtgever, dat is het platform",
         "Case nog uit te werken: uitdaging, oplossing en opbouw. Nu alleen beeld en intro",
         "Volledige programmatitel bevestigen"
-      ]
+      ],
+      "url": "lukalloo"
     },
     {
       "slug": "dontscream",
@@ -1371,7 +1403,8 @@
         "De huidige beelden zijn telefoonfotos van de set. Professioneel beeld zou deze case veel sterker maken",
         "Streamz key art staat op uitdrukkelijke vraag van Björn in de galerij. Dat is promotiemateriaal van de zender",
         "Aantal locaties en afleveringen bevestigen"
-      ]
+      ],
+      "url": "dontscream"
     },
     {
       "slug": "jamesmusical",
@@ -1401,7 +1434,8 @@
         "SHG_G&L-83.jpg staat in de Drive-map maar is 7,5 MB en komt niet door de koppeling. Mogelijk het sterkste beeld",
         "Twee bestanden in die map zijn persfotos van nieuwssites en zijn bewust niet gebruikt",
         "Case nog uit te werken: uitdaging, oplossing en opbouw"
-      ]
+      ],
+      "url": "jamesdemusical"
     }
   ]
 }
