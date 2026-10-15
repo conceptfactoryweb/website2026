@@ -157,7 +157,7 @@
   }
   var d = PROJECTS[slug];
 
-  document.title = 'Concept Factory \u2014 ' + d.title;
+  if (!window.FORCED_SLUG) document.title = 'Concept Factory \u2014 ' + d.title;
   document.getElementById('cHero').src = P + d.hero;
   document.getElementById('cHero').alt = d.title;
   document.getElementById('cEyebrow').textContent = 'Case study \u2014 ' + d.disc;
