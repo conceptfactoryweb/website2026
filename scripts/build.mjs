@@ -155,7 +155,7 @@ for (const f of readdirSync(root)) {
 writeFileSync(join(root, '_redirects'),
   '# Gegenereerd door scripts/build.mjs\n' +
   live.map(p => `/case  p=${p.slug}  /${p.url}  301!`).join('\n') +
-  '\n/case  /work  301\n');
+  '\n/case  /work  301!\n');
 
 // ---------- industries ----------
 const INDUSTRY = { 'theme-parks': 'theme-parks', 'theatre': 'theatre', 'tv-film': 'television', 'brands': 'brands', 'events': 'events', 'museums': 'museums' };

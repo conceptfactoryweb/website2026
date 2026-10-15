@@ -152,6 +152,9 @@
 
   function qp(){ if (window.FORCED_SLUG) return window.FORCED_SLUG; var m = location.search.match(/[?&]p=([\w-]+)/); return m ? m[1] : 'muizenval'; }
   var slug = qp(); if (!PROJECTS[slug]) slug = 'muizenval';
+  if (window.FORCED_SLUG && location.search && history.replaceState) {
+    try { history.replaceState(null, '', location.pathname + location.hash); } catch (e) {}
+  }
   var d = PROJECTS[slug];
 
   document.title = 'Concept Factory \u2014 ' + d.title;
